@@ -16,7 +16,7 @@
 		{
 			$resultado = array(
 				'nomeUnidade' => $nomeUnidade,
-				'nomeSala' => $row['sala_30_nome'],
+				'nomeSala' => $row['sala_30_nome']." - ".$row['sala_30_numero'],
 				'idSala' => $row['sala_10_id']				
 			);
 			array_push($json, $resultado);

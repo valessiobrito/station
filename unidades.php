@@ -38,7 +38,7 @@
                             	<select class="span6" id="unidade" name="unidade">
                                 	<option value="">Escolha a unidade:</option>
                                 </select>
-                                <a role="button" class="btn" onclick="pesquisarSalas()">Mostrar</a>
+                                <a role="button" class="btn" onclick="pesquisarSalas(document.getElementById('unidade').value)">Mostrar</a>
                             </div>
                         </div>                        
                     </div>
@@ -48,17 +48,7 @@
                     <h4>Resultado da busca:</h4>
                     <div class="row">
                         <table id="tabelaBusca" class="table table-bordered table-striped">
-                            <tr>
-                                <th>Unidade</th>
-                                <th>Sala</th>
-                                <th>Ações</th>
-                            </tr>
                             
-                            <tr>
-                                <td><?=$nomeCliente?></td>
-                                <td><?=$razaoSocial?></td>
-                                <td><a href="editarSala.php?is=<?=$idSala?>" class="btn btn-info" style="float:left; margin-right:10px;">Editar</a><a href="#" onclick="deletaCliente('<?=$codCliente?>')" class="btn btn-danger" style="float:left;">Deletar</a></td>
-                            </tr>
                             
                         </table>
                     </div>

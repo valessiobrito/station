@@ -156,9 +156,9 @@ function validaUnidade(){
 		}
 	});
 }
-function pesquisarSalas()
+function pesquisarSalas(idUnidade)
 {
-	if(document.getElementById("unidade").value == "")
+	if(idUnidade == "")
 	{
 		alert("Selecione a unidade");
 		document.getElementById("unidade").focus();		
@@ -166,20 +166,38 @@ function pesquisarSalas()
 	}
 	
 	$("#tabelaBusca").empty();
-	var unidade = document.getElementById('unidade').value;
 	$.post(
     	'inc/buscarSalas.php',
-        {unidade:unidade},
+        {unidade:idUnidade},
 		
 		function(data){
 			
 			$("#tabelaBusca").append("<tr><th>Unidade</th><th>Sala</th><th>Ações</th></tr>");
 				$.each(data, function(i,data){
-					$("#tabelaBusca").append("<tr><td>"+data.nomeUnidade+"</td><td>"+data.nomeSala+"</td><td><a href='editarSala.php?is="+data.idSala+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaSala('"+data.idSala+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+					$("#tabelaBusca").append("<tr><td>"+data.nomeUnidade+"</td><td>"+data.nomeSala+"</td><td><a href='editarSala.php?is="+data.idSala+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaSala('"+data.idSala+"','"+idUnidade+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
 				});
 		},'json');
 		
 	$("#resultadoBusca").show();
+}
+function deletaSala(idSala,idUnidade){
+	if(confirm("Deseja realmente deletar essa sala?")){
+		$.ajax({
+		type: "POST",
+		url: "inc/deletarSala.php",
+		data: "is="+idSala,
+		success: function(resposta){
+			if(resposta == 'ok'){
+				alert("Sala deletada!");
+				pesquisarSalas(idUnidade);
+			}else{
+				alert("Ocorreu um erro");
+			}
+		}
+	});
+	}else{
+		return false;
+	}
 }
 function carregaCombo(elemento,valorSelecionado)
 {
