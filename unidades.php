@@ -47,10 +47,7 @@
                 <div id="resultadoBusca" style="display:none;">
                     <h4>Resultado da busca:</h4>
                     <div class="row">
-                        <table id="tabelaBusca" class="table table-bordered table-striped">
-                            
-                            
-                        </table>
+                        <table id="tabelaBusca" class="table table-bordered table-striped"></table>
                     </div>
                 </div>
             </div>
