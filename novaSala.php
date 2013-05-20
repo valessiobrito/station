@@ -10,7 +10,11 @@
 <?php include("inc/header.php");?>
 		<script>
 			$(document).ready(function(){
-				carregaCombo('unidade');
+				carregaCombo('unidade','');
+				$("#valorManha").maskMoney({showSymbol:false, thousands:'', decimal:','});
+				$("#valorTarde").maskMoney({showSymbol:false, thousands:'', decimal:','});
+				$("#valorNoite").maskMoney({showSymbol:false, thousands:'', decimal:','});
+				$("#valorIntegral").maskMoney({showSymbol:false, thousands:'', decimal:','});
 			});	
 		</script> 
     

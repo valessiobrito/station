@@ -8,6 +8,7 @@
     <link href="bootstrap/css/bootstrap.icon-large.min.css" rel="stylesheet">
     <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/maskMoney.js"></script>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css" />
 </head>
 <body>

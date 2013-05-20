@@ -1,6 +1,7 @@
 <?php
 	include ("conexao.php");
 	
+	$idSala = $_POST['is'];
 	$sala = $_POST['sala'];
 	$numero = $_POST['numero'];
 	$valorManha = number_format($_POST['valorManha'],2,'.',',');
@@ -19,17 +20,18 @@
 	$auditorio = $_POST['auditorio'];
 	$unidade = $_POST['unidade'];
 	
-	$query = "INSERT INTO sta_salas(sala_30_nome,sala_30_numero,sala_15_valorManha,sala_15_valorTarde,sala_15_valorNoite,sala_15_valorIntegral,sala_20_metros,sala_20_uMesa,sala_20_uSimples,sala_20_grupos,sala_20_escolar,sala_20_auditorio,unidade_10_id) VALUES ('".$sala."','".$numero."','".$valorManha."','".$valorTarde."','".$valorNoite."','".$valorIntegral."','".$metros."','".$uMesa."','".$uSimples."','".$grupos."','".$escolar."','".$auditorio."','".$unidade."')";
+	$query = "UPDATE sta_salas SET sala_30_nome = '".$sala."',sala_30_numero = '".$numero."',sala_15_valorManha = '".$valorManha."',sala_15_valorTarde = '".$valorTarde."',sala_15_valorNoite = '".$valorNoite."',sala_15_valorIntegral = '".$valorIntegral."',sala_20_metros = '".$metros."',sala_20_uMesa = '".$uMesa."',sala_20_uSimples = '".$uSimples."',sala_20_grupos = '".$grupos."',sala_20_escolar = '".$escolar."',sala_20_auditorio = '".$auditorio."',unidade_10_id = '".$unidade."' WHERE sala_10_id = '".$idSala."'";
+	
 	$gravar = mysql_query($query);
 	if($gravar){
 		echo("<script>
-			alert('Sala salva com sucesso!')
+			alert('Sala editada com sucesso!')
 			window.location = '../unidades.php';
 			</script>");
 	}else{
 		echo("<script>
 			alert('Ocorreu um erro na gravação.')
-			window.location = '../novaSala.php';
+			window.location = '../editarSala.php?is=".$idSala."';
 			</script>");
 	}
 ?>

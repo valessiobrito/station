@@ -10,7 +10,7 @@
 <?php include("inc/header.php");?>
 		<script>
 			$(document).ready(function(){
-				carregaCombo('unidade');
+				carregaCombo('unidade','');
 			});	
 		</script> 
         
@@ -57,7 +57,7 @@
                             <tr>
                                 <td><?=$nomeCliente?></td>
                                 <td><?=$razaoSocial?></td>
-                                <td><a href="editarSala?is=<?=$idSala?>" class="btn btn-info" style="float:left; margin-right:10px;">Editar</a><a href="#" onclick="deletaCliente('<?=$codCliente?>')" class="btn btn-danger" style="float:left;">Deletar</a></td>
+                                <td><a href="editarSala.php?is=<?=$idSala?>" class="btn btn-info" style="float:left; margin-right:10px;">Editar</a><a href="#" onclick="deletaCliente('<?=$codCliente?>')" class="btn btn-danger" style="float:left;">Deletar</a></td>
                             </tr>
                             
                         </table>

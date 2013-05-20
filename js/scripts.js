@@ -146,9 +146,9 @@ function validaUnidade(){
 		url: "inc/gravarUnidade.php",
 		data: "nome="+document.getElementById("nomeUnidade").value+"&logradouro="+document.getElementById("logradouro").value+"&numero="+document.getElementById("numeroUnidade").value+"&bairro="+document.getElementById("bairro").value+"&cep="+document.getElementById("cep").value+"&complemento="+document.getElementById("complemento").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&ddd="+document.getElementById("ddd").value+"&telefone="+document.getElementById("telefone").value+"&nomeContato="+document.getElementById("nomeContato").value,
 		success: function(resposta){
-			if(resposta == 'ok'){
+			if(resposta != '0'){
 				$('#modalNovaUnidade').modal('hide');
-				carregaCombo('unidade');
+				carregaCombo('unidade',resposta);
 			}else{
 				$('#retornoUnidade').attr('class', 'text-error');
 				$('#retornoUnidade').html('Ocorreu um erro na gravação');
@@ -175,13 +175,13 @@ function pesquisarSalas()
 			
 			$("#tabelaBusca").append("<tr><th>Unidade</th><th>Sala</th><th>Ações</th></tr>");
 				$.each(data, function(i,data){
-					$("#tabelaBusca").append("<tr><td>"+data.nomeUnidade+"</td><td>"+data.nomeSala+"</td><td><a href='editarSala?is="+data.idSala+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaSala('"+data.idSala+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+					$("#tabelaBusca").append("<tr><td>"+data.nomeUnidade+"</td><td>"+data.nomeSala+"</td><td><a href='editarSala.php?is="+data.idSala+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaSala('"+data.idSala+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
 				});
 		},'json');
 		
 	$("#resultadoBusca").show();
 }
-function carregaCombo(elemento)
+function carregaCombo(elemento,valorSelecionado)
 {
    $.ajax({cache:false});
    $.post(
@@ -197,6 +197,9 @@ function carregaCombo(elemento)
             	option[i] = document.createElement('option');
             	$( option[i] ).attr( {value : obj.idSelecao} );
             	$( option[i] ).append( obj.nomeSelecao );
+				if(obj.idSelecao == valorSelecionado){
+					$( option[i] ).attr('selected','selected');
+				}
 
             	$("select[name='"+elemento+"']").append( option[i] );
            	});

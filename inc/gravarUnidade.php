@@ -1,7 +1,7 @@
 <?php
 	include ("conexao.php");
 	
-	$resposta = 'erro';
+	$resposta = 0;
 	
 	$nome = $_POST['nome'];
 	$logradouro = $_POST['logradouro'];
@@ -18,7 +18,7 @@
 	$query = "INSERT INTO sta_unidades (unidade_30_nome,unidade_30_logradouro,unidade_30_numero,unidade_30_bairro,unidade_30_complemento,unidade_30_cidade,unidade_30_estado,unidade_30_cep,unidade_30_ddd,unidade_30_telefone,unidade_30_nomeContato) VALUES ('".$nome."','".$logradouro."','".$numero."','".$bairro."','".$complemento."','".$cidade."','".$estado."','".$cep."','".$ddd."','".$telefone."','".$nomeContato."')";
 	$gravar = mysql_query($query);
 	if($gravar){
-		$resposta = 'ok';
+		$resposta = mysql_insert_id();
 	}
 	
 	echo $resposta;
