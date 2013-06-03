@@ -1,35 +1,36 @@
 <?php
 
-class ProdutoController {
+class SalaController {
 
-    public function insertAction(Produto $produto) {
+    public function insertAction(Sala $sala) {
 			
-        if ($produto->getNome() != "" && $produto->getDescCurta() != "" && $produto->getDescCompleta() != "" && $produto->getPrazoProducao() != "" && $produto->getLarguraMinima() != "" && $produto->getAlturaMinima() != "" && $produto->getMinimoFotos() != ""){
+        if ($sala->getNome() != "" && $sala->getNumero() != "" && $sala->getValorManha() != "" && $sala->getValorTarde() != "" && $sala->getValorNoite() != "" && $sala->getValorIntegral() != "" && $sala->getMetros() != "" && $sala->getUMesa() != "" && $sala->getUSimples() != "" && $sala->getGrupos() != "" && $sala->getEscolar() != "" && $sala->getAuditorio() != "" && $sala->getUnidadeId() != ""){
 
-            $produtoAr = $produto->assocEntity();
+            $salaAr = $sala->assocEntity();
 
-            $fields = implode("`, `", array_keys($produtoAr));
-            $values = implode("', '", $produtoAr);
+            $fields = implode("`, `", array_keys($salaAr));
+            $values = implode("', '", $salaAr);
 
-            $strQuery = "INSERT INTO `insta892_instagift`.`" . $produto->tableName() . "` (`" . $fields . "`) VALUES('" . $values . "');";
+            $strQuery = "INSERT INTO " . $sala->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
 
             mysql_query($strQuery);
 			
-            $produtoId = mysql_insert_id();
+            $salaId = mysql_insert_id();
 
-            return $produtoId;
+            return $salaId;
         } else {
             return 0;
         }
     }
 
-    public function editAction(Produto $produto){
+    public function editAction(Sala $sala){
         
-        if ($produto->getNome() != "" && $produto->getDescCurta() != "" && $produto->getDescCompleta() != "" && $produto->getPrazoProducao() != "" && $produto->getLarguraMinima() != "" && $produto->getAlturaMinima() != "" && $produto->getMinimoFotos() != ""){
-            $produtoAr = $produto->assocEntity();
+        if ($sala->getNome() != "" && $sala->getNumero() != "" && $sala->getValorManha() != "" && $sala->getValorTarde() != "" && $sala->getValorNoite() != "" && $sala->getValorIntegral() != "" && $sala->getMetros() != "" && $sala->getUMesa() != "" && $sala->getUSimples() != "" && $sala->getGrupos() != "" && $sala->getEscolar() != "" && $sala->getAuditorio() != ""){
+			
+            $salaAr = $sala->assocEntity();
             
             $setQuery = array();
-            foreach ($produtoAr as $k => $v){
+            foreach ($salaAr as $k => $v){
                 if ($v != ""){
                     $setQuery[] = "`".$k."` = '".$v."'";
                 }
@@ -37,60 +38,45 @@ class ProdutoController {
             
             $setQuery = implode($setQuery, ", ");
             
-            $sqlQuery = "UPDATE `insta892_instagift`.`".$produto->tableName()."` SET $setQuery WHERE `produto_10_id` = ". $produto->getId();
+            $sqlQuery = "UPDATE ".$sala->tableName()."` SET $setQuery WHERE `sala_10_id` = ". $sala->getId();
             mysql_query($sqlQuery);
             
             return true;
-            
-        }else {
-            return false;
-            
-        }
-        
-    }
-
-    public function deleteAction(Produto $produto){
-        
-        if ($produto->getId() != "") {
-            
-            $sqlQuery = "DELETE FROM `insta892_instagift`.`".$produto->tableName()."` WHERE `produto_10_id` = ". $produto->getId();
-            mysql_query($sqlQuery);
-            
-            return true;
-            
-        }else {
+        }else{
             return false;
         }
         
     }
     
-    public function listAction($id = false, $type = 3) {
+    public function listAction($id = false) {
 
-        $whereQuery[] = (!$id) ? "1 = 1" : "produto_10_id = " . $id;
+        $whereQuery[] = (!$id) ? "1 = 1" : "sala_10_id = " . $id;
 
-        $strQuery = "SELECT * FROM produto WHERE ".implode(" AND ", $whereQuery);
+        $strQuery = "SELECT * FROM sta_salas WHERE ".implode(" AND ", $whereQuery);
+		
         $result = mysql_query($strQuery);
 
         $retArr = array();
         $i = 1;
 
         if (mysql_num_rows($result) > 0) {
-
             while ($row = mysql_fetch_assoc($result)) {
                 $retArr[$i] = $row;
                 $i++;
             }
         }
-
+		
+		echo "<pre>".var_dump($retArr)."</pre>";
+		break;
         return $retArr;
     }
 
-    public function getProdutoAction($field, $value, $op = "=") {
+    public function getSalaAction($field, $value, $op = "=") {
 
         $field = addslashes($field);
         $value = addslashes($value);
         
-        $strQuery = "SELECT * FROM produto WHERE ".$field . " = '" . $value."'";
+        $strQuery = "SELECT * FROM sta_salas WHERE ".$field . " = '" . $value."'";
         $result = mysql_query($strQuery);
 
         $retArr = array();
@@ -107,6 +93,18 @@ class ProdutoController {
         return $retArr;
     }
     
+	public function formataValor($valor, $action){
+		
+		if($action == 'gravar'){
+			$valorFormatado = number_format($valor,2,'.',',');
+			$valorFormatado = str_replace(',','',$valorFormatado);
+		}else{
+			$valorFormatado = number_format($valor,2,',','.');
+			$valorFormatado = str_replace('.','',$valorFormatado);
+		}
+		return $valorFormatado;
+	}
+	
 }
 
 ?>

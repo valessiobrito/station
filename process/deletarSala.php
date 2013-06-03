@@ -1,5 +1,6 @@
 <?php
-	include ("conexao.php");
+	header("Content-Type: text/html; charset=utf-8");
+	include ($_SERVER['DOCUMENT_ROOT']."/agenda/conf/connection.php");
 	
 	$resposta = 'erro';
 	

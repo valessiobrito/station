@@ -20,8 +20,8 @@
     
         <div class="content">
         	<ul class="breadcrumb">
-                <li><a href="painel.php">Home</a> <span class="divider">/</span></li>
-                <li><a href="unidades.php">Unidades e Salas</a> <span class="divider">/</span></li>
+                <li><a href="<?php echo $_SERVER['DOCUMENT_ROOT']; ?>/agenda/painel.php">Home</a> <span class="divider">/</span></li>
+                <li><a href="<?php echo $_SERVER['DOCUMENT_ROOT']; ?>/agenda/modules/unidades/listarUnidade.php">Unidades e Salas</a> <span class="divider">/</span></li>
                 <li class="active">Nova Sala</li>
             </ul>
             <div class="span10">
