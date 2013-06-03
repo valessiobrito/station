@@ -1,4 +1,4 @@
-<?php include("conexao.php");?>
+<?php include("connection.php");?>
 <?php
 	$login = mysql_real_escape_string($_POST['login']);
 	$senha = mysql_real_escape_string($_POST['senha']);

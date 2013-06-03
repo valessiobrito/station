@@ -30,19 +30,17 @@
                 	</div>
                 </div>
                 <br>
-                <form name="gravarSala" method="post" action="inc/gravarSala.php">
-                    <h4>Pesquisar</h4>
-                    <div class="row">
-                        <div class="span10">
-                        	<div class="input-append">
-                            	<select class="span6" id="unidade" name="unidade">
-                                	<option value="">Escolha a unidade:</option>
-                                </select>
-                                <a role="button" class="btn" onclick="pesquisarSalas(document.getElementById('unidade').value)">Mostrar</a>
-                            </div>
-                        </div>                        
-                    </div>
-                </form>
+                <h4>Pesquisar</h4>
+                <div class="row">
+                    <div class="span10">
+                        <div class="input-append">
+                            <select class="span6" id="unidade" name="unidade">
+                                <option value="">Escolha a unidade:</option>
+                            </select>
+                            <a role="button" class="btn" onclick="pesquisarSalas(document.getElementById('unidade').value)">Mostrar</a>
+                        </div>
+                    </div>                        
+                </div>
                 <br>
                 <div id="resultadoBusca" style="display:none;">
                     <h4>Resultado da busca:</h4>

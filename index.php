@@ -19,7 +19,7 @@
 <body>
 	<div class="container">
     	<div class="login">
-            <form name="formLogin" class="form-stacked" method="post" action="inc/verificarUsuario.php">
+            <form name="formLogin" class="form-stacked" method="post" action="conf/secUser.php">
                 <img src="images/logo.png" border="0" class="logo" />
                 <?php
                 if(isset($_GET['err'])){

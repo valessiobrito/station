@@ -143,7 +143,7 @@ function validaUnidade(){
 
 	$.ajax({
 		type: "POST",
-		url: "inc/gravarUnidade.php",
+		url: "/agenda/process/gravarUnidade.php",
 		data: "nome="+document.getElementById("nomeUnidade").value+"&logradouro="+document.getElementById("logradouro").value+"&numero="+document.getElementById("numeroUnidade").value+"&bairro="+document.getElementById("bairro").value+"&cep="+document.getElementById("cep").value+"&complemento="+document.getElementById("complemento").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&ddd="+document.getElementById("ddd").value+"&telefone="+document.getElementById("telefone").value+"&nomeContato="+document.getElementById("nomeContato").value,
 		success: function(resposta){
 			if(resposta != '0'){
@@ -167,7 +167,7 @@ function pesquisarSalas(idUnidade)
 	
 	$("#tabelaBusca").empty();
 	$.post(
-    	'inc/buscarSalas.php',
+    	'/agenda/process/buscarSalas.php',
         {unidade:idUnidade},
 		
 		function(data){
@@ -203,7 +203,7 @@ function carregaCombo(elemento,valorSelecionado)
 {
    $.ajax({cache:false});
    $.post(
-       		'inc/selecionaGeral.php',
+       		'/agenda/process/selecionaGeral.php',
             {elemento: elemento},
 
     		function(data){                                        

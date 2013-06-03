@@ -1,6 +1,6 @@
 <?php
         header("Content-Type: text/html; charset=utf-8");
-		include ("conexao.php");
+		include ($_SERVER['DOCUMENT_ROOT']."/agenda/conf/connection.php");
 		
 		$unidade = $_POST['unidade'];
 		
