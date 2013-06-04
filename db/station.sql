@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 20/05/2013 às 21:20:19
+-- Tempo de Geração: 04/06/2013 às 05:01:11
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.4.4
 
@@ -19,6 +19,66 @@ SET time_zone = "+00:00";
 --
 -- Banco de Dados: `station`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_clientes`
+--
+
+CREATE TABLE `sta_clientes` (
+  `cliente_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cliente_30_nome` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_cnpj` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_razaoSocial` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_inscMunicipal` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_inscEstadual` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_endereco` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_complemento` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_cidade` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_estado` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_cep` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_nomeResponsavel` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_sobrenomeResponsavel` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_emailResponsavel` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_telefoneResponsavel` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_30_celularResponsavel` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_10_idPai` int(11) NOT NULL,
+  PRIMARY KEY (`cliente_10_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_contatos_cliente`
+--
+
+CREATE TABLE `sta_contatos_cliente` (
+  `contato_cliente_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `contato_cliente_30_nome` text COLLATE utf8_unicode_ci NOT NULL,
+  `contato_cliente_30_sobrenome` text COLLATE utf8_unicode_ci NOT NULL,
+  `contato_cliente_30_email` text COLLATE utf8_unicode_ci NOT NULL,
+  `contato_cliente_30_telefone` text COLLATE utf8_unicode_ci NOT NULL,
+  `contato_cliente_30_celular` text COLLATE utf8_unicode_ci NOT NULL,
+  `cliente_10_id` int(11) NOT NULL,
+  PRIMARY KEY (`contato_cliente_10_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_produtos`
+--
+
+CREATE TABLE `sta_produtos` (
+  `produto_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `produto_30_nome` text COLLATE utf8_unicode_ci NOT NULL,
+  `produto_15_valor` decimal(10,2) NOT NULL,
+  `produto_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `produto_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `tipo_produto_10_id` int(11) NOT NULL,
+  PRIMARY KEY (`produto_10_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -49,8 +109,26 @@ CREATE TABLE `sta_salas` (
 --
 
 INSERT INTO `sta_salas` (`sala_10_id`, `sala_30_nome`, `sala_30_numero`, `sala_15_valorManha`, `sala_15_valorTarde`, `sala_15_valorNoite`, `sala_15_valorIntegral`, `sala_20_metros`, `sala_20_uMesa`, `sala_20_uSimples`, `sala_20_grupos`, `sala_20_escolar`, `sala_20_auditorio`, `unidade_10_id`) VALUES
-(1, 'Sala Teste', '12', 120.00, 130.00, 140.00, 200.00, '20', '21', '22', '23', '24', '25', 1),
-(2, 'Outra Sala2', '022', 2000.00, 3000.00, 4000.00, 5000.00, '102', '202', '302', '402', '502', '602', 1);
+(1, 'Outra Sala3', '033', 100.00, 200.00, 300.00, 400.00, '10', '20', '30', '40', '50', '60', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_tipos_produto`
+--
+
+CREATE TABLE `sta_tipos_produto` (
+  `tipo_produto_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_produto_30_nome` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`tipo_produto_10_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `sta_tipos_produto`
+--
+
+INSERT INTO `sta_tipos_produto` (`tipo_produto_10_id`, `tipo_produto_30_nome`) VALUES
+(1, 'Tipo Teste');
 
 -- --------------------------------------------------------
 
