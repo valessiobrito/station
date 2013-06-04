@@ -1,34 +1,40 @@
 <?php
 
-class Sala {
+class Cliente {
     
     protected $id;
     
     protected $nome;
     
-    protected $numero;
+    protected $cnpj;
     
-    protected $valorManha;
+    protected $razaoSocial;
     
-    protected $valorTarde;
+    protected $inscMunicipal;
     
-    protected $valorNoite;
+    protected $inscEstadual;
     
-    protected $valorIntegral;
+    protected $endereco;
     
-    protected $metros;
+    protected $complemento;
     
-    protected $uMesa;
+    protected $cidade;
     
-    protected $uSimples;
+    protected $estado;
     
-    protected $grupos;
+    protected $cep;
     
-    protected $escolar;
+    protected $nomeResposavel;
     
-    protected $auditorio;
+    protected $sobrenomeResponsavel;
     
-    protected $unidadeId;
+    protected $emailResponsavel;
+	
+	protected $telefoneResponsavel;
+	
+	protected $celularResponsavel;
+	
+	protected $idPai;
     
     public function getId() {
         return $this->id;
@@ -46,119 +52,146 @@ class Sala {
         $this->nome = $nome;
     }
 
-    public function getNumero() {
-        return $this->numero;
-    }
+    public function getCnpj(){
+		return $this->cnpj;
+	}
 
-    public function setNumero($numero) {
-        $this->numero = $numero;
-    }
+	public function setCnpj($cnpj){
+		$this->cnpj = $cnpj;
+	}
 
-    public function getValorManha() {
-        return $this->valorManha;
-    }
+	public function getRazaoSocial(){
+		return $this->razaoSocial;
+	}
 
-    public function setValorManha($valorManha) {
-        $this->valorManha = $valorManha;
-    }
+	public function setRazaoSocial($razaoSocial){
+		$this->razaoSocial = $razaoSocial;
+	}
 
-    public function getValorTarde() {
-        return $this->valorTarde;
-    }
+	public function getInscMunicipal(){
+		return $this->inscMunicipal;
+	}
 
-    public function setValorTarde($valorTarde) {
-        $this->valorTarde = $valorTarde;
-    }
-	
-	public function getValorNoite() {
-        return $this->valorNoite;
-    }
+	public function setInscMunicipal($inscMunicipal){
+		$this->inscMunicipal = $inscMunicipal;
+	}
 
-    public function setValorNoite($valorNoite) {
-        $this->valorNoite = $valorNoite;
-    }
-	
-	public function getValorIntegral() {
-        return $this->valorIntegral;
-    }
+	public function getInscEstadual(){
+		return $this->inscEstadual;
+	}
 
-    public function setValorIntegral($valorIntegral) {
-        $this->valorIntegral = $valorIntegral;
-    }
-	
-	public function getMetros() {
-        return $this->metros;
-    }
+	public function setInscEstadual($inscEstadual){
+		$this->inscEstadual = $inscEstadual;
+	}
 
-    public function setMetros($metros) {
-        $this->metros = $metros;
-    }
-	
-	public function getUMesa() {
-        return $this->uMesa;
-    }
+	public function getEndereco(){
+		return $this->endereco;
+	}
 
-    public function setUMesa($uMesa) {
-        $this->uMesa = $uMesa;
-    }
-	
-	public function getUSimples() {
-        return $this->uSimples;
-    }
+	public function setEndereco($endereco){
+		$this->endereco = $endereco;
+	}
 
-    public function setUSimples($uSimples) {
-        $this->uSimples = $uSimples;
-    }
-	
-	public function getGrupos() {
-        return $this->grupos;
-    }
+	public function getComplemento(){
+		return $this->complemento;
+	}
 
-    public function setGrupos($grupos) {
-        $this->grupos = $grupos;
-    }
-	
-	public function getEscolar() {
-        return $this->escolar;
-    }
+	public function setComplemento($complemento){
+		$this->complemento = $complemento;
+	}
 
-    public function setEscolar($escolar) {
-        $this->escolar = $escolar;
-    }
-	
-	public function getAuditorio() {
-        return $this->auditorio;
-    }
+	public function getCidade(){
+		return $this->cidade;
+	}
 
-    public function setAuditorio($auditorio) {
-        $this->auditorio = $auditorio;
-    }
-	
-	public function getUnidadeId() {
-        return $this->unidadeId;
-    }
+	public function setCidade($cidade){
+		$this->cidade = $cidade;
+	}
 
-    public function setUnidadeId($unidadeId) {
-        $this->unidadeId = $unidadeId;
-    }
+	public function getEstado(){
+		return $this->estado;
+	}
+
+	public function setEstado($estado){
+		$this->estado = $estado;
+	}
+
+	public function getCep(){
+		return $this->cep;
+	}
+
+	public function setCep($cep){
+		$this->cep = $cep;
+	}
+
+	public function getNomeResposavel(){
+		return $this->nomeResposavel;
+	}
+
+	public function setNomeResposavel($nomeResposavel){
+		$this->nomeResposavel = $nomeResposavel;
+	}
+
+	public function getSobrenomeResponsavel(){
+		return $this->sobrenomeResponsavel;
+	}
+
+	public function setSobrenomeResponsavel($sobrenomeResponsavel){
+		$this->sobrenomeResponsavel = $sobrenomeResponsavel;
+	}
+
+	public function getEmailResponsavel(){
+		return $this->emailResponsavel;
+	}
+
+	public function setEmailResponsavel($emailResponsavel){
+		$this->emailResponsavel = $emailResponsavel;
+	}
+
+	public function getTelefoneResponsavel(){
+		return $this->telefoneResponsavel;
+	}
+
+	public function setTelefoneResponsavel($telefoneResponsavel){
+		$this->telefoneResponsavel = $telefoneResponsavel;
+	}
+
+	public function getCelularResponsavel(){
+		return $this->celularResponsavel;
+	}
+
+	public function setCelularResponsavel($celularResponsavel){
+		$this->celularResponsavel = $celularResponsavel;
+	}
+
+	public function getIdPai(){
+		return $this->idPai;
+	}
+
+	public function setIdPai($idPai){
+		$this->idPai = $idPai;
+	}
 
     public function assocEntity(){
         
         $fields = array(
-            "sala_10_id"       		=> $this->getId(),
-            "sala_30_nome"     		=> $this->getNome(),
-            "sala_30_numero"  		=> $this->getNumero(),
-            "sala_15_valorManha"  	=> $this->getValorManha(),
-            "sala_15_valorTarde" 	=> $this->getValorTarde(),
-            "sala_15_valorNoite"   	=> $this->getValorNoite(),
-            "sala_15_valorIntegral" => $this->getValorIntegral(),
-            "sala_20_metros" 		=> $this->getMetros(),
-            "sala_20_uMesa" 		=> $this->getUMesa(),
-            "sala_20_uSimples" 		=> $this->getUSimples(),
-            "sala_20_grupos"   		=> $this->getGrupos(),
-            "sala_20_escolar"   	=> $this->getEscolar(),
-            "sala_20_auditorio"   	=> $this->getAuditorio(),
-			"unidade_10_id"   		=> $this->getUnidadeId()
+            "cliente_10_id"       				=> $this->getId(),
+            "cliente_30_nome"     				=> $this->getNome(),
+            "cliente_30_cnpj"  					=> $this->getCnpj(),
+            "cliente_30_razaoSocial"  			=> $this->getRazaoSocial(),
+            "cliente_30_inscMunicipal" 			=> $this->getInscMunicipal(),
+            "cliente_30_inscEstadual"   		=> $this->getInscEstadual(),
+            "cliente_30_endereco" 				=> $this->getEndereco(),
+            "cliente_30_complemento" 			=> $this->getComplemento(),
+            "cliente_30_cidade" 				=> $this->getCidade(),
+            "cliente_30_estado" 				=> $this->getEstado(),
+            "cliente_30_cep"   					=> $this->getCep(),
+            "cliente_30_nomeResponsavel"   		=> $this->getNomeResposavel(),
+            "cliente_30_sobrenomeResponsavel"   => $this->getSobrenomeResponsavel(),
+			"cliente_30_emailResponsavel"   	=> $this->getEmailResponsavel(),
+			"cliente_30_telefoneResponsavel"   	=> $this->getTelefoneResponsavel(),
+			"cliente_30_celularResponsavel"   	=> $this->getCelularResponsavel(),
+			"cliente_10_idPai"   				=> $this->getIdPai()
         );
         
         return $fields;

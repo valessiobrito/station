@@ -5,7 +5,7 @@
 	if ($_SESSION['LogadoSTATION'] != "1"){
 		header("Location: index.php");
 	}else{
-		include("inc/conexao.php");
+		include($_SERVER['DOCUMENT_ROOT'].'/agenda/conf/connection.php');
 		$title = "Painel";
 ?>
 <?php include("inc/header.php");?>
