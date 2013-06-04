@@ -156,6 +156,31 @@ function validaUnidade(){
 		}
 	});
 }
+
+function validaTipoProduto(){
+	if(document.getElementById("nomeTipo").value == "")
+	{
+		alert("Preencha o nome do tipo");
+		document.getElementById("nomeTipo").focus();		
+		return false;
+	}
+
+	$.ajax({
+		type: "POST",
+		url: "/agenda/process/gravarTipoProduto.php",
+		data: "nome="+document.getElementById("nomeTipo").value,
+		success: function(resposta){
+			if(resposta != '0'){
+				$('#modalNovoTipo').modal('hide');
+				carregaCombo('tipo',resposta);
+			}else{
+				$('#retornoTipo').attr('class', 'text-error');
+				$('#retornoTipo').html('Ocorreu um erro na gravação');
+			}
+		}
+	});
+}
+
 function pesquisarSalas(idUnidade)
 {
 	if(idUnidade == "")
@@ -199,6 +224,52 @@ function deletaSala(idSala,idUnidade){
 		return false;
 	}
 }
+
+function pesquisarProdutos(idTipo)
+{
+	if(idTipo == "")
+	{
+		alert("Selecione o tipo");
+		document.getElementById("tipo_produto").focus();		
+		return false;
+	}
+	
+	$("#tabelaBusca").empty();
+	$.post(
+    	'/agenda/process/buscarProdutos.php',
+        {tipo:idTipo},
+		
+		function(data){
+			
+			$("#tabelaBusca").append("<tr><th>Produto</th><th>Quantidade</th><th>Ações</th></tr>");
+				$.each(data, function(i,data){
+					$("#tabelaBusca").append("<tr><td>"+data.nomeProduto+"</td><td>"+data.quantidade+"</td><td><a href='editarProduto.php?id="+data.idProduto+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaProduto('"+data.idProduto+"','"+idTipo+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+				});
+		},'json');
+		
+	$("#resultadoBusca").show();
+}
+function deletaProduto(idProduto,idTipo){
+	if(confirm("Deseja realmente deletar esse produto?")){
+		$.ajax({
+		type: "POST",
+		url: "/agenda/process/deletarProduto.php",
+		data: "ip="+idProduto,
+		success: function(resposta){
+			if(resposta == 'ok'){
+				alert("Produto deletado!");
+				pesquisarProdutos(idProduto);
+			}else{
+				alert("Ocorreu um erro");
+			}
+		}
+	});
+	}else{
+		return false;
+	}
+}
+
+
 function carregaCombo(elemento,valorSelecionado)
 {
    $.ajax({cache:false});

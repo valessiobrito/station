@@ -35,6 +35,20 @@
                         <span>Unidades</span>
                     </a>
                 </li>
+                <li>
+                	<a id="dropProdutos" href="<?php echo $urlClientes; ?>/listarCliente.php" role="button">
+                    	<i class="icon-large icon-nameplate"></i>
+                		<br>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+                <li>
+                	<a id="dropProdutos" href="<?php echo $urlProdutos; ?>/listarProduto.php" role="button">
+                    	<i class="icon-large icon-ipad"></i>
+                		<br>
+                        <span>Produtos</span>
+                    </a>
+                </li>
             <?php
                 }
             ?>

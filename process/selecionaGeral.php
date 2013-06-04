@@ -8,6 +8,10 @@
 			$table = 'sta_unidades';
 			$colId = 'unidade_10_id';
 			$colNome = 'unidade_30_nome';
+		}else if($elemento == 'tipo'){
+			$table = 'sta_tipos_produto';
+			$colId = 'tipo_produto_10_id';
+			$colNome = 'tipo_produto_30_nome';
 		}
 
 		$json = array();

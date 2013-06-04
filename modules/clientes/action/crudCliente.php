@@ -116,7 +116,7 @@ switch ($op) {
         break;
     case "listar":
     default:
-        header("Location: $urlUnidades/listarUnidade.php");
+        header("Location: $urlClientes/listarCliente.php");
 
         break;
 }
