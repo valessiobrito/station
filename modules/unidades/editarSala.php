@@ -1,4 +1,5 @@
 <?php
+include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/connection.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/config.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
 
@@ -32,8 +33,8 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 
 <div class="content">
 			<ul class="breadcrumb">
-				<li><a href="<?php echo $_SERVER['DOCUMENT_ROOT']; ?>/agenda/painel.php">Home</a> <span class="divider">/</span></li>
-                <li><a href="<?php echo $_SERVER['DOCUMENT_ROOT']; ?>/agenda/modules/unidades/listarUnidade.php">Unidades e Salas</a> <span class="divider">/</span></li>
+				<li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
+                <li><a href="/agenda/modules/unidades/listarUnidade.php">Unidades e Salas</a> <span class="divider">/</span></li>
 				<li class="active">Editar Sala</li>
 			</ul>
 			<div class="span10">

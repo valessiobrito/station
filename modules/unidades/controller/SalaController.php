@@ -38,7 +38,7 @@ class SalaController {
             
             $setQuery = implode($setQuery, ", ");
             
-            $sqlQuery = "UPDATE ".$sala->tableName()."` SET $setQuery WHERE `sala_10_id` = ". $sala->getId();
+            $sqlQuery = "UPDATE ".$sala->tableName()." SET $setQuery WHERE `sala_10_id` = ". $sala->getId();
             mysql_query($sqlQuery);
             
             return true;
@@ -66,8 +66,6 @@ class SalaController {
             }
         }
 		
-		echo "<pre>".var_dump($retArr)."</pre>";
-		break;
         return $retArr;
     }
 

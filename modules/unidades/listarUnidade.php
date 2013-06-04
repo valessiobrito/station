@@ -16,7 +16,7 @@
         
         <div class="content">
         	<ul class="breadcrumb">
-                <li><a href="painel.php">Home</a> <span class="divider">/</span></li>
+                <li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
                 <li class="active">Unidades e Salas</li>
             </ul>
             <div class="span10">

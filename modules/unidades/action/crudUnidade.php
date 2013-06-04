@@ -43,19 +43,19 @@ switch ($op) {
 						</script>");
                 } else {
                     echo("<script>
-						alert('Ocorreu um erro na gravação1.')
+						alert('Ocorreu um erro na gravação.')
 						window.location = '".$urlUnidades."/novaSala.php';
 						</script>");
                 }
             } else {
                 echo("<script>
-					alert('Ocorreu um erro na gravação2.')
+					alert('Ocorreu um erro na gravação.')
 					window.location = '".$urlUnidades."/novaSala.php';
 					</script>");
             }
         } else {
             echo("<script>
-				alert('Ocorreu um erro na gravação3.')
+				alert('Ocorreu um erro na gravação.')
 				window.location = '".$urlUnidades."/novaSala.php';
 				</script>");
         }
@@ -69,49 +69,51 @@ switch ($op) {
                 $$k = $v;
             }
            
-            if ($produto_10_id != "" && $nome != "" && $descCurta != "" && $descCompleta != "" && $prazoProducao != "" && $larguraMinima != "" && $alturaMinima != "" && $minimoFotos != "") {
+            if ($id != "" && $sala != "" && $numero != "" && $valorManha != "" && $valorTarde != "" && $valorNoite != "" && $valorIntegral != "" && $metros != "" && $uMesa != "" && $uSimples != "" && $grupos != "" && $escolar != "" && $auditorio != "" && $unidade != "") {
 
-                $produtoClass = new Produto();
-                $produtoController = new ProdutoController();
+                $salaClass = new Sala();
+                $salaController = new SalaController();
 
-                $produtoClass->setId($produto_10_id);
-                $produtoClass->setNome($nome);
-                $produtoClass->setDescCurta($descCurta);
-                $produtoClass->setDescCompleta($descCompleta);
-                $produtoClass->setPrazoProducao($prazoProducao);
-                $produtoClass->setLarguraMinima($larguraMinima);
-                $produtoClass->setAlturaMinima($alturaMinima);
-                $produtoClass->setMinimoFotos($minimoFotos);
-                $produtoClass->setTipo($prd_tipo);
+                $salaClass->setId($id);
+                $salaClass->setNome($sala);
+                $salaClass->setNumero($numero);
+				$salaClass->setValorManha($salaController->formataValor($valorManha,'gravar'));
+				$salaClass->setValorTarde($salaController->formataValor($valorTarde,'gravar'));
+				$salaClass->setValorNoite($salaController->formataValor($valorNoite,'gravar'));
+				$salaClass->setValorIntegral($salaController->formataValor($valorIntegral,'gravar'));
+				$salaClass->setMetros($metros);
+				$salaClass->setUMesa($uMesa);
+				$salaClass->setUSimples($uSimples);
+				$salaClass->setGrupos($grupos);
+				$salaClass->setEscolar($escolar);
+				$salaClass->setAuditorio($auditorio);
+				$salaClass->setUnidadeId($unidade);
 
-                if ($produtoController->editAction($produtoClass)) {
+                if ($salaController->editAction($salaClass)) {
                     echo("<script>
 						alert('Sala editada com sucesso!')
 						window.location = '".$urlUnidades."/listarUnidade.php';
 						</script>");
                 } else {
-                    header("Location: $urlProdutos/listarProduto.php?type=error&editar=novo&erron=1");
+                    echo("<script>
+						alert('Ocorreu um erro na gravação.')
+						window.location = '".$urlUnidades."/editarSala.php?id=".$id."';
+						</script>");
                 }
             } else {
-                header("Location: $urlProdutos/listarProduto.php?type=error&case=editar&erron=5");
+                echo("<script>
+					alert('Ocorreu um erro na gravação.')
+					window.location = '".$urlUnidades."/editarSala.php?id=".$id."';
+					</script>");
             }
         } else {
-            header("Location: $urlProdutos/listarProduto.php?type=error&case=editar&erron=2");
+            echo("<script>
+				alert('Ocorreu um erro na gravação.')
+				window.location = '".$urlUnidades."/editarSala.php?id=".$id."';
+				</script>");
         }
 
         break;
-    case "deletar":
-        $resposta = 'erro';
-	
-		$idSala = $_POST['is'];
-		
-		$query = "DELETE FROM sta_salas WHERE sala_10_id = ".$idSala;
-		$deletar = mysql_query($query);
-		if($deletar){
-			$resposta = 'ok';
-		}
-		
-		echo $resposta;
     case "listar":
     default:
         header("Location: $urlProdutos/listarProduto.php");
