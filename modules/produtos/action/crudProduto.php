@@ -17,7 +17,7 @@ switch ($op) {
             
 			$produtoController = new ProdutoController();
             foreach($nome as $kProduto => $vProduto){
-				if ($nome[$kProduto] != "" && $valor[$kProduto] != "" && $quantidade[$kProduto] != "" && $observacoes[$kProduto] != "" && $tipo != ""){
+				if ($nome[$kProduto] != "" && $valor[$kProduto] != "" && $quantidade[$kProduto] != "" && $tipo != ""){
 					$produtoClass = new Produto();	
 					
 					$produtoClass->setNome($nome[$kProduto]);
@@ -35,12 +35,6 @@ switch ($op) {
 							</script>");
 						break;
 					}
-				}else{
-					echo("<script>
-						alert('Ocorreu um erro na gravação.')
-						window.location = '".$urlProdutos."/novoProduto.php';
-						</script>");
-					break;
 				}
 			}
 			
@@ -65,11 +59,12 @@ switch ($op) {
                 $$k = $v;
             }
            
-            if ($id != "" && $nome != "" && $valor != "" && $quantidade != "" && $observacoes != "" && $tipo != "") {
+            if ($id != "" && $nome != "" && $valor != "" && $quantidade != "" && $tipo != "") {
 
                 $produtoClass = new Produto();
                 $produtoController = new ProdutoController();
-
+				
+				$produtoClass->setId($id);
                 $produtoClass->setNome($nome);
 				$produtoClass->setValor($produtoController->formataValor($valor,'gravar'));
 				$produtoClass->setQuantidade($quantidade);

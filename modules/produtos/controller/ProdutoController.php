@@ -4,7 +4,7 @@ class ProdutoController {
 
     public function insertAction(Produto $produto) {
 			
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getObservacoes() != "" && $produto->getTipoId() != ""){
+        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
 
             $produtoAr = $produto->assocEntity();
 
@@ -25,7 +25,7 @@ class ProdutoController {
 
     public function editAction(Produto $produto){
         
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getObservacoes() != "" && $produto->getTipoId() != ""){
+        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
 			
             $produtoAr = $produto->assocEntity();
             

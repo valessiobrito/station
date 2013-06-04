@@ -79,6 +79,47 @@ function validaSala(){
 	}
 	document.gravarSala.submit();
 }
+
+function validaProduto(tipo){
+	if(document.getElementById("tipo").value == "")
+	{
+		alert("Selecione o tipo");
+		document.getElementById("tipo").focus();		
+		return false;
+	}
+	if(tipo == 'novo'){
+		var nomes = document.getElementsByName('nome[]');
+		var valores = document.getElementsByName('valor[]');
+		var quantidades = document.getElementsByName('quantidade[]');
+		if(nomes[0].value == '' || valores[0].value == '' || quantidades[0].value == '')
+		{
+			alert("Preencha pelo menos nome, valor e quantidade do primeiro produto!");
+			return false;
+		}
+		document.gravarProduto.submit();
+	}else{
+		if(document.getElementById("nome").value == "")
+		{
+			alert("Preencha o nome");
+			document.getElementById("nome").focus();		
+			return false;
+		}
+		if(document.getElementById("valor").value == "")
+		{
+			alert("Preencha o valor");
+			document.getElementById("valor").focus();		
+			return false;
+		}
+		if(document.getElementById("quantidade").value == "")
+		{
+			alert("Preencha a quantidade");
+			document.getElementById("quantidade").focus();		
+			return false;
+		}
+		document.gravarProduto.submit();
+	}
+}
+
 function validaUnidade(){
 	if(document.getElementById("nomeUnidade").value == "")
 	{

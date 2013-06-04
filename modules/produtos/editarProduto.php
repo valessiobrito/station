@@ -86,14 +86,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
                 </div>
             </div>
 		</div>
-<?php include("inc/footer.php");?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
 	}	
-?>
-
-
-<?php echo $produto[1]["produto_30_nome"]; ?>
-<div style="display: none;">
-<input type="hidden" name="sala_10_id" value="<?php echo $produto[1]["sala_10_id"]; ?>" />
-</div>
-                                                        
+?>                                                      
