@@ -200,20 +200,23 @@ class Cliente {
     
     public function fetchEntity($row){
         
-        $this->setId($row['sala_10_id']);
-        $this->setNome($row['sala_30_nome']);
-        $this->setNumero($row['sala_30_numero']);
-        $this->setValorManha($row['sala_15_valorManha']);
-        $this->setValorTarde($row['sala_15_valorTarde']);
-        $this->setValorNoite($row['sala_15_valorNoite']);
-        $this->setValorIntegral($row['sala_15_valorIntegral']);
-        $this->setMetros($row['sala_20_metros']);
-        $this->setUMesa($row['sala_20_uMesa']);
-        $this->setUSimples($row['sala_20_uSimples']);
-        $this->setGrupos($row['sala_20_grupos']);
-        $this->setEscolar($row['sala_20_escolar']);
-        $this->setAuditorio($row['sala_20_auditorio']);
-		$this->setUnidadeId($row['unidade_10_id']);
+        $this->setId($row['cliente_10_id']);
+        $this->setNome($row['cliente_30_nome']);
+        $this->setCnpj($row['cliente_30_cnpj']);
+        $this->setRazaoSocial($row['cliente_30_razaoSocial']);
+        $this->setInscMunicipal($row['cliente_30_inscMunicipal']);
+        $this->setInscEstadual($row['cliente_30_inscEstadual']);
+        $this->setEndereco($row['cliente_30_endereco']);
+        $this->setComplemento($row['cliente_30_complemento']);
+        $this->setCidade($row['cliente_30_cidade']);
+        $this->setEstado($row['cliente_30_estado']);
+        $this->setCep($row['cliente_30_cep']);
+        $this->setNomeResposavel($row['cliente_30_nomeResponsavel']);
+        $this->setSobrenomeResponsavel($row['cliente_30_sobrenomeResponsavel']);
+		$this->setEmailResponsavel($row['cliente_30_emailResponsavel']);
+		$this->setTelefoneResponsavel($row['cliente_30_telefoneResponsavel']);
+		$this->setCelularResponsavel($row['cliente_30_celularResponsavel']);
+		$this->setIdPai($row['cliente_10_idPai']);
         
         return $this;
     }
