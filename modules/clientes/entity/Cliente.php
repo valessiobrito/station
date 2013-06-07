@@ -24,7 +24,7 @@ class Cliente {
     
     protected $cep;
     
-    protected $nomeResposavel;
+    protected $nomeResponsavel;
     
     protected $sobrenomeResponsavel;
     
@@ -124,12 +124,12 @@ class Cliente {
 		$this->cep = $cep;
 	}
 
-	public function getNomeResposavel(){
-		return $this->nomeResposavel;
+	public function getNomeResponsavel(){
+		return $this->nomeResponsavel;
 	}
 
-	public function setNomeResposavel($nomeResposavel){
-		$this->nomeResposavel = $nomeResposavel;
+	public function setNomeResponsavel($nomeResponsavel){
+		$this->nomeResponsavel = $nomeResponsavel;
 	}
 
 	public function getSobrenomeResponsavel(){
@@ -186,7 +186,7 @@ class Cliente {
             "cliente_30_cidade" 				=> $this->getCidade(),
             "cliente_30_estado" 				=> $this->getEstado(),
             "cliente_30_cep"   					=> $this->getCep(),
-            "cliente_30_nomeResponsavel"   		=> $this->getNomeResposavel(),
+            "cliente_30_nomeResponsavel"   		=> $this->getNomeResponsavel(),
             "cliente_30_sobrenomeResponsavel"   => $this->getSobrenomeResponsavel(),
 			"cliente_30_emailResponsavel"   	=> $this->getEmailResponsavel(),
 			"cliente_30_telefoneResponsavel"   	=> $this->getTelefoneResponsavel(),
@@ -211,7 +211,7 @@ class Cliente {
         $this->setCidade($row['cliente_30_cidade']);
         $this->setEstado($row['cliente_30_estado']);
         $this->setCep($row['cliente_30_cep']);
-        $this->setNomeResposavel($row['cliente_30_nomeResponsavel']);
+        $this->setNomeResponsavel($row['cliente_30_nomeResponsavel']);
         $this->setSobrenomeResponsavel($row['cliente_30_sobrenomeResponsavel']);
 		$this->setEmailResponsavel($row['cliente_30_emailResponsavel']);
 		$this->setTelefoneResponsavel($row['cliente_30_telefoneResponsavel']);
@@ -222,7 +222,7 @@ class Cliente {
     }
     
     public function tableName(){
-        return "sta_salas";
+        return "sta_clientes";
     }
 }
 ?>

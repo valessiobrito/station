@@ -25,7 +25,7 @@ class SalaController {
 
     public function editAction(Sala $sala){
         
-        if ($sala->getNome() != "" && $sala->getNumero() != "" && $sala->getValorManha() != "" && $sala->getValorTarde() != "" && $sala->getValorNoite() != "" && $sala->getValorIntegral() != "" && $sala->getMetros() != "" && $sala->getUMesa() != "" && $sala->getUSimples() != "" && $sala->getGrupos() != "" && $sala->getEscolar() != "" && $sala->getAuditorio() != ""){
+        if ($sala->getId() != "" && $sala->getNome() != "" && $sala->getNumero() != "" && $sala->getValorManha() != "" && $sala->getValorTarde() != "" && $sala->getValorNoite() != "" && $sala->getValorIntegral() != "" && $sala->getMetros() != "" && $sala->getUMesa() != "" && $sala->getUSimples() != "" && $sala->getGrupos() != "" && $sala->getEscolar() != "" && $sala->getAuditorio() != ""){
 			
             $salaAr = $sala->assocEntity();
             

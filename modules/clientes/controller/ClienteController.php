@@ -1,36 +1,36 @@
 <?php
 
-class SalaController {
+class ClienteController {
 
-    public function insertAction(Sala $sala) {
+    public function insertAction(Cliente $cliente) {
 			
-        if ($sala->getNome() != "" && $sala->getNumero() != "" && $sala->getValorManha() != "" && $sala->getValorTarde() != "" && $sala->getValorNoite() != "" && $sala->getValorIntegral() != "" && $sala->getMetros() != "" && $sala->getUMesa() != "" && $sala->getUSimples() != "" && $sala->getGrupos() != "" && $sala->getEscolar() != "" && $sala->getAuditorio() != "" && $sala->getUnidadeId() != ""){
+        if ($cliente->getNome() != "" && $cliente->getCnpj() != "" && $cliente->getRazaoSocial() != "" && $cliente->getInscEstadual() != "" && $cliente->getEndereco() != "" && $cliente->getCidade() != "" && $cliente->getEstado() != "" && $cliente->getCep() != "" && $cliente->getNomeResponsavel() != "" && $cliente->getSobrenomeResponsavel() != "" && $cliente->getEmailResponsavel() != "" && $cliente->getTelefoneResponsavel() != "" && $cliente->getCelularResponsavel() != ""){
 
-            $salaAr = $sala->assocEntity();
+            $clienteAr = $cliente->assocEntity();
 
-            $fields = implode("`, `", array_keys($salaAr));
-            $values = implode("', '", $salaAr);
+            $fields = implode("`, `", array_keys($clienteAr));
+            $values = implode("', '", $clienteAr);
 
-            $strQuery = "INSERT INTO " . $sala->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
+            $strQuery = "INSERT INTO " . $cliente->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
 
             mysql_query($strQuery);
 			
-            $salaId = mysql_insert_id();
+            $clienteId = mysql_insert_id();
 
-            return $salaId;
+            return $clienteId;
         } else {
             return 0;
         }
     }
 
-    public function editAction(Sala $sala){
+    public function editAction(Cliente $cliente){
         
-        if ($sala->getNome() != "" && $sala->getNumero() != "" && $sala->getValorManha() != "" && $sala->getValorTarde() != "" && $sala->getValorNoite() != "" && $sala->getValorIntegral() != "" && $sala->getMetros() != "" && $sala->getUMesa() != "" && $sala->getUSimples() != "" && $sala->getGrupos() != "" && $sala->getEscolar() != "" && $sala->getAuditorio() != ""){
+        if ($cliente->getId() != "" && $cliente->getNome() != "" && $cliente->getCnpj() != "" && $cliente->getRazaoSocial() != "" && $cliente->getInscEstadual() != "" && $cliente->getEndereco() != "" && $cliente->getCidade() != "" && $cliente->getEstado() != "" && $cliente->getCep() != "" && $cliente->getNomeResponsavel() != "" && $cliente->getSobrenomeResponsavel() != "" && $cliente->getEmailResponsavel() != "" && $cliente->getTelefoneResponsavel() != "" && $cliente->getCelularResponsavel() != ""){
 			
-            $salaAr = $sala->assocEntity();
+            $clienteAr = $cliente->assocEntity();
             
             $setQuery = array();
-            foreach ($salaAr as $k => $v){
+            foreach ($clienteAr as $k => $v){
                 if ($v != ""){
                     $setQuery[] = "`".$k."` = '".$v."'";
                 }
@@ -38,7 +38,7 @@ class SalaController {
             
             $setQuery = implode($setQuery, ", ");
             
-            $sqlQuery = "UPDATE ".$sala->tableName()." SET $setQuery WHERE `sala_10_id` = ". $sala->getId();
+            $sqlQuery = "UPDATE ".$cliente->tableName()." SET $setQuery WHERE `cliente_10_id` = ". $cliente->getId();
             mysql_query($sqlQuery);
             
             return true;
@@ -50,9 +50,9 @@ class SalaController {
     
     public function listAction($id = false) {
 
-        $whereQuery[] = (!$id) ? "1 = 1" : "sala_10_id = " . $id;
+        $whereQuery[] = (!$id) ? "1 = 1" : "cliente_10_id = " . $id;
 
-        $strQuery = "SELECT * FROM sta_salas WHERE ".implode(" AND ", $whereQuery);
+        $strQuery = "SELECT * FROM sta_clientes WHERE ".implode(" AND ", $whereQuery);
 		
         $result = mysql_query($strQuery);
 
@@ -69,12 +69,12 @@ class SalaController {
         return $retArr;
     }
 
-    public function getSalaAction($field, $value, $op = "=") {
+    public function getClienteAction($field, $value, $op = "=") {
 
         $field = addslashes($field);
         $value = addslashes($value);
         
-        $strQuery = "SELECT * FROM sta_salas WHERE ".$field . " = '" . $value."'";
+        $strQuery = "SELECT * FROM sta_clientes WHERE ".$field . " = '" . $value."'";
         $result = mysql_query($strQuery);
 
         $retArr = array();
@@ -90,18 +90,6 @@ class SalaController {
 
         return $retArr;
     }
-    
-	public function formataValor($valor, $action){
-		
-		if($action == 'gravar'){
-			$valorFormatado = number_format($valor,2,'.',',');
-			$valorFormatado = str_replace(',','',$valorFormatado);
-		}else{
-			$valorFormatado = number_format($valor,2,',','.');
-			$valorFormatado = str_replace('.','',$valorFormatado);
-		}
-		return $valorFormatado;
-	}
 	
 }
 
