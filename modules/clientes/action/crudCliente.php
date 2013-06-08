@@ -93,47 +93,73 @@ switch ($op) {
                 $$k = $v;
             }
            
-            if ($id != "" && $sala != "" && $numero != "" && $valorManha != "" && $valorTarde != "" && $valorNoite != "" && $valorIntegral != "" && $metros != "" && $uMesa != "" && $uSimples != "" && $grupos != "" && $escolar != "" && $auditorio != "" && $unidade != "") {
+            if ($id != "" && $nome != "" && $cnpj != "" && $razaoSocial != "" && $inscEstadual != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "" && $nomeResponsavel != "" && $sobrenomeResponsavel != "" && $emailResponsavel != "" && $telefoneResponsavel != "" && $celularResponsavel != "") {
 
-                $salaClass = new Sala();
-                $salaController = new SalaController();
+                 $clienteClass = new Cliente();
+                $clienteController = new ClienteController();
 
-                $salaClass->setId($id);
-                $salaClass->setNome($sala);
-                $salaClass->setNumero($numero);
-				$salaClass->setValorManha($salaController->formataValor($valorManha,'gravar'));
-				$salaClass->setValorTarde($salaController->formataValor($valorTarde,'gravar'));
-				$salaClass->setValorNoite($salaController->formataValor($valorNoite,'gravar'));
-				$salaClass->setValorIntegral($salaController->formataValor($valorIntegral,'gravar'));
-				$salaClass->setMetros($metros);
-				$salaClass->setUMesa($uMesa);
-				$salaClass->setUSimples($uSimples);
-				$salaClass->setGrupos($grupos);
-				$salaClass->setEscolar($escolar);
-				$salaClass->setAuditorio($auditorio);
-				$salaClass->setUnidadeId($unidade);
+				$clienteClass->setId($id);
+                $clienteClass->setNome($nome);
+				$clienteClass->setCnpj($cnpj);
+				$clienteClass->setRazaoSocial($razaoSocial);
+				$clienteClass->setInscMunicipal($inscMunicipal);
+				$clienteClass->setInscEstadual($inscEstadual);
+				$clienteClass->setEndereco($endereco);
+				$clienteClass->setComplemento($complemento);
+				$clienteClass->setCidade($cidade);
+				$clienteClass->setEstado($estado);
+				$clienteClass->setCep($cep);
+				$clienteClass->setNomeResponsavel($nomeResponsavel);
+				$clienteClass->setSobrenomeResponsavel($sobrenomeResponsavel);
+				$clienteClass->setEmailResponsavel($emailResponsavel);
+				$clienteClass->setTelefoneResponsavel($telefoneResponsavel);
+				$clienteClass->setCelularResponsavel($celularResponsavel);
+				
+				if($clientes == ""){
+					$clientes = 0;
+				}
+				
+				$clienteClass->setIdPai($clientes);
+				
+				$contatoController = new ContatoController();
+				$contatoController->deleteAction($id);
+				
+				foreach($nomeContato as $kContato => $vContato){
+					if ($nomeContato[$kContato] != "" && $sobrenomeContato[$kContato] != "" && $emailContato[$kContato] != "" && $telefoneContato[$kContato] != "" && $celularContato[$kContato] != ""){
+						$contatoClass = new Contato();
+						
+						$contatoClass->setNome($nomeContato[$kContato]);
+						$contatoClass->setSobrenome($sobrenomeContato[$kContato]);
+						$contatoClass->setEmail($emailContato[$kContato]);
+						$contatoClass->setTelefone($telefoneContato[$kContato]);
+						$contatoClass->setCelular($celularContato[$kContato]);
+						$contatoClass->setClienteId($id);
+						
+						$contatoId = $contatoController->insertAction($contatoClass);
+					}
+				}
 
-                if ($salaController->editAction($salaClass)) {
+                if ($clienteController->editAction($clienteClass)) {
                     echo("<script>
-						alert('Sala editada com sucesso!')
-						window.location = '".$urlUnidades."/listarUnidade.php';
+						alert('Cliente editado com sucesso!')
+						window.location = '".$urlClientes."/listarCliente.php';
 						</script>");
                 } else {
                     echo("<script>
 						alert('Ocorreu um erro na gravação.')
-						window.location = '".$urlUnidades."/editarSala.php?id=".$id."';
+						window.location = '".$urlClientes."/editarCliente.php?id=".$id."';
 						</script>");
                 }
             } else {
                 echo("<script>
 					alert('Ocorreu um erro na gravação.')
-					window.location = '".$urlUnidades."/editarSala.php?id=".$id."';
+					window.location = '".$urlClientes."/editarCliente.php?id=".$id."';
 					</script>");
             }
         } else {
             echo("<script>
 				alert('Ocorreu um erro na gravação.')
-				window.location = '".$urlUnidades."/editarSala.php?id=".$id."';
+				window.location = '".$urlClientes."/editarCliente.php?id=".$id."';
 				</script>");
         }
 

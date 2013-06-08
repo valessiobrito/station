@@ -68,8 +68,24 @@ class ContatoController {
 		
         return $retArr;
     }
+	
+	public function deleteAction($id = false){
+            
+            $whereQuery[] = (!$id) ? "1 = 1" : "cliente_10_id = " . $id;
 
-    public function getSalaAction($field, $value, $op = "=") {
+        	$sqlQuery = "DELETE FROM sta_contatos_cliente WHERE ".implode(" AND ", $whereQuery);
+			
+            $deletar = mysql_query($sqlQuery);
+			
+       if($deletar){     
+            return true;
+        }else {
+            return false;
+        }
+        
+    }
+
+    public function getContatoAction($field, $value, $op = "=") {
 
         $field = addslashes($field);
         $value = addslashes($value);

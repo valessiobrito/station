@@ -7,196 +7,203 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 	header("Location: index.php");
 }else{
     
-    $salaController = new SalaController();
-    $sala = $salaController->listAction($_GET['id'] , 1);
+    $clienteController = new ClienteController();
+    $cliente = $clienteController->listAction($_GET['id'] , 1);
     
-    if (count($sala) == 0){
-        header("Location: ".$urlUnidades."/listarUnidade.php");
+    if (count($cliente) == 0){
+        header("Location: ".$urlClientes."/listarCliente.php");
     }
 	
-    $salaClass = new Sala();
-    $salaClass->fetchEntity($sala[1]);
-	$title = "Editar Unidade/Sala";
+    $clienteClass = new Cliente();
+    $clienteClass->fetchEntity($cliente[1]);
+	$title = "Editar Cliente/Contatos";
 
 ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 
 <script>
 	$(document).ready(function(){
-		carregaCombo('unidade','<?php echo $salaClass->getUnidadeId(); ?>');
-		$("#valorManha").maskMoney({showSymbol:false, thousands:'', decimal:','});
-		$("#valorTarde").maskMoney({showSymbol:false, thousands:'', decimal:','});
-		$("#valorNoite").maskMoney({showSymbol:false, thousands:'', decimal:','});
-		$("#valorIntegral").maskMoney({showSymbol:false, thousands:'', decimal:','});
+		carregaCombo('clientes','<?php echo $clienteClass->getIdPai(); ?>');
+		
+		$(".lineClone").click(function(){
+			
+			invLine = $(this).attr("id")+"_inv";
+			
+			newLine = $("#"+invLine).clone();
+			
+			numPossibilidades = 90231290523432 - 1
+			aleat = Math.random() * numPossibilidades
+			aleat = Math.floor(aleat)
+			
+			newLineId = parseInt(1) + aleat;
+			
+			newLine.attr("style","");
+			newLine.attr("class","");
+			newLine.attr("id",newLineId);
+			newLine.appendTo("#tbody_"+$(this).attr("id"));
+			$("#"+newLineId+">td").children().eq(1).remove();
+			newLine.attr("style", "height: 30px");
+			
+			imgEle = newLine.find("button").attr("id","rm_"+newLineId+"_"+$(this).attr("id"));
+			
+		});
+		
+		$(".lineRemove").live("click",function(){
+			
+			slices = $(this).attr("id");
+			slices = slices.split("_");
+			
+			if ($("#tbody_"+slices[2]+"_"+slices[3]+" tr").length > 2){
+				$("#"+slices[1]).remove();
+			}
+			
+		});
 	});	
 </script>
 
 <div class="content">
 			<ul class="breadcrumb">
 				<li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
-                <li><a href="/agenda/modules/unidades/listarUnidade.php">Unidades e Salas</a> <span class="divider">/</span></li>
-				<li class="active">Editar Sala</li>
+                <li><a href="/agenda/modules/clientes/listarCliente.php">Clientes e Contatos</a> <span class="divider">/</span></li>
+				<li class="active">Editar Cliente</li>
 			</ul>
 			<div class="span10">
 				<div class="page-header">
-					<h1>Editar Sala</h1>
+					<h1>Editar Cliente</h1>
 				</div>
-				<form name="gravarSala" method="post" action="<?php echo $urlUnidades;?>/action/crudUnidade.php?op=editar">
-					<h4>Unidade</h4>
-					<div class="row">
-						<div class="span10">
-							<div class="input-append">
-								<select class="span6" id="unidade" name="unidade">
-									<option value="">Escolha a unidade:</option>
-								</select>
-								<a href="#modalNovaUnidade" role="button" class="btn" data-toggle="modal">+</a>
-							</div>
-						</div>                        
-					</div>
-					<br>
-					<h4>Informações da Sala</h4>
-					<div class="row">
-						<div class="span10">
-							<input type="text" class="span6" id="sala" name="sala" placeholder="Nome da Sala" value="<?php echo $salaClass->getNome();?>">
-							<input type="text" class="span4" id="numero" name="numero" placeholder="Número da Sala" value="<?php echo $salaClass->getNumero();?>">
-						</div>
-					</div>
-					<br>
-					<h4>Valor / Período</h4>
-					<div class="row">
-						<div class="span10">
-							<label for="valorManha">Manhã:</label>
-							<input type="text" class="span4" id="valorManha" name="valorManha" placeholder="Valor (R$)" value="<?php echo $salaController->formataValor($salaClass->getValorManha(),'editar');?>">
-							<label for="valorTarde">Tarde:</label>
-							<input type="text" class="span4" id="valorTarde" name="valorTarde" placeholder="Valor (R$)" value="<?php echo $salaController->formataValor($salaClass->getValorTarde(),'editar');?>">
-							<label for="valorNoite">Noite:</label>
-							<input type="text" class="span4" id="valorNoite" name="valorNoite" placeholder="Valor (R$)" value="<?php echo $salaController->formataValor($salaClass->getValorNoite(),'editar');?>">
-							<label for="valorIntegral">Integral:</label>
-							<input type="text" class="span4" id="valorIntegral" name="valorIntegral" placeholder="Valor (R$)" value="<?php echo $salaController->formataValor($salaClass->getValorIntegral(),'editar');?>">
-						</div>
-					</div>
-					<br>
-					<h4>Formato / Lotação</h4>
-					<div class="row">
-						<div class="span10">
-							<label for="metros">M²:</label>
-							<input type="text" class="span4" id="metros" name="metros" placeholder="Lotação Máxima" value="<?php echo $salaClass->getMetros();?>">
-							<label for="uMesa">"U" com mesa:</label>
-							<input type="text" class="span4" id="uMesa" name="uMesa" placeholder="Lotação Máxima" value="<?php echo $salaClass->getUMesa();?>">
-							<label for="uSimples">"U" simples:</label>
-							<input type="text" class="span4" id="uSimples" name="uSimples" placeholder="Lotação Máxima" value="<?php echo $salaClass->getUSimples();?>">
-							<label for="grupos">Grupos:</label>
-							<input type="text" class="span4" id="grupos" name="grupos" placeholder="Lotação Máxima" value="<?php echo $salaClass->getGrupos();?>">
-							<label for="escolar">Escolar:</label>
-							<input type="text" class="span4" id="escolar" name="escolar" placeholder="Lotação Máxima" value="<?php echo $salaClass->getEscolar();?>">
-							<label for="auditorio">Auditório:</label>
-							<input type="text" class="span4" id="auditorio" name="auditorio" placeholder="Lotação Máxima" value="<?php echo $salaClass->getAuditorio();?>">
-						</div>
-					</div>
-					<br>
-                    <input type="hidden" name="id" value="<?php echo $salaClass->getUnidadeId();?>">
-					<input type="button" onclick="validaSala()" class="btn btn-info btn-large" value="Salvar" />
-				</form>
-			</div>
-			<div id="modalNovaUnidade" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="myModalLabel">Nova Unidade</h3>
-				</div>
-				<div class="modal-body">
-					<h4>Informações da Unidade</h4>
-					<div class="row">
-						<div class="span6">
-							<input type="text" class="span6" id="nomeUnidade" name="nomeUnidade" placeholder="Nome da Unidade">
-						</div>
-					</div>
-					<br>
-					<h4>Endereço</h4>
-					<div class="row">
-						<div class="span6">
-							<input type="text" class="span4" id="logradouro" name="logradouro" placeholder="Endereço">
-							<input type="text" class="span2" id="numeroUnidade" name="numeroUnidade" placeholder="Número">
-						</div>
-					</div>
-					<div class="row">
-						<div class="span6">
-							<input type="text" class="span4" id="bairro" name="bairro" placeholder="Bairro">
-							<input type="text" class="span2" id="cep" name="cep" placeholder="CEP">
-						</div>
-					</div>
-					<div class="row">
-						<div class="span6">
-							<input type="text" class="span6" id="complemento" name="complemento" placeholder="Complemento">
-						</div>
-					</div>
-					<div class="row">
-						<div class="span6">
-							<input type="text" class="span4" id="cidade" name="cidade" placeholder="Cidade">
-							<select name="estado" id="estado" class="span2">
-								<option value="">Selecione o estado:</option>
-								<option value="AC">AC</option>
-								<option value="AL">AL</option>
-								<option value="AM">AM</option>
-								<option value="AP">AP</option>
-								<option value="BA">BA</option>
-								<option value="CE">CE</option>
-								<option value="DF">DF</option>
-								<option value="ES">ES</option>
-								<option value="GO">GO</option>
-								<option value="MA">MA</option>
-								<option value="MG">MG</option>
-								<option value="MS">MS</option>
-								<option value="MT">MT</option>
-								<option value="PA">PA</option>
-								<option value="PB">PB</option>
-								<option value="PE">PE</option>
-								<option value="PI">PI</option>
-								<option value="PR">PR</option>
-								<option value="RJ">RJ</option>
-								<option value="RN">RN</option>
-								<option value="RO">RO</option>
-								<option value="RS">RS</option>
-								<option value="RR">RR</option>
-								<option value="SC">SC</option>
-								<option value="SE">SE</option>
-								<option value="SP">SP</option>
-								<option value="TO">TO</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<h4>Telefone</h4>
-					<div class="row">
-						<div class="span6">
-							<input type="text" class="span2" id="ddd" name="ddd" placeholder="DDD">
-							<input type="text" class="span4" id="telefone" name="telefone" placeholder="Telefone">
-						</div>
-					</div>
-					<br>
-					<h4>Contato</h4>
-					<div class="row">
-						<div class="span6">
-							<input type="text" class="span6" id="nomeContato" name="nomeContato" placeholder="Nome do Contato">
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<input type="button" onclick="validaUnidade()" class="btn btn-info" value="Salvar" style="float:right; margin-right:55px;">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<span id="retornoUnidade"></span>
-				</div>
+                <form name="gravarCliente" method="post" action="<?php echo $urlClientes;?>/action/crudCliente.php?op=editar">
+                    <h4>Contatos</h4>
+                    <table id="tbody_tr_contato">
+                    	<?php
+							$contatosController = new ContatoController();
+    						$contatos = $contatosController->listAction($_GET['id']);
+							foreach($contatos as $contato){
+						?>
+                    	<tr id="<?php echo $contato['contato_cliente_10_id']; ?>">
+                        	<td>
+                                <div class="row">
+                                    <div class="span10" style="margin-bottom:20px;">
+                                        <input type="text" class="span3" id="nomeContato" name="nomeContato[]" placeholder="Primeiro Nome" value="<?php echo $contato['contato_cliente_30_nome']; ?>">
+                                        <input type="text" class="span4" id="sobrenomeContato" name="sobrenomeContato[]" placeholder="Sobrenome" value="<?php echo $contato['contato_cliente_30_sobrenome']; ?>">
+                                        <br>
+                                        <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail" value="<?php echo $contato['contato_cliente_30_email']; ?>">
+                                        <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial" value="<?php echo $contato['contato_cliente_30_telefone']; ?>">
+                                        <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular" value="<?php echo $contato['contato_cliente_30_celular']; ?>">
+                                        <button type="button" class="btn btn-danger lineRemove" id="rm_<?php echo $contato['contato_cliente_10_id']; ?>_tr_contato">Deletar</button>
+                                    </div>
+                                </div>
+                            </td>
+                    	</tr>
+                        <?php
+							}
+						?>
+                        <tr id="original">
+                        	<td>
+                                <div class="row">
+                                    <div class="span10" style="margin-bottom:20px;">
+                                        <input type="text" class="span3" id="nomeContato" name="nomeContato[]" placeholder="Primeiro Nome">
+                                        <input type="text" class="span4" id="sobrenomeContato" name="sobrenomeContato[]" placeholder="Sobrenome">
+                                        <br>
+                                        <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail">
+                                        <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial">
+                                        <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular">
+                                        <button type="button" class="btn btn-success lineClone" id="tr_contato">Adicionar outro</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="tr_contato_inv" style="display: none;">
+                        	<td>
+                                <div class="row">
+                                    <div class="span10" style="margin-bottom:20px;">
+                                        <input type="text" class="span3" id="nomeContato" name="nomeContato[]" placeholder="Primeiro Nome">
+                                        <input type="text" class="span4" id="sobrenomeContato" name="sobrenomeContato[]" placeholder="Sobrenome">
+                                        <br>
+                                        <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail">
+                                        <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial">
+                                        <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular">
+                                        <button type="button" class="btn btn-danger lineRemove">Deletar</button>
+                                    </div>
+                                </div>
+                            </td>
+                    	</tr>
+                    </table>
+                 	<br>
+                    <h4>Informações da Empresa</h4>
+                    <div class="row">
+                        <div class="span10" style="margin-bottom:20px;">
+                            <input type="text" class="span3" id="nome" name="nome" placeholder="Nome da Empresa" value="<?php echo $clienteClass->getNome();?>">
+                            <input type="text" class="span3" id="cnpj" name="cnpj" placeholder="CNPJ" value="<?php echo $clienteClass->getCnpj();?>">
+                            <input type="text" class="span3" id="razaoSocial" name="razaoSocial" placeholder="Razão Social" value="<?php echo $clienteClass->getRazaoSocial();?>">
+                            <input type="text" class="span3" id="inscMunicipal" name="inscMunicipal" placeholder="Inscrição Comercial" value="<?php echo $clienteClass->getInscMunicipal();?>">
+                            <input type="text" class="span3" id="inscEstadual" name="inscEstadual" placeholder="Inscrição Municipal" value="<?php echo $clienteClass->getInscEstadual();?>">
+                            <br>
+                            <input type="text" class="span5" id="endereco" name="endereco" placeholder="Endereço Completo" value="<?php echo $clienteClass->getEndereco();?>">
+                            <input type="text" class="span4" id="complemento" name="complemento" placeholder="Complemento" value="<?php echo $clienteClass->getComplemento();?>">
+                            <br />
+                            <input type="text" class="span4" id="cidade" name="cidade" placeholder="Cidade" value="<?php echo $clienteClass->getCidade();?>">
+                            <select name="estado" id="estado" class="span2">
+                            	<option value="<?php echo $clienteClass->getEstado();?>"><?php echo $clienteClass->getEstado();?></option>
+                                <option value="">Estado:</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AM">AM</option>
+                                <option value="AP">AP</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MG">MG</option>
+                                <option value="MS">MS</option>
+                                <option value="MT">MT</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="PR">PR</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RO">RO</option>
+                                <option value="RS">RS</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SE">SE</option>
+                                <option value="SP">SP</option>
+                                <option value="TO">TO</option>
+                            </select>
+                            <input type="text" class="span3" id="cep" name="cep" placeholder="CEP" value="<?php echo $clienteClass->getCep();?>">
+                        </div>
+                    </div>
+                    <br>
+                    <h4>Responsável Financeiro</h4>
+                    <div class="row">
+                        <div class="span10" style="margin-bottom:20px;">
+                            <input type="text" class="span3" id="nomeResponsavel" name="nomeResponsavel" placeholder="Primeiro Nome" value="<?php echo $clienteClass->getNomeResponsavel();?>">
+                            <input type="text" class="span4" id="sobrenomeResponsavel" name="sobrenomeResponsavel" placeholder="Sobrenome" value="<?php echo $clienteClass->getSobrenomeResponsavel();?>">
+                            <br>
+                            <input type="text" class="span3" id="emailResponsavel" name="emailResponsavel" placeholder="E-mail" value="<?php echo $clienteClass->getEmailResponsavel();?>">
+                            <input type="text" class="span2" id="telefoneResponsavel" name="telefoneResponsavel" placeholder="Telefone Comercial" value="<?php echo $clienteClass->getTelefoneResponsavel();?>">
+                            <input type="text" class="span2" id="celularResponsavel" name="celularResponsavel" placeholder="Celular" value="<?php echo $clienteClass->getCelularResponsavel();?>">
+                        </div>
+                    </div>
+                    <br>
+                    <h4>Vincular a outra empresa</h4>
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span6" id="clientes" name="clientes">
+                                <option value="">Escolha a empresa:</option>
+                            </select>
+                        </div>                        
+                    </div>
+                    <br>
+                    <input type="hidden" name="id" value="<?php echo $clienteClass->getId();?>">
+                    <input type="button" onclick="validaCliente()" class="btn btn-info btn-large" value="Salvar" />
+                </form>
 			</div>
 		</div>
 <?php include("inc/footer.php");?>
 <?php
 	}	
-?>
-
-
-<?php echo $produto[1]["produto_30_nome"]; ?>
-<div style="display: none;">
-<input type="hidden" name="sala_10_id" value="<?php echo $produto[1]["sala_10_id"]; ?>" />
-</div>
-                                                        
+?>                                
