@@ -8,8 +8,8 @@ class ContatoController {
 
             $contatoAr = $contato->assocEntity();
 
-            $fields = implode("`, `", array_keys($salaAr));
-            $values = implode("', '", $salaAr);
+            $fields = implode("`, `", array_keys($contatoAr));
+            $values = implode("', '", $contatoAr);
 
             $strQuery = "INSERT INTO " . $contato->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
 
@@ -50,7 +50,7 @@ class ContatoController {
     
     public function listAction($id = false) {
 
-        $whereQuery[] = (!$id) ? "1 = 1" : "contato_cliente_10_id = " . $id;
+        $whereQuery[] = (!$id) ? "1 = 1" : "cliente_10_id = " . $id;
 
         $strQuery = "SELECT * FROM sta_contatos_cliente WHERE ".implode(" AND ", $whereQuery);
 		

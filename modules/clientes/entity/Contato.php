@@ -60,7 +60,7 @@ class Contato {
 		return $this->celular;
 	}
 
-	public function setCelularl($celular){
+	public function setCelular($celular){
 		$this->celular = $celular;
 	}
 

@@ -44,7 +44,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 						<div class="span10">
 							<div class="input-append">
                             	<select class="span6" id="tipo" name="tipo">
-                                	<option value="">Escolha a unidade:</option>
+                                	<option value="">Escolha o tipo:</option>
                                 </select>
                                 <a href="#modalNovoTipo" role="button" class="btn" data-toggle="modal">+</a>
                             </div>

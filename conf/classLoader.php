@@ -17,4 +17,11 @@ include_once $unidadesClass.'/controller/SalaController.php';
 include_once $produtosClass.'/entity/Produto.php';
 include_once $produtosClass.'/controller/ProdutoController.php';
 /* /Unidades Module */
+
+/* Clientes Module */
+include_once $clientesClass.'/entity/Cliente.php';
+include_once $clientesClass.'/controller/ClienteController.php';
+include_once $clientesClass.'/entity/Contato.php';
+include_once $clientesClass.'/controller/ContatoController.php';
+/* /Clientes Module */
 ?>

@@ -5,28 +5,28 @@
 	if ($_SESSION['LogadoSTATION'] != "1"){
 		header("Location: index.php");
 	}else{
-		$title = "Unidades e Salas";
+		$title = "Clientes e Contatos";
 ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<script>
 			$(document).ready(function(){
-				carregaCombo('unidade','');
+				carregaCombo('clientes','');
 			});	
 		</script> 
         
         <div class="content">
         	<ul class="breadcrumb">
                 <li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
-                <li class="active">Unidades e Salas</li>
+                <li class="active">Clientes e Contatos</li>
             </ul>
             <div class="span10">
             	<div class="page-header">
-                	<h1>Unidades e Salas</h1>
+                	<h1>Clientes e Contatos</h1>
                 </div>
-                <h4>Cadastrar Nova</h4>
+                <h4>Cadastrar Novo</h4>
                 <div class="row">
                     <div class="span10">
-                    	<a href="novaSala.php" role="button" class="btn btn-info">Adicionar Unidade/Sala</a>
+                    	<a href="novoCliente.php" role="button" class="btn btn-info">Adicionar Cliente/Contato</a>
                 	</div>
                 </div>
                 <br>
@@ -34,10 +34,10 @@
                 <div class="row">
                     <div class="span10">
                         <div class="input-append">
-                            <select class="span6" id="unidade" name="unidade">
-                                <option value="">Escolha a unidade:</option>
+                            <select class="span6" id="clientes" name="clientes">
+                                <option value="">Escolha o cliente:</option>
                             </select>
-                            <a role="button" class="btn" onclick="pesquisarSalas(document.getElementById('unidade').value)">Mostrar</a>
+                            <a role="button" class="btn" onclick="pesquisarClientes(document.getElementById('clientes').value)">Mostrar</a>
                         </div>
                     </div>                        
                 </div>

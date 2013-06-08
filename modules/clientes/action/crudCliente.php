@@ -30,30 +30,30 @@ switch ($op) {
 				$clienteClass->setCidade($cidade);
 				$clienteClass->setEstado($estado);
 				$clienteClass->setCep($cep);
-				$clienteClass->setNomeResposavel($nomeResponsavel);
+				$clienteClass->setNomeResponsavel($nomeResponsavel);
 				$clienteClass->setSobrenomeResponsavel($sobrenomeResponsavel);
 				$clienteClass->setEmailResponsavel($emailResponsavel);
 				$clienteClass->setTelefoneResponsavel($telefoneResponsavel);
 				$clienteClass->setCelularResponsavel($celularResponsavel);
 				
-				if($clientePai == ""){
-					$clientePai = 0;
+				if($clientes == ""){
+					$clientes = 0;
 				}
 				
-				$clienteClass->setIdPai($clientePai);
+				$clienteClass->setIdPai($clientes);
                 
                 $clienteId = $clienteController->insertAction($clienteClass);
 				
 				$contatoController = new ContatoController();
-				foreach($nomeContato as $kProduto => $vProduto){
-					if ($nomeContato[$kProduto] != "" && $sobrenomeContato[$kProduto] != "" && $emailContato[$kProduto] != "" && $telefoneContato[$kProduto] != "" && $celularContato[$kProduto] != ""){
+				foreach($nomeContato as $kContato => $vContato){
+					if ($nomeContato[$kContato] != "" && $sobrenomeContato[$kContato] != "" && $emailContato[$kContato] != "" && $telefoneContato[$kContato] != "" && $celularContato[$kContato] != ""){
 						$contatoClass = new Contato();
 						
-						$contatoClass->setNome($nomeContato[$kProduto]);
-						$contatoClass->setSobrenome($sobrenomeContato[$kProduto]);
-						$contatoClass->setEmail($emailContato[$kProduto]);
-						$contatoClass->setTelefone($telefoneContato[$kProduto]);
-						$contatoClass->setCelular($celularContato[$kProduto]);
+						$contatoClass->setNome($nomeContato[$kContato]);
+						$contatoClass->setSobrenome($sobrenomeContato[$kContato]);
+						$contatoClass->setEmail($emailContato[$kContato]);
+						$contatoClass->setTelefone($telefoneContato[$kContato]);
+						$contatoClass->setCelular($celularContato[$kContato]);
 						$contatoClass->setClienteId($clienteId);
 					
 						$contatoId = $contatoController->insertAction($contatoClass);

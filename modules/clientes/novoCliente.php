@@ -5,13 +5,12 @@
 	if ($_SESSION['LogadoSTATION'] != "1"){
 		header("Location: index.php");
 	}else{
-		$title = "Adicionar Produto";
+		$title = "Adicionar Cliente";
 ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<script>
 			$(document).ready(function(){
-				carregaCombo('tipo','');
-				$(".valor").maskMoney({showSymbol:false, thousands:'', decimal:','});
+				carregaCombo('clientes','');
 
 				$(".lineClone").click(function(){
 					
@@ -34,8 +33,6 @@
 					
 					imgEle = newLine.find("button").attr("id","rm_"+newLineId+"_"+$(this).attr("id"));
 					
-					valorEle = newLine.find(".valor").maskMoney({showSymbol:false, thousands:'', decimal:','});
-					
 				});
 				
 				$(".lineRemove").live("click",function(){
@@ -54,49 +51,41 @@
         <div class="content">
         	<ul class="breadcrumb">
                 <li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
-                <li><a href="/agenda/modules/produtos/listarProduto.php">Produtos</a> <span class="divider">/</span></li>
-                <li class="active">Novo Produto</li>
+                <li><a href="/agenda/modules/clientes/listarCliente.php">Clientes</a> <span class="divider">/</span></li>
+                <li class="active">Novo Cliente</li>
             </ul>
             <div class="span10">
             	<div class="page-header">
-                	<h1>Novo Produto</h1>
+                	<h1>Novo Cliente</h1>
                 </div>
-                <form name="gravarProduto" method="post" action="<?php echo $urlProdutos;?>/action/crudProduto.php?op=novo">
-                    <h4>Tipo</h4>
-                    <div class="row">
-                        <div class="span10">
-                        	<div class="input-append">
-                            	<select class="span6" id="tipo" name="tipo">
-                                	<option value="">Escolha a unidade:</option>
-                                </select>
-                                <a href="#modalNovoTipo" role="button" class="btn" data-toggle="modal">+</a>
-                            </div>
-                        </div>                        
-                    </div>
-                    <br>
-                    <h4>Informações do Produto</h4>
-                    <table id="tbody_tr_produto">
+                <form name="gravarCliente" method="post" action="<?php echo $urlClientes;?>/action/crudCliente.php?op=novo">
+                    <h4>Contatos</h4>
+                    <table id="tbody_tr_contato">
                         <tr id="2">
                         	<td>
                                 <div class="row">
                                     <div class="span10" style="margin-bottom:20px;">
-                                        <input type="text" class="span4" id="nome" name="nome[]" placeholder="Nome do Produto">
-                                        <input type="text" class="span2 valor" id="valor" name="valor[]" placeholder="Valor do Produto">
-                                        <input type="text" class="span2" id="quantidade" name="quantidade[]" placeholder="Quantidade">
-                                        <textarea class="span4" id="observacoes" name="observacoes[]" placeholder="Observações"></textarea>
-                                        <button type="button" class="btn btn-success lineClone" id="tr_produto">Adicionar outro</button>
+                                        <input type="text" class="span3" id="nomeContato" name="nomeContato[]" placeholder="Primeiro Nome">
+                                        <input type="text" class="span4" id="sobrenomeContato" name="sobrenomeContato[]" placeholder="Sobrenome">
+                                        <br>
+                                        <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail">
+                                        <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial">
+                                        <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular">
+                                        <button type="button" class="btn btn-success lineClone" id="tr_contato">Adicionar outro</button>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr id="tr_produto_inv" style="display: none;">
+                        <tr id="tr_contato_inv" style="display: none;">
                         	<td>
                                 <div class="row">
                                     <div class="span10" style="margin-bottom:20px;">
-                                        <input type="text" class="span4" id="nome" name="nome[]" placeholder="Nome do Produto">
-                                        <input type="text" class="span2 valor" id="valor" name="valor[]" placeholder="Valor do Produto">
-                                        <input type="text" class="span2" id="quantidade" name="quantidade[]" placeholder="Quantidade">
-                                        <textarea class="span4" id="observacoes" name="observacoes[]" placeholder="Observações"></textarea>
+                                        <input type="text" class="span3" id="nomeContato" name="nomeContato[]" placeholder="Primeiro Nome">
+                                        <input type="text" class="span4" id="sobrenomeContato" name="sobrenomeContato[]" placeholder="Sobrenome">
+                                        <br>
+                                        <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail">
+                                        <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial">
+                                        <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular">
                                         <button type="button" class="btn btn-danger lineRemove">Deletar</button>
                                     </div>
                                 </div>
@@ -104,28 +93,76 @@
                     	</tr>
                     </table>
                  	<br>
-                    <input type="button" onclick="validaProduto('novo')" class="btn btn-info btn-large" value="Salvar" />
-                </form>
-            </div>
-            <div id="modalNovoTipo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="myModalLabel">Novo Tipo Produto</h3>
-                </div>
-                <div class="modal-body">
-                	<h4>Informações do Tipo</h4>
+                    <h4>Informações da Empresa</h4>
                     <div class="row">
-                        <div class="span6">
-                            <input type="text" class="span6" id="nomeTipo" name="nomeTipo" placeholder="Nome do Tipo">
+                        <div class="span10" style="margin-bottom:20px;">
+                            <input type="text" class="span3" id="nome" name="nome" placeholder="Nome da Empresa">
+                            <input type="text" class="span3" id="cnpj" name="cnpj" placeholder="CNPJ">
+                            <input type="text" class="span3" id="razaoSocial" name="razaoSocial" placeholder="Razão Social">
+                            <input type="text" class="span3" id="inscMunicipal" name="inscMunicipal" placeholder="Inscrição Comercial">
+                            <input type="text" class="span3" id="inscEstadual" name="inscEstadual" placeholder="Inscrição Municipal">
+                            <br>
+                            <input type="text" class="span5" id="endereco" name="endereco" placeholder="Endereço Completo">
+                            <input type="text" class="span4" id="complemento" name="complemento" placeholder="Complemento">
+                            <br />
+                            <input type="text" class="span4" id="cidade" name="cidade" placeholder="Cidade">
+                            <select name="estado" id="estado" class="span2">
+                                <option value="">Estado:</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AM">AM</option>
+                                <option value="AP">AP</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MG">MG</option>
+                                <option value="MS">MS</option>
+                                <option value="MT">MT</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="PR">PR</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RO">RO</option>
+                                <option value="RS">RS</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SE">SE</option>
+                                <option value="SP">SP</option>
+                                <option value="TO">TO</option>
+                            </select>
+                            <input type="text" class="span3" id="cep" name="cep" placeholder="CEP">
                         </div>
                     </div>
+                    <br>
+                    <h4>Responsável Financeiro</h4>
                     <div class="row">
-                    	<input type="button" onclick="validaTipoProduto()" class="btn btn-info" value="Salvar" style="float:right; margin-right:55px;" />
+                        <div class="span10" style="margin-bottom:20px;">
+                            <input type="text" class="span3" id="nomeResponsavel" name="nomeResponsavel" placeholder="Primeiro Nome">
+                            <input type="text" class="span4" id="sobrenomeResponsavel" name="sobrenomeResponsavel" placeholder="Sobrenome">
+                            <br>
+                            <input type="text" class="span3" id="emailResponsavel" name="emailResponsavel" placeholder="E-mail">
+                            <input type="text" class="span2" id="telefoneResponsavel" name="telefoneResponsavel" placeholder="Telefone Comercial">
+                            <input type="text" class="span2" id="celularResponsavel" name="celularResponsavel" placeholder="Celular">
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <span id="retornoTipo"></span>
-                </div>
+                    <br>
+                    <h4>Vincular a outra empresa</h4>
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span6" id="clientes" name="clientes">
+                                <option value="">Escolha a empresa:</option>
+                            </select>
+                        </div>                        
+                    </div>
+                    <br>
+                    <input type="button" onclick="validaCliente()" class="btn btn-info btn-large" value="Salvar" />
+                </form>
             </div>
         </div>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>

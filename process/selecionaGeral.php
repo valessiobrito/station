@@ -12,6 +12,10 @@
 			$table = 'sta_tipos_produto';
 			$colId = 'tipo_produto_10_id';
 			$colNome = 'tipo_produto_30_nome';
+		}else if($elemento == 'clientes'){
+			$table = 'sta_clientes';
+			$colId = 'cliente_10_id';
+			$colNome = 'cliente_30_nome';
 		}
 
 		$json = array();

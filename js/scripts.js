@@ -120,6 +120,100 @@ function validaProduto(tipo){
 	}
 }
 
+function validaCliente(){
+	var nomesContato = document.getElementsByName('nomeContato[]');
+	var sobrenomesContato = document.getElementsByName('sobrenomeContato[]');
+	var emailsContato = document.getElementsByName('emailContato[]');
+	var telefonesContato = document.getElementsByName('telefoneContato[]');
+	var celularesContato = document.getElementsByName('celularContato[]');
+	
+	if(nomesContato[0].value == '' || sobrenomesContato[0].value == '' || emailsContato[0].value == '' || telefonesContato[0].value == '' || celularesContato[0].value == '')
+	{
+		alert("Preencha pelo menos todos os campos do primeiro contato!");
+		return false;
+	}
+	
+	if(document.getElementById("nome").value == "")
+	{
+		alert("Preencha o nome");
+		document.getElementById("nome").focus();		
+		return false;
+	}
+	if(document.getElementById("cnpj").value == "")
+	{
+		alert("Preencha o CNPJ");
+		document.getElementById("cnpj").focus();		
+		return false;
+	}
+	if(document.getElementById("razaoSocial").value == "")
+	{
+		alert("Preencha a razão social");
+		document.getElementById("razaoSocial").focus();		
+		return false;
+	}
+	if(document.getElementById("inscEstadual").value == "")
+	{
+		alert("Preencha a inscrição estadual");
+		document.getElementById("inscEstadual").focus();		
+		return false;
+	}
+	if(document.getElementById("endereco").value == "")
+	{
+		alert("Preencha o endereço");
+		document.getElementById("endereco").focus();		
+		return false;
+	}
+	if(document.getElementById("cidade").value == "")
+	{
+		alert("Preencha a cidade");
+		document.getElementById("cidade").focus();		
+		return false;
+	}
+	if(document.getElementById("estado").value == "")
+	{
+		alert("Selecione o estado");
+		document.getElementById("estado").focus();		
+		return false;
+	}
+	if(document.getElementById("cep").value == "")
+	{
+		alert("Preencha o CEP");
+		document.getElementById("cep").focus();		
+		return false;
+	}
+	if(document.getElementById("nomeResponsavel").value == "")
+	{
+		alert("Preencha o nome do responsável financeiro");
+		document.getElementById("nomeResponsavel").focus();		
+		return false;
+	}
+	if(document.getElementById("sobrenomeResponsavel").value == "")
+	{
+		alert("Preencha o sobrenome do responsável financeiro");
+		document.getElementById("sobrenomeResponsavel").focus();		
+		return false;
+	}
+	if(document.getElementById("emailResponsavel").value == "")
+	{
+		alert("Preencha o e-mail do responsável financeiro");
+		document.getElementById("emailResponsavel").focus();		
+		return false;
+	}
+	if(document.getElementById("telefoneResponsavel").value == "")
+	{
+		alert("Preencha o telefone do responsável financeiro");
+		document.getElementById("telefoneResponsavel").focus();		
+		return false;
+	}
+	if(document.getElementById("celularResponsavel").value == "")
+	{
+		alert("Preencha o celular do responsável financeiro");
+		document.getElementById("celularResponsavel").focus();		
+		return false;
+	}
+	document.gravarCliente.submit();
+}
+
 function validaUnidade(){
 	if(document.getElementById("nomeUnidade").value == "")
 	{
@@ -300,6 +394,50 @@ function deletaProduto(idProduto,idTipo){
 			if(resposta == 'ok'){
 				alert("Produto deletado!");
 				pesquisarProdutos(idProduto);
+			}else{
+				alert("Ocorreu um erro");
+			}
+		}
+	});
+	}else{
+		return false;
+	}
+}
+
+function pesquisarClientes(idCliente)
+{
+	if(idCliente == "")
+	{
+		alert("Selecione o cliente");
+		document.getElementById("clientes").focus();		
+		return false;
+	}
+	
+	$("#tabelaBusca").empty();
+	$.post(
+    	'/agenda/process/buscarClientes.php',
+        {cliente:idCliente},
+		
+		function(data){
+			
+			$("#tabelaBusca").append("<tr><th>Nome</th><th>CNPJ</th><th>Ações</th></tr>");
+				$.each(data, function(i,data){
+					$("#tabelaBusca").append("<tr><td>"+data.nomeCliente+"</td><td>"+data.cnpj+"</td><td><a href='editarCliente.php?id="+data.idCliente+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaCliente('"+data.idCliente+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+				});
+		},'json');
+		
+	$("#resultadoBusca").show();
+}
+function deletaCliente(idCliente){
+	if(confirm("Deseja realmente deletar esse cliente e seus contatos?")){
+		$.ajax({
+		type: "POST",
+		url: "/agenda/process/deletarCliente.php",
+		data: "ic="+idCliente,
+		success: function(resposta){
+			if(resposta == 'ok'){
+				alert("Cliente deletado!");
+				pesquisarClientes(idCliente);
 			}else{
 				alert("Ocorreu um erro");
 			}
