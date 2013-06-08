@@ -8,7 +8,7 @@ if ($_SERVER['SERVER_ADDR'] == "127.0.0.1" || $_SERVER['SERVER_ADDR'] == "::1"){
     $urlGeral = "http://stationct.com.br/agenda";
 }
 
-include $urlGeral."/conf/connection.php";
+include $_SERVER['DOCUMENT_ROOT']."/agenda/conf/connection.php";
 $urlModules = $urlGeral."/modules";
 
 /* Modules */
