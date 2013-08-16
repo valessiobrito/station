@@ -29,6 +29,13 @@
                 if($_SESSION["TipoSTATION"] != "3"){
             ?>
                 <li>
+                    <a id="dropProdutos" href="<?php echo $urlOportunidades; ?>/listarOportunidade.php" role="button">
+                        <i class="icon-large icon-briefcase"></i>
+                        <br>
+                        <span>Oportunidades</span>
+                    </a>
+                </li>
+                <li>
                 	<a id="dropProdutos" href="<?php echo $urlUnidades; ?>/listarUnidade.php" role="button">
                     	<i class="icon-large icon-home"></i>
                 		<br>

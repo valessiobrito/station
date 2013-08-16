@@ -1,7 +1,7 @@
 <?php
 	ob_start();
 	session_start();
-	
+
 	if ($_SESSION['LogadoSTATION'] != "1"){
 		header("Location: index.php");
 	}else{
@@ -14,52 +14,52 @@
 				carregaCombo('clientes','');
 
 				$(".lineClone").click(function(){
-					
+
 					invLine = $(this).attr("id")+"_inv";
-					
+
 					newLine = $("#"+invLine).clone();
-					
+
 					numPossibilidades = 90231290523432 - 1
 					aleat = Math.random() * numPossibilidades
 					aleat = Math.floor(aleat)
-					
+
 					newLineId = parseInt(1) + aleat;
-					
+
 					newLine.attr("style","");
 					newLine.attr("class","");
 					newLine.attr("id",newLineId);
 					newLine.appendTo("#tbody_"+$(this).attr("id"));
 					$("#"+newLineId+">td").children().eq(1).remove();
 					newLine.attr("style", "height: 30px");
-					
+
 					imgEle = newLine.find("button").attr("id","rm_"+newLineId+"_"+$(this).attr("id"));
-					
+
 					valorEle = newLine.find(".valor").maskMoney({showSymbol:false, thousands:'', decimal:','});
-					
+
 				});
-				
+
 				$(".lineRemove").live("click",function(){
-					
+
 					slices = $(this).attr("id");
 					slices = slices.split("_");
-					
+
 					if ($("#tbody_"+slices[2]+"_"+slices[3]+" tr").length > 2){
 						$("#"+slices[1]).remove();
 					}
-					
+
 				});
-			});	
-		</script> 
-    
+			});
+		</script>
+
         <div class="content">
         	<ul class="breadcrumb">
                 <li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
-                <li><a href="/agenda/modules/propostas/listarProposta.php">Propostas</a> <span class="divider">/</span></li>
-                <li class="active">Nova Proposta</li>
+                <li><a href="/agenda/modules/oportunidades/listarOportunidade.php">Oportunidades</a> <span class="divider">/</span></li>
+                <li class="active">Nova Oportunidade</li>
             </ul>
             <div class="span10">
             	<div class="page-header">
-                	<h1>Nova Proposta</h1>
+                	<h1>Nova Oportunidade</h1>
                 </div>
                 <form name="gravarProposta" method="post" action="<?php echo $urlPropostas;?>/action/crudProposta.php?op=novo">
                     <h4>Informações Básicas</h4>
@@ -71,7 +71,7 @@
                                 <option value="2">Fechada</option>
                                 <option value="3">Recusada</option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="row">
                         <div class="span10">
@@ -83,9 +83,9 @@
                             <select class="span4" id="clientes" name="clientes">
                                 <option value="">Escolha a empresa:</option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
-                    
+
                     <div id="novoCliente" class="boxExtra" style="margin-bottom:10px;">
                         <h4>Novo Cliente</h4>
                         <div class="row">
@@ -150,10 +150,10 @@
                                 <select class="span6" id="clientes" name="clientes">
                                     <option value="">Escolha a empresa:</option>
                                 </select>
-                            </div>                        
+                            </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="span10">
                             <select class="span2" id="jaContato" name="jaContato">
@@ -164,9 +164,9 @@
                             <select class="span4" id="contato" name="contato">
                                 <option value="">Escolha o contato:</option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
-                    
+
                     <div id="novoContato" class="boxExtra">
                     	<h4>Novo Contato</h4>
                     	<div class="row">
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <br>
                     <h4>Briefing</h4>
                     <table id="tbody_tr_briefing">
@@ -191,7 +191,7 @@
                                         <select class="span6" id="unidades" name="unidades">
                                             <option value="">Escolha a Unidade:</option>
                                         </select>
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="span10">
@@ -207,7 +207,7 @@
                                             <option value="3">Noite</option>
                                             <option value="4">Integral</option>
                                         </select>
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="span10">
@@ -216,7 +216,7 @@
                                         </select>
                                         <input type="text" class="span2" id="qtdeParticipantes" name="qtdeParticipantes" placeholder="Qtde. Participantes">
                                         <input type="text" class="span2" id="formatoSala" name="formatoSala" placeholder="Formato da Sala">
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="span10">
@@ -235,7 +235,7 @@
                                             <option value="2">Apenas Tarde</option>
                                             <option value="3">Manhã e Tarde</option>
                                         </select>
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="span10">
@@ -251,7 +251,7 @@
                                             <option value="2">Apenas Tarde</option>
                                             <option value="3">Manhã e Tarde</option>
                                         </select>
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="span10">
@@ -267,7 +267,7 @@
                                             <option value="2">Apenas Tarde</option>
                                             <option value="3">Manhã e Tarde</option>
                                         </select>
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="span10">
@@ -277,24 +277,24 @@
                                             </select>
                                             <input type="button" onclick="adicionaEquipamento()" class="btn btn-success" value="Adicionar Mais" />
                                         </div>
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="span10">
                                         <input type="button" onclick="adicionarData()" class="btn btn-success" value="Adicionar nova data a proposta" />
-                                    </div>                        
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="span10">
                                         <textarea class="span6" id="observacoes" name="observacoes" placeholder="Observações Proposta"></textarea>
-                                    </div>                        
+                                    </div>
                                 </div>
                             </td>
                         </tr>
                         <tr id="tr_produto_inv" style="display: none;">
                         	<td>
-                                
+
                             </td>
                     	</tr>
                     </table>
@@ -305,5 +305,5 @@
         </div>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
-	}	
+	}
 ?>

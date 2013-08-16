@@ -1,9 +1,9 @@
 <?php
 
-class ProdutoController {
+class ReservaEquipamentoController {
 
     public function insertAction(Produto $produto) {
-			
+
         if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
 
             $produtoAr = $produto->assocEntity();
@@ -14,7 +14,7 @@ class ProdutoController {
             $strQuery = "INSERT INTO " . $produto->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
 
             mysql_query($strQuery);
-			
+
             $produtoId = mysql_insert_id();
 
             return $produtoId;
@@ -24,36 +24,36 @@ class ProdutoController {
     }
 
     public function editAction(Produto $produto){
-        
+
         if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
-			
+
             $produtoAr = $produto->assocEntity();
-            
+
             $setQuery = array();
             foreach ($produtoAr as $k => $v){
                 if ($v != ""){
                     $setQuery[] = "`".$k."` = '".$v."'";
                 }
             }
-            
+
             $setQuery = implode($setQuery, ", ");
-            
+
             $sqlQuery = "UPDATE ".$produto->tableName()." SET $setQuery WHERE `produto_10_id` = ". $produto->getId();
             mysql_query($sqlQuery);
-            
+
             return true;
         }else{
             return false;
         }
-        
+
     }
-    
+
     public function listAction($id = false) {
 
         $whereQuery[] = (!$id) ? "1 = 1" : "produto_10_id = " . $id;
 
         $strQuery = "SELECT * FROM sta_produtos WHERE ".implode(" AND ", $whereQuery);
-		
+
         $result = mysql_query($strQuery);
 
         $retArr = array();
@@ -65,7 +65,7 @@ class ProdutoController {
                 $i++;
             }
         }
-		
+
         return $retArr;
     }
 
@@ -73,7 +73,7 @@ class ProdutoController {
 
         $field = addslashes($field);
         $value = addslashes($value);
-        
+
         $strQuery = "SELECT * FROM sta_produtos WHERE ".$field . " = '" . $value."'";
         $result = mysql_query($strQuery);
 
@@ -90,9 +90,9 @@ class ProdutoController {
 
         return $retArr;
     }
-    
+
 	public function formataValor($valor, $action){
-		
+
 		if($action == 'gravar'){
 			$valorFormatado = number_format($valor,2,'.',',');
 			$valorFormatado = str_replace(',','',$valorFormatado);
@@ -102,7 +102,7 @@ class ProdutoController {
 		}
 		return $valorFormatado;
 	}
-	
+
 }
 
 ?>
