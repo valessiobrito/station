@@ -12,11 +12,11 @@ switch ($op) {
         if (isset($_POST)) {
             // Se o POST estiver setado
             foreach ($_POST as $k => $v) {
-                $$k = $v;
+               $$k = $v;
             }
-            
+			
             if ($nome != "" && $cnpj != "" && $razaoSocial != "" && $inscEstadual != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "" && $nomeResponsavel != "" && $sobrenomeResponsavel != "" && $emailResponsavel != "" && $telefoneResponsavel != "" && $celularResponsavel != "") {
-
+				
                 $clienteClass = new Cliente();
                 $clienteController = new ClienteController();
 

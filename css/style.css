@@ -74,3 +74,10 @@
 .container .login .logo{
 	margin-left:80px;
 }
+
+.boxExtra{
+	background:#EEEEEE;
+	border:1px solid #c0c0c0;
+	border-radius:3px;
+	padding-left:20px;
+}

@@ -7,6 +7,7 @@ $unidadesClass = $geralClass."/unidades";
 $produtosClass = $geralClass."/produtos";
 $clientesClass = $geralClass."/clientes";
 $usuariosClass = $geralClass."/usuarios";
+$propostasClass = $geralClass."/propostas";
 
 /* Unidades Module */
 include_once $unidadesClass.'/entity/Sala.php';
@@ -24,4 +25,13 @@ include_once $clientesClass.'/controller/ClienteController.php';
 include_once $clientesClass.'/entity/Contato.php';
 include_once $clientesClass.'/controller/ContatoController.php';
 /* /Clientes Module */
+
+/* Propostas Module */
+include_once $propostasClass.'/entity/Proposta.php';
+include_once $propostasClass.'/controller/PropostaController.php';
+include_once $propostasClass.'/entity/Reserva.php';
+include_once $propostasClass.'/controller/ReservaController.php';
+include_once $propostasClass.'/entity/ReservaEquipamento.php';
+include_once $propostasClass.'/controller/ReservaEquipamentoController.php';
+/* /Propostas Module */
 ?>

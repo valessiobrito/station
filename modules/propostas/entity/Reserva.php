@@ -14,6 +14,8 @@ class Reserva {
 
     protected $data;
 
+	protected $coffee;
+	
     protected $coffeeId;
 
     protected $coffeePeriodo;
@@ -92,7 +94,17 @@ class Reserva {
     return $this->data = $data;
     }
 
-    public function getCoffeeId()
+    public function getCoffee()
+    {
+    return $this->coffee;
+    }
+
+    public function setCoffee($coffee)
+    {
+    return $this->coffee = $coffee;
+    }
+	
+	public function getCoffeeId()
     {
     return $this->coffeeId;
     }
@@ -201,6 +213,7 @@ class Reserva {
             "sala_10_id"  	                        => $this->getSalaId(),
             "reserva_12_periodo" 	                => $this->getPeriodo(),
             "reserva_22_data"    	                => $this->getData(),
+			"reserva_12_coffee"    	                => $this->getCoffee(),
             "coffe_10_id"                           => $this->getCoffeeId(),
             "coffee_12_periodo"                     => $this->getCoffeePeriodo(),
             "coffee_20_quantidade"                  => $this->getCoffeeQuantidade(),
@@ -225,6 +238,7 @@ class Reserva {
         $this->setSalaId($row['sala_10_id']);
         $this->setPeriodo($row['reserva_12_periodo']);
         $this->setData($row['reserva_22_data']);
+		$this->setCoffee($row['reserva_12_coffee']);
         $this->setCoffeeId($row['coffe_10_id']);
         $this->setCoffeePeriodo($row['coffee_12_periodo']);
         $this->setCoffeeQuantidade($row['coffee_20_quantidade']);
