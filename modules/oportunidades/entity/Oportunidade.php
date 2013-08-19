@@ -12,8 +12,6 @@ class Proposta {
 
     protected $data;
 
-    protected $observacoes;
-
     public function getId() {
         return $this->id;
     }
@@ -62,14 +60,6 @@ class Proposta {
     return $this->data = $data;
     }
 
-    public function getObservacoes() {
-        return $this->observacoes;
-    }
-
-    public function setObservacoes($observacoes) {
-        $this->observacoes = $observacoes;
-    }
-
     public function assocEntity(){
 
         $fields = array(
@@ -77,8 +67,7 @@ class Proposta {
             "cliente_10_id"     		=> $this->getClienteId(),
             "contato_10_id"             => $this->getContatoId(),
             "proposta_12_status"        => $this->getStatus(),
-            "proposta_22_data"          => $this->getData(),
-            "proposta_60_observacoes"   => $this->getObservacoes()
+            "proposta_22_data"          => $this->getData()
         );
 
         return $fields;
@@ -92,7 +81,6 @@ class Proposta {
         $this->setContatoId($row['contato_10_id']);
         $this->setStatus($row['proposta_12_status']);
         $this->setData($row['proposta_22_data']);
-        $this->setObservacoes($row['proposta_60_observacoes']);
 
         return $this;
     }
