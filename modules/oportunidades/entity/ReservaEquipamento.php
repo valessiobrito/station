@@ -88,7 +88,7 @@ class ReservaEquipamento {
     }
 
     public function tableName(){
-        return "sta_reservas_equipamentos";
+        return "sta_reservas_equipamento";
     }
 }
 ?>

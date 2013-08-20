@@ -558,6 +558,7 @@ function resetaCombo(el){
 function resetaComboClone(el){
 	$("."+el).empty();
 }
+
 function verificaUnidade(el){
 	valor = $(el).val();
 	trParentId = $(el).closest("tr").attr("id");
@@ -572,6 +573,13 @@ function verificaUnidade(el){
 		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}else{
 		$("#"+trParentId+" #data").show();
+		$("#"+trParentId+" #data").val("");
+		$("#"+trParentId+" #periodo").hide();
+		$("#"+trParentId+" #periodo").val(0);
+		$("#"+trParentId+" #rowSala").hide();
+		$("#"+trParentId+" #salas").val(0);
+		$("#"+trParentId+" #formatoSala").val(0);
+		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}
 }
 function verificaData(el){
@@ -586,17 +594,48 @@ function verificaData(el){
 		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}else{
 		$("#"+trParentId+" #periodo").show();
+		$("#"+trParentId+" #periodo").val(0);
+		$("#"+trParentId+" #rowSala").hide();
+		$("#"+trParentId+" #salas").val(0);
+		$("#"+trParentId+" #formatoSala").val(0);
+		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}
 }
 function verificaPeriodo(el){
 	valor = $(el).val();
 	trParentId = $(el).closest("tr").attr("id");
+	unidade = $("#"+trParentId+" #unidade").val();
+	data = $("#"+trParentId+" #data").val();
+	
 	if(valor == ""){
 		$("#"+trParentId+" #rowSala").hide();
 		$("#"+trParentId+" #salas").val(0);
 		$("#"+trParentId+" #formatoSala").val(0);
 		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}else{
+		$.ajax({cache:false});
+	$.post(
+		'/agenda/process/selecionaSalas.php',
+		{unidade: unidade, data:data, periodo:valor},
+
+		function(data){
+			var option = new Array();
+
+			$("#"+trParentId+" #salas").empty();
+			$("#"+trParentId+" .detalhesSala").hide();
+			$("#"+trParentId+" #formatoSala").val(0);
+			$("#"+trParentId+" #qtdeParticipantes").val("");
+			
+			$.each(data, function(i, obj){
+
+				option[i] = document.createElement('option');
+				$( option[i] ).attr( {value : obj.idSelecao} );
+				$( option[i] ).append( obj.nomeSelecao );
+
+				$("#"+trParentId+" #salas").append( option[i] );
+			});
+		},'json');
+		
 		$("#"+trParentId+" #rowSala").show();
 	}
 }
@@ -609,6 +648,26 @@ function verificaSala(el){
 		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}else{
 		$("#"+trParentId+" .detalhesSala").show();
+		$("#"+trParentId+" #formatoSala").val(0);
+		$("#"+trParentId+" #qtdeParticipantes").val("");
+	}
+}
+function verificaFormatoSala(el){
+	valor = $(el).val();
+	trParentId = $(el).closest("tr").attr("id");
+	sala = $("#"+trParentId+" #salas").val();
+	
+	if(valor == ""){
+		sala = $("#"+trParentId+" #qtdeParticipantes").val("");
+	}else{
+		$.ajax({cache:false});
+	$.post(
+		'/agenda/process/selecionaLotacaoSala.php',
+		{sala: sala, tipoLotacao:valor},
+
+		function(data){
+			$("#"+trParentId+" #qtdeParticipantes").val(data);
+		},'json');
 	}
 }
 function verificaCoffee(el){
@@ -637,4 +696,32 @@ function verificaAgua(el){
 	}else{
 		$("#"+trParentId+" .detalhesAgua").show();
 	}
+}
+function verificaTipoProduto(el)
+{
+	valorPai = $(el).val();
+	trParentId = $(el).closest("tr").attr("id");
+	
+	cloneIdCru = $(el).closest("table").attr("id");
+	cloneIdArr = cloneIdCru.split("_");
+	cloneId = cloneIdArr[3];
+	
+	$.ajax({cache:false});
+	$.post(
+		'/agenda/process/selecionaGeral.php',
+		{elemento: 'produtos', valorPai:valorPai},
+
+		function(data){
+			var option = new Array();
+
+			$("#"+trParentId+" #produtos_"+cloneId).empty();
+			$.each(data, function(i, obj){
+
+				option[i] = document.createElement('option');
+				$( option[i] ).attr( {value : obj.idSelecao} );
+				$( option[i] ).append( obj.nomeSelecao );
+
+				$("#"+trParentId+" #produtos_"+cloneId).append( option[i] );
+			});
+		},'json');
 }

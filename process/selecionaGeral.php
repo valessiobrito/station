@@ -28,12 +28,22 @@
 			$colId = 'produto_10_id';
 			$colNome = 'produto_30_nome';
 			$colPai = 'tipo_produto_10_id';
+		}else if($elemento == 'tipoProduto'){
+			$table = 'sta_tipos_produto';
+			$colId = 'tipo_produto_10_id';
+			$colNome = 'tipo_produto_30_nome';
+		}else if($elemento == 'produtos'){
+			$valorPai = $_POST['valorPai'];
+			$table = 'sta_produtos';
+			$colId = 'produto_10_id';
+			$colNome = 'produto_30_nome';
+			$colPai = 'tipo_produto_10_id';
 		}
 
 
 		$json = array();
 
-		if($elemento == 'contatos' || $elemento == 'tipoCoffee'){
+		if($elemento == 'contatos' || $elemento == 'tipoCoffee' || $elemento == 'produtos'){
 			$sql = mysql_query("SELECT * FROM ".$table." WHERE ".$colPai." = ".$valorPai." ORDER BY ".$colNome);
 		}else{
 			$sql = mysql_query("SELECT * FROM ".$table." ORDER BY ".$colNome);
@@ -41,6 +51,10 @@
 
 		if ($elemento == 'tipoCoffee') {
 			$lblPrimeira = 'Qual Coffee?';
+		}else if($elemento == 'tipoProduto'){
+			$lblPrimeira = 'Tipos de Produto';
+		}else if($elemento == 'produtos'){
+			$lblPrimeira = 'Produtos';
 		}else{
 			$lblPrimeira = 'Escolha '.$elemento;
 		}
