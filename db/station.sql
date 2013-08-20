@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 04/06/2013 às 05:01:11
+-- Tempo de Geração: 20/08/2013 às 06:03:22
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.4.4
 
@@ -45,7 +45,14 @@ CREATE TABLE `sta_clientes` (
   `cliente_30_celularResponsavel` text COLLATE utf8_unicode_ci NOT NULL,
   `cliente_10_idPai` int(11) NOT NULL,
   PRIMARY KEY (`cliente_10_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `sta_clientes`
+--
+
+INSERT INTO `sta_clientes` (`cliente_10_id`, `cliente_30_nome`, `cliente_30_cnpj`, `cliente_30_razaoSocial`, `cliente_30_inscMunicipal`, `cliente_30_inscEstadual`, `cliente_30_endereco`, `cliente_30_complemento`, `cliente_30_cidade`, `cliente_30_estado`, `cliente_30_cep`, `cliente_30_nomeResponsavel`, `cliente_30_sobrenomeResponsavel`, `cliente_30_emailResponsavel`, `cliente_30_telefoneResponsavel`, `cliente_30_celularResponsavel`, `cliente_10_idPai`) VALUES
+(1, 'teste empresa', 'fasfa', 'fasf', 'safa', 'fsa', 'fsaf', 'fsas', 'fdasf', 'SP', 'cvfa', 'fasf', 'fasfs', 'dsa', 'dsa', 'dfasf', 0);
 
 -- --------------------------------------------------------
 
@@ -62,7 +69,14 @@ CREATE TABLE `sta_contatos_cliente` (
   `contato_cliente_30_celular` text COLLATE utf8_unicode_ci NOT NULL,
   `cliente_10_id` int(11) NOT NULL,
   PRIMARY KEY (`contato_cliente_10_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `sta_contatos_cliente`
+--
+
+INSERT INTO `sta_contatos_cliente` (`contato_cliente_10_id`, `contato_cliente_30_nome`, `contato_cliente_30_sobrenome`, `contato_cliente_30_email`, `contato_cliente_30_telefone`, `contato_cliente_30_celular`, `cliente_10_id`) VALUES
+(1, 'contato teste', 'fads', 'afafsfas', 'fsasf', 'fsafsaf', 1);
 
 -- --------------------------------------------------------
 
@@ -78,6 +92,73 @@ CREATE TABLE `sta_produtos` (
   `produto_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
   `tipo_produto_10_id` int(11) NOT NULL,
   PRIMARY KEY (`produto_10_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `sta_produtos`
+--
+
+INSERT INTO `sta_produtos` (`produto_10_id`, `produto_30_nome`, `produto_15_valor`, `produto_20_quantidade`, `produto_60_observacoes`, `tipo_produto_10_id`) VALUES
+(1, 'Coffee Teste', 20.00, '300', 'Teste', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_propostas`
+--
+
+CREATE TABLE `sta_propostas` (
+  `proposta_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cliente_10_id` int(11) NOT NULL,
+  `contato_10_id` int(11) NOT NULL,
+  `proposta_12_status` int(3) NOT NULL,
+  `proposta_22_data` date NOT NULL,
+  PRIMARY KEY (`proposta_10_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_reservas`
+--
+
+CREATE TABLE `sta_reservas` (
+  `reserva_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `proposta_10_id` int(11) NOT NULL,
+  `unidade_10_id` int(11) NOT NULL,
+  `sala_10_id` int(11) NOT NULL,
+  `reserva_12_periodo` int(3) NOT NULL,
+  `reserva_22_data` date NOT NULL,
+  `reserva_12_coffee` int(3) NOT NULL,
+  `coffe_10_id` int(11) NOT NULL,
+  `coffee_12_periodo` int(3) NOT NULL,
+  `coffee_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_12_cafe` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_20_quantidadeCafe` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_12_periodoCafe` int(3) NOT NULL,
+  `reserva_12_agua` int(3) NOT NULL,
+  `reserva_20_quantidadeAgua` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_12_periodoAgua` int(3) NOT NULL,
+  `reserva_20_quantidadeParticipantes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_12_formatoSala` int(3) NOT NULL,
+  `reserva_60_coffeeObs` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`reserva_10_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_reservas_equipamento`
+--
+
+CREATE TABLE `sta_reservas_equipamento` (
+  `reserva_equipamento_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_produto_10_id` int(11) NOT NULL,
+  `produto_10_id` int(11) NOT NULL,
+  `reserva_equipamento_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_10_id` int(11) NOT NULL,
+  PRIMARY KEY (`reserva_equipamento_10_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -102,7 +183,7 @@ CREATE TABLE `sta_salas` (
   `sala_20_auditorio` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `unidade_10_id` int(11) NOT NULL,
   PRIMARY KEY (`sala_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Extraindo dados da tabela `sta_salas`
@@ -121,14 +202,16 @@ CREATE TABLE `sta_tipos_produto` (
   `tipo_produto_10_id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_produto_30_nome` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`tipo_produto_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Extraindo dados da tabela `sta_tipos_produto`
 --
 
 INSERT INTO `sta_tipos_produto` (`tipo_produto_10_id`, `tipo_produto_30_nome`) VALUES
-(1, 'Tipo Teste');
+(1, 'Tipo Teste'),
+(2, 'Outro Tipo'),
+(3, 'Coffee Break');
 
 -- --------------------------------------------------------
 
