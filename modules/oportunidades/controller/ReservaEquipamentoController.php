@@ -2,35 +2,35 @@
 
 class ReservaEquipamentoController {
 
-    public function insertAction(Produto $produto) {
+    public function insertAction(ReservaEquipamento $reservaEquipamento) {
 
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
+        if ($reservaEquipamento->getReservaId() != ""){
 
-            $produtoAr = $produto->assocEntity();
+            $reservaEquipamentoAr = $reservaEquipamento->assocEntity();
 
-            $fields = implode("`, `", array_keys($produtoAr));
-            $values = implode("', '", $produtoAr);
+            $fields = implode("`, `", array_keys($reservaEquipamentoAr));
+            $values = implode("', '", $reservaEquipamentoAr);
 
-            $strQuery = "INSERT INTO " . $produto->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
+            $strQuery = "INSERT INTO " . $reservaEquipamento->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
 
             mysql_query($strQuery);
 
-            $produtoId = mysql_insert_id();
+            $reservaEquipamentoId = mysql_insert_id();
 
-            return $produtoId;
+            return $reservaEquipamentoId;
         } else {
             return 0;
         }
     }
 
-    public function editAction(Produto $produto){
+    public function editAction(ReservaEquipamento $reservaEquipamento){
 
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
+        if ($reservaEquipamento->getId() != "" && $reservaEquipamento->getReservaId() != ""){
 
-            $produtoAr = $produto->assocEntity();
+            $reservaEquipamentoAr = $reservaEquipamento->assocEntity();
 
             $setQuery = array();
-            foreach ($produtoAr as $k => $v){
+            foreach ($reservaEquipamentoAr as $k => $v){
                 if ($v != ""){
                     $setQuery[] = "`".$k."` = '".$v."'";
                 }
@@ -38,7 +38,7 @@ class ReservaEquipamentoController {
 
             $setQuery = implode($setQuery, ", ");
 
-            $sqlQuery = "UPDATE ".$produto->tableName()." SET $setQuery WHERE `produto_10_id` = ". $produto->getId();
+            $sqlQuery = "UPDATE ".$reservaEquipamento->tableName()." SET $setQuery WHERE `reserva_equipamento_10_id` = ". $reservaEquipamento->getId();
             mysql_query($sqlQuery);
 
             return true;
@@ -50,9 +50,9 @@ class ReservaEquipamentoController {
 
     public function listAction($id = false) {
 
-        $whereQuery[] = (!$id) ? "1 = 1" : "produto_10_id = " . $id;
+        $whereQuery[] = (!$id) ? "1 = 1" : "reserva_equipamento_10_id = " . $id;
 
-        $strQuery = "SELECT * FROM sta_produtos WHERE ".implode(" AND ", $whereQuery);
+        $strQuery = "SELECT * FROM sta_reservas_equipamento WHERE ".implode(" AND ", $whereQuery);
 
         $result = mysql_query($strQuery);
 
@@ -69,12 +69,12 @@ class ReservaEquipamentoController {
         return $retArr;
     }
 
-    public function getProdutoAction($field, $value, $op = "=") {
+    public function getReservaEquipamentoAction($field, $value, $op = "=") {
 
         $field = addslashes($field);
         $value = addslashes($value);
 
-        $strQuery = "SELECT * FROM sta_produtos WHERE ".$field . " = '" . $value."'";
+        $strQuery = "SELECT * FROM sta_reservas_equipamento WHERE ".$field . " = '" . $value."'";
         $result = mysql_query($strQuery);
 
         $retArr = array();
@@ -90,18 +90,6 @@ class ReservaEquipamentoController {
 
         return $retArr;
     }
-
-	public function formataValor($valor, $action){
-
-		if($action == 'gravar'){
-			$valorFormatado = number_format($valor,2,'.',',');
-			$valorFormatado = str_replace(',','',$valorFormatado);
-		}else{
-			$valorFormatado = number_format($valor,2,',','.');
-			$valorFormatado = str_replace('.','',$valorFormatado);
-		}
-		return $valorFormatado;
-	}
 
 }
 

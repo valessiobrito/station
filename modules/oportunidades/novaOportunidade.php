@@ -15,7 +15,7 @@
 					dataPicker.blur();
 					verificaData(this);
 				});
-				
+
 				carregaCombo('clientesCadastrados','');
 				carregaCombo('clientes','');
                 carregaComboClone('unidade','');
@@ -31,7 +31,7 @@
 					numPossibilidades = 90231290523432 - 1
 					aleat = Math.random() * numPossibilidades
 					aleat = Math.floor(aleat)
-					
+
 					newLineNr = parseInt(1) + aleat;
 					newLineId = "clone"+ newLineNr;
 
@@ -48,7 +48,7 @@
                     $("#"+newLineId+" #tr_produtos_clone").attr("id","tr_produtos_"+newLineId);
                     $("#"+newLineId+" #tr_produtos_clone_inv").attr("id","tr_produtos_"+newLineId+"_inv");
                     $("#"+newLineId+" #nrClone").val(newLineId);
-					
+
 					dataPicker = newLine.find(".data").datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
 						dataPicker.datepicker('hide');
 						dataPicker.blur();
@@ -105,7 +105,7 @@
             	<div class="page-header">
                 	<h1>Nova Oportunidade</h1>
                 </div>
-                <form name="gravarProposta" method="post" action="<?php echo $urlPropostas;?>/action/crudProposta.php?op=novo">
+                <form name="gravarProposta" method="post" action="<?php echo $urlOportunidades;?>/action/crudOportunidade.php?op=novo">
                     <h4>Informações Básicas</h4>
                     <div class="row">
                         <div class="span10">
@@ -191,7 +191,7 @@
                         <h4>Vincular a outra empresa</h4>
                         <div class="row">
                             <div class="span10">
-                                <select class="span6" id="clientes" name="clientes">
+                                <select class="span6" id="clientesCadastrados" name="clientesCadastrados">
                                     <option value="">Escolha a empresa:</option>
                                 </select>
                             </div>
@@ -354,7 +354,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="span10">
-                                        <textarea class="span6" id="observacoes" name="observacoes" placeholder="Observações da Reserva"></textarea>
+                                        <textarea class="span6" id="obsCoffee" name="obsCoffee[]" placeholder="Observações do Coffee"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="span10">
+                                        <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Reserva"></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -491,7 +496,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="span10">
-                                        <textarea class="span6" id="observacoes" name="observacoes" placeholder="Observações da Reserva"></textarea>
+                                        <textarea class="span6" id="obsCoffee" name="obsCoffee[]" placeholder="Observações do Coffee"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="span10">
+                                        <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Reserva"></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -505,7 +515,7 @@
                     </table>
                  	<br>
                     <input type="button" onclick="validaProposta('novo')" class="btn btn-info btn-large" value="Aplicar" />
-                    <input type="button" onclick="validaProposta('novo')" class="btn btn-success btn-large" value="Salvar e Fechar" />
+                    <input type="submit" class="btn btn-success btn-large" value="Salvar e Fechar" />
                 </form>
             </div>
         </div>

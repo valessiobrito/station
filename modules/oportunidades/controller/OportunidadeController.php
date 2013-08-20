@@ -2,35 +2,33 @@
 
 class OportunidadeController {
 
-    public function insertAction(Produto $produto) {
+    public function insertAction(Oportunidade $oportunidade) {
 
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
+            $oportunidadeAr = $oportunidade->assocEntity();
 
-            $produtoAr = $produto->assocEntity();
+            $fields = implode("`, `", array_keys($oportunidadeAr));
+            $values = implode("', '", $oportunidadeAr);
 
-            $fields = implode("`, `", array_keys($produtoAr));
-            $values = implode("', '", $produtoAr);
+            $strQuery = "INSERT INTO " . $oportunidade->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
 
-            $strQuery = "INSERT INTO " . $produto->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
+            $gravar = mysql_query($strQuery);
 
-            mysql_query($strQuery);
-
-            $produtoId = mysql_insert_id();
-
-            return $produtoId;
+            $oportunidadeId = mysql_insert_id();
+        if($gravar){
+            return $oportunidadeId;
         } else {
             return 0;
         }
     }
 
-    public function editAction(Produto $produto){
+    public function editAction(Oportunidade $oportunidade){
 
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
+        if ($oportunidade->getId() != ""){
 
-            $produtoAr = $produto->assocEntity();
+            $oportunidadeAr = $oportunidade->assocEntity();
 
             $setQuery = array();
-            foreach ($produtoAr as $k => $v){
+            foreach ($oportunidadeAr as $k => $v){
                 if ($v != ""){
                     $setQuery[] = "`".$k."` = '".$v."'";
                 }
@@ -38,7 +36,7 @@ class OportunidadeController {
 
             $setQuery = implode($setQuery, ", ");
 
-            $sqlQuery = "UPDATE ".$produto->tableName()." SET $setQuery WHERE `produto_10_id` = ". $produto->getId();
+            $sqlQuery = "UPDATE ".$oportunidade->tableName()." SET $setQuery WHERE `proposta_10_id` = ". $oportunidade->getId();
             mysql_query($sqlQuery);
 
             return true;
@@ -50,9 +48,9 @@ class OportunidadeController {
 
     public function listAction($id = false) {
 
-        $whereQuery[] = (!$id) ? "1 = 1" : "produto_10_id = " . $id;
+        $whereQuery[] = (!$id) ? "1 = 1" : "proposta_10_id = " . $id;
 
-        $strQuery = "SELECT * FROM sta_produtos WHERE ".implode(" AND ", $whereQuery);
+        $strQuery = "SELECT * FROM sta_propostas WHERE ".implode(" AND ", $whereQuery);
 
         $result = mysql_query($strQuery);
 
@@ -69,12 +67,12 @@ class OportunidadeController {
         return $retArr;
     }
 
-    public function getProdutoAction($field, $value, $op = "=") {
+    public function getPropostaAction($field, $value, $op = "=") {
 
         $field = addslashes($field);
         $value = addslashes($value);
 
-        $strQuery = "SELECT * FROM sta_produtos WHERE ".$field . " = '" . $value."'";
+        $strQuery = "SELECT * FROM sta_propostas WHERE ".$field . " = '" . $value."'";
         $result = mysql_query($strQuery);
 
         $retArr = array();
@@ -90,18 +88,6 @@ class OportunidadeController {
 
         return $retArr;
     }
-
-	public function formataValor($valor, $action){
-
-		if($action == 'gravar'){
-			$valorFormatado = number_format($valor,2,'.',',');
-			$valorFormatado = str_replace(',','',$valorFormatado);
-		}else{
-			$valorFormatado = number_format($valor,2,',','.');
-			$valorFormatado = str_replace('.','',$valorFormatado);
-		}
-		return $valorFormatado;
-	}
 
 }
 

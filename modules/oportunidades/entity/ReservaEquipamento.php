@@ -8,8 +8,6 @@ class ReservaEquipamento {
 
     protected $produtoId;
 
-    protected $quantidade;
-
     protected $reservaId;
 
     public function getId()
@@ -19,7 +17,7 @@ class ReservaEquipamento {
 
     public function setId($id)
     {
-        return $this->id = $id;
+        $this->id = $id;
     }
 
 	public function getTipoProdutoId()
@@ -29,7 +27,7 @@ class ReservaEquipamento {
 
     public function setTipoProdutoId($tipoProdutoId)
     {
-        return $this->tipoProdutoId = $tipoProdutoId;
+        $this->tipoProdutoId = $tipoProdutoId;
     }
 	
     public function getProdutoId()
@@ -39,17 +37,7 @@ class ReservaEquipamento {
 
     public function setProdutoId($produtoId)
     {
-        return $this->produtoId = $produtoId;
-    }
-
-    public function getQuantidade()
-    {
-        return $this->quantidade;
-    }
-
-    public function setQuantidade($quantidade)
-    {
-        return $this->quantidade = $quantidade;
+        $this->produtoId = $produtoId;
     }
 
     public function getReservaId()
@@ -59,7 +47,7 @@ class ReservaEquipamento {
 
     public function setReservaId($reservaId)
     {
-        return $this->reservaId = $reservaId;
+        $this->reservaId = $reservaId;
     }
 
     public function assocEntity(){
@@ -68,7 +56,6 @@ class ReservaEquipamento {
             "reserva_equipamento_10_id"            => $this->getId(),
 			"tipo_produto_10_id"     		       => $this->getTipoProdutoId(),
             "produto_10_id"     		           => $this->getProdutoId(),
-            "reserva_equipamento_20_quantidade"    => $this->getQuantidade(),
             "reserva_10_id"                        => $this->getReservaId()
             );
 
@@ -81,7 +68,6 @@ class ReservaEquipamento {
         $this->setId($row['reserva_equipamento_10_id']);
 		$this->setTipoProdutoId($row['tipo_produto_10_id']);
         $this->setProdutoId($row['produto_10_id']);
-        $this->setQuantidade($row['reserva_equipamento_20_quantidade']);
         $this->setReservaId($row['reserva_10_id']);
 
         return $this;

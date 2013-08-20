@@ -55,6 +55,8 @@
 			$lblPrimeira = 'Tipos de Produto';
 		}else if($elemento == 'produtos'){
 			$lblPrimeira = 'Produtos';
+		}else if($elemento == 'clientesCadastrados'){
+			$lblPrimeira = 'Escolha o cliente';
 		}else{
 			$lblPrimeira = 'Escolha '.$elemento;
 		}

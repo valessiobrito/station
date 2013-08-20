@@ -27,8 +27,8 @@ include_once $clientesClass.'/controller/ContatoController.php';
 /* /Clientes Module */
 
 /* Propostas Module */
-include_once $oportunidadesClass.'/entity/Proposta.php';
-include_once $oportunidadesClass.'/controller/PropostaController.php';
+include_once $oportunidadesClass.'/entity/Oportunidade.php';
+include_once $oportunidadesClass.'/controller/OportunidadeController.php';
 include_once $oportunidadesClass.'/entity/Reserva.php';
 include_once $oportunidadesClass.'/controller/ReservaController.php';
 include_once $oportunidadesClass.'/entity/ReservaEquipamento.php';

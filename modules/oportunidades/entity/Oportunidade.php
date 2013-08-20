@@ -1,6 +1,6 @@
 <?php
 
-class Proposta {
+class Oportunidade {
 
     protected $id;
 
@@ -12,52 +12,54 @@ class Proposta {
 
     protected $data;
 
-    public function getId() {
+    public function getId() 
+	{
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id) 
+	{
         $this->id = $id;
     }
 
     public function getClienteId()
     {
-    return $this->clienteId;
+    	return $this->clienteId;
     }
 
     public function setClienteId($clienteId)
     {
-    return $this->clienteId = $clienteId;
+    	$this->clienteId = $clienteId;
     }
 
     public function getContatoId()
     {
-    return $this->contatoId;
+    	return $this->contatoId;
     }
 
     public function setContatoId($contatoId)
     {
-    return $this->contatoId = $contatoId;
+    	$this->contatoId = $contatoId;
     }
 
     public function getStatus()
     {
-    return $this->status;
+    	return $this->status;
     }
 
     public function setStatus($status)
     {
-    return $this->status = $status;
+    	$this->status = $status;
     }
 
     public function getData()
     {
-    return $this->data;
+    	return $this->data;
     }
 
     public function setData($data)
     {
-    return $this->data = $data;
+    	$this->data = $data;
     }
 
     public function assocEntity(){

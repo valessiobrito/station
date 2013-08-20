@@ -2,35 +2,35 @@
 
 class ReservaController {
 
-    public function insertAction(Produto $produto) {
+    public function insertAction(Reserva $reserva) {
 
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
+        if ($reserva->getPropostaId() != ""){
 
-            $produtoAr = $produto->assocEntity();
+            $reservaAr = $reserva->assocEntity();
 
-            $fields = implode("`, `", array_keys($produtoAr));
-            $values = implode("', '", $produtoAr);
+            $fields = implode("`, `", array_keys($reservaAr));
+            $values = implode("', '", $reservaAr);
 
-            $strQuery = "INSERT INTO " . $produto->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
+            $strQuery = "INSERT INTO " . $reserva->tableName() . " (`" . $fields . "`) VALUES('" . $values . "');";
 
             mysql_query($strQuery);
 
-            $produtoId = mysql_insert_id();
+            $reservaId = mysql_insert_id();
 
-            return $produtoId;
+            return $reservaId;
         } else {
             return 0;
         }
     }
 
-    public function editAction(Produto $produto){
+    public function editAction(Reserva $reserva){
 
-        if ($produto->getNome() != "" && $produto->getValor() != "" && $produto->getQuantidade() != "" && $produto->getTipoId() != ""){
+        if ($reserva->getId() != "" && $reserva->getPropostaId() != ""){
 
-            $produtoAr = $produto->assocEntity();
+            $reservaAr = $reserva->assocEntity();
 
             $setQuery = array();
-            foreach ($produtoAr as $k => $v){
+            foreach ($reservaAr as $k => $v){
                 if ($v != ""){
                     $setQuery[] = "`".$k."` = '".$v."'";
                 }
@@ -38,7 +38,7 @@ class ReservaController {
 
             $setQuery = implode($setQuery, ", ");
 
-            $sqlQuery = "UPDATE ".$produto->tableName()." SET $setQuery WHERE `produto_10_id` = ". $produto->getId();
+            $sqlQuery = "UPDATE ".$reserva->tableName()." SET $setQuery WHERE `reserva_10_id` = ". $reserva->getId();
             mysql_query($sqlQuery);
 
             return true;
@@ -50,9 +50,9 @@ class ReservaController {
 
     public function listAction($id = false) {
 
-        $whereQuery[] = (!$id) ? "1 = 1" : "produto_10_id = " . $id;
+        $whereQuery[] = (!$id) ? "1 = 1" : "reserva_10_id = " . $id;
 
-        $strQuery = "SELECT * FROM sta_produtos WHERE ".implode(" AND ", $whereQuery);
+        $strQuery = "SELECT * FROM sta_reservas WHERE ".implode(" AND ", $whereQuery);
 
         $result = mysql_query($strQuery);
 
@@ -69,7 +69,7 @@ class ReservaController {
         return $retArr;
     }
 
-    public function getProdutoAction($field, $value, $op = "=") {
+    public function getReservaAction($field, $value, $op = "=") {
 
         $field = addslashes($field);
         $value = addslashes($value);
@@ -90,18 +90,6 @@ class ReservaController {
 
         return $retArr;
     }
-
-	public function formataValor($valor, $action){
-
-		if($action == 'gravar'){
-			$valorFormatado = number_format($valor,2,'.',',');
-			$valorFormatado = str_replace(',','',$valorFormatado);
-		}else{
-			$valorFormatado = number_format($valor,2,',','.');
-			$valorFormatado = str_replace('.','',$valorFormatado);
-		}
-		return $valorFormatado;
-	}
 
 }
 
