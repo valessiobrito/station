@@ -4,7 +4,7 @@ class ClienteController {
 
     public function insertAction(Cliente $cliente) {
 			
-        if ($cliente->getNome() != "" && $cliente->getCnpj() != "" && $cliente->getRazaoSocial() != "" && $cliente->getInscEstadual() != "" && $cliente->getEndereco() != "" && $cliente->getCidade() != "" && $cliente->getEstado() != "" && $cliente->getCep() != "" && $cliente->getNomeResponsavel() != "" && $cliente->getSobrenomeResponsavel() != "" && $cliente->getEmailResponsavel() != "" && $cliente->getTelefoneResponsavel() != "" && $cliente->getCelularResponsavel() != ""){
+        if ($cliente->getNome() != ""){
 
             $clienteAr = $cliente->assocEntity();
 
@@ -25,7 +25,7 @@ class ClienteController {
 
     public function editAction(Cliente $cliente){
         
-        if ($cliente->getId() != "" && $cliente->getNome() != "" && $cliente->getCnpj() != "" && $cliente->getRazaoSocial() != "" && $cliente->getInscEstadual() != "" && $cliente->getEndereco() != "" && $cliente->getCidade() != "" && $cliente->getEstado() != "" && $cliente->getCep() != "" && $cliente->getNomeResponsavel() != "" && $cliente->getSobrenomeResponsavel() != "" && $cliente->getEmailResponsavel() != "" && $cliente->getTelefoneResponsavel() != "" && $cliente->getCelularResponsavel() != ""){
+        if ($cliente->getId() != "" && $cliente->getNome() != ""){
 			
             $clienteAr = $cliente->assocEntity();
             

@@ -18,7 +18,7 @@ switch ($op) {
             $oportunidadeController = new OportunidadeController();
             $oportunidadeClass = new Oportunidade();
 
-            if($jaCliente == "1"){
+            if($jaCliente != "2"){
             	$clienteId = $clientes;
             }else{
             	$clienteClass = new Cliente();
@@ -49,7 +49,7 @@ switch ($op) {
                 $clienteId = $clienteController->insertAction($clienteClass);
             }
 
-            if($jaContato == "1"){
+            if($jaContato != "2"){
             	$contatoId = $contatos;
             }else{
             	$contatoClass = new Contato();
@@ -74,52 +74,53 @@ switch ($op) {
             $reservaController = new ReservaController();
             $reservaEquipamentoController = new ReservaEquipamentoController();
             foreach($unidade as $kReserva => $vReserva){
-				if($unidade[$kReserva] != ""){
-					$reservaClass = new Reserva();
-					$cloneId = $nrClone[$kReserva];
-					$reservaClass->setPropostaId($oportunidadeId);
-					$reservaClass->setUnidadeId($unidade[$kReserva]);
-					$reservaClass->setSalaId($salas[$kReserva]);
-					$reservaClass->setPeriodo($periodo[$kReserva]);
-					$dataCru = $data[$kReserva];
-					$dataArr = explode("/", $dataCru);
-					$dataEd = $dataArr[2]."-".$dataArr[1]."-".$dataArr[0];
-					$reservaClass->setData($dataEd);
-					$reservaClass->setCoffee($coffee[$kReserva]);
-					$reservaClass->setCoffeeId($tipoCoffee[$kReserva]);
-					$reservaClass->setCoffeePeriodo($periodoCoffee[$kReserva]);
-					$reservaClass->setCoffeeQuantidade($qtdeCoffee[$kReserva]);
-					$reservaClass->setCafe($cafe[$kReserva]);
-					$reservaClass->setQuantidadeCafe($qtdeCafe[$kReserva]);
-					$reservaClass->setPeriodoCafe($periodoCafe[$kReserva]);
-					$reservaClass->setAgua($agua[$kReserva]);
-					$reservaClass->setQuantidadeAgua($qtdeAgua[$kReserva]);
-					$reservaClass->setPeriodoAgua($periodoAgua[$kReserva]);
-					$reservaClass->setQuantideParticipantes($qtdeParticipantes[$kReserva]);
-					$reservaClass->setFormatoSala($formatoSala[$kReserva]);
-					$reservaClass->setCoffeObs($obsCoffee[$kReserva]);
-					$reservaClass->setObservacoes($observacoes[$kReserva]);
-					$reservaId = $reservaController->insertAction($reservaClass);
-	
-					foreach(${'tipoProduto_'.$cloneId} as $kProduto => $vProduto){
-						if(${'tipoProduto_'.$cloneId}[$kProduto] != "" && ${'produtos_'.$cloneId}[$kProduto] != ""){
-							$tipoProduto = ${'tipoProduto_'.$cloneId}[$kProduto];
-							$produtoId = ${'produtos_'.$cloneId}[$kProduto];
-							$reservaEquipamentoClass = new ReservaEquipamento();
-							$reservaEquipamentoClass->setTipoProdutoId($tipoProduto);
-							$reservaEquipamentoClass->setProdutoId($produtoId);
-							$reservaEquipamentoClass->setReservaId($reservaId);
-							
-							$reservaEquipamentoId = $reservaEquipamentoController->insertAction($reservaEquipamentoClass);
-						}
-					}
+				$reservaClass = new Reserva();
+				$cloneId = $nrClone[$kReserva];
+				$reservaClass->setPropostaId($oportunidadeId);
+				$reservaClass->setUnidadeId($unidade[$kReserva]);
+				$reservaClass->setSalaId($salas[$kReserva]);
+				$reservaClass->setPeriodo($periodo[$kReserva]);
+				$dataCru = $data[$kReserva];
+				$dataArr = explode("/", $dataCru);
+				$dataEd = $dataArr[2]."-".$dataArr[1]."-".$dataArr[0];
+				$reservaClass->setData($dataEd);
+				$reservaClass->setCoffee($coffee[$kReserva]);
+				$reservaClass->setCoffeeId($tipoCoffee[$kReserva]);
+				$reservaClass->setCoffeePeriodo($periodoCoffee[$kReserva]);
+				$reservaClass->setCoffeeQuantidade($qtdeCoffee[$kReserva]);
+				$reservaClass->setCafe($cafe[$kReserva]);
+				$reservaClass->setQuantidadeCafe($qtdeCafe[$kReserva]);
+				$reservaClass->setPeriodoCafe($periodoCafe[$kReserva]);
+				$reservaClass->setAgua($agua[$kReserva]);
+				$reservaClass->setQuantidadeAgua($qtdeAgua[$kReserva]);
+				$reservaClass->setPeriodoAgua($periodoAgua[$kReserva]);
+				$reservaClass->setQuantideParticipantes($qtdeParticipantes[$kReserva]);
+				$reservaClass->setFormatoSala($formatoSala[$kReserva]);
+				$reservaClass->setCoffeObs($obsCoffee[$kReserva]);
+				$reservaClass->setObservacoes($observacoes[$kReserva]);
+				$reservaId = $reservaController->insertAction($reservaClass);
+
+				foreach(${'tipoProduto_'.$cloneId} as $kProduto => $vProduto){
+						$tipoProduto = ${'tipoProduto_'.$cloneId}[$kProduto];
+						$produtoId = ${'produtos_'.$cloneId}[$kProduto];
+						$reservaEquipamentoClass = new ReservaEquipamento();
+						$reservaEquipamentoClass->setTipoProdutoId($tipoProduto);
+						$reservaEquipamentoClass->setProdutoId($produtoId);
+						$reservaEquipamentoClass->setReservaId($reservaId);
+						
+						$reservaEquipamentoId = $reservaEquipamentoController->insertAction($reservaEquipamentoClass);
 				}
             }
-
-			echo("<script>
-				alert('Oportunidade salva com sucesso!')
-				window.location = '".$urlOportunidades."/listarOportunidade.php';
-				</script>");
+			if($modSalvar == 'aplicar'){
+				echo("<script>
+					window.location = '".$urlOportunidades."/editarOportunidade.php?id=".$oportunidadeId."';
+					</script>");
+			}else{
+				echo("<script>
+					alert('Oportunidade salva com sucesso!')
+					window.location = '".$urlOportunidades."/listarOportunidade.php';
+					</script>");
+			}
 
         } else {
             echo("<script>

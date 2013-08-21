@@ -77,6 +77,7 @@
 					newLineId = "produtoClone"+parseInt(1) + aleat;
 
 					newLine.attr("style","");
+					newLine.attr("class","");
 					newLine.attr("id",newLineId);
 					newLine.appendTo("#tbody_"+$(this).attr("id"));
 
@@ -105,7 +106,7 @@
             	<div class="page-header">
                 	<h1>Nova Oportunidade</h1>
                 </div>
-                <form name="gravarProposta" method="post" action="<?php echo $urlOportunidades;?>/action/crudOportunidade.php?op=novo">
+                <form name="gravarOportunidade" method="post" action="<?php echo $urlOportunidades;?>/action/crudOportunidade.php?op=novo">
                     <h4>Informações Básicas</h4>
                     <div class="row">
                         <div class="span10">
@@ -336,7 +337,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr id="tr_produtos_clone1_inv" style="display: none;">
+                                            <tr id="tr_produtos_clone1_inv" style="display: none;" class="cloneInv">
                         						<td>
                                                 	<select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                         <option value="">Tipos de Produto</option>
@@ -370,7 +371,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr id="tr_reserva_inv" style="display: none;">
+                        <tr id="tr_reserva_inv" style="display: none;" class="cloneInv">
                         	<td>
                             	<div class="row" style="margin-top:15px;">
                                     <div class="span10">
@@ -478,7 +479,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr id="tr_produtos_clone_inv" style="display: none;">
+                                            <tr id="tr_produtos_clone_inv" style="display: none;" class="cloneInv">
                         						<td>
                                                 	<select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                         <option value="">Tipos de Produto</option>
@@ -514,8 +515,9 @@
                     	</tr>
                     </table>
                  	<br>
-                    <input type="button" onclick="validaProposta('novo')" class="btn btn-info btn-large" value="Aplicar" />
-                    <input type="submit" class="btn btn-success btn-large" value="Salvar e Fechar" />
+                    <input type="hidden" id="modSalvar" name="modSalvar" value="salvar" />
+                    <input type="button" onclick="validaOportunidade('aplicar')" class="btn btn-info btn-large" value="Aplicar" />
+                    <input type="button" onclick="validaOportunidade('novo')" class="btn btn-success btn-large" value="Salvar e Fechar" />
                 </form>
             </div>
         </div>

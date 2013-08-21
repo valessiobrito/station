@@ -58,6 +58,19 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 			}
 			
 		});
+		
+		$(".lineRemoveExistente").live("click",function(){
+			
+			slices = $(this).attr("id");
+			slices = slices.split("_");
+			
+			if ($("#tbody_"+slices[2]+"_"+slices[3]+" tr").length > 2){
+				$("#"+slices[1]).remove();
+			}
+			
+			$('#lastRow').append('<input type="hidden" id="ce" name="ce[]" value="'+slices[1]+'" />');
+			
+		});
 	});	
 </script>
 
@@ -89,7 +102,8 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
                                         <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail" value="<?php echo $contato['contato_cliente_30_email']; ?>">
                                         <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial" value="<?php echo $contato['contato_cliente_30_telefone']; ?>">
                                         <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular" value="<?php echo $contato['contato_cliente_30_celular']; ?>">
-                                        <button type="button" class="btn btn-danger lineRemove" id="rm_<?php echo $contato['contato_cliente_10_id']; ?>_tr_contato">Deletar</button>
+                                        <input type="hidden" id="edicao" name="edicao[]" value="<?php echo $contato['contato_cliente_10_id']; ?>">
+                                        <button type="button" class="btn btn-danger lineRemoveExistente" id="rm_<?php echo $contato['contato_cliente_10_id']; ?>_tr_contato">Deletar</button>
                                     </div>
                                 </div>
                             </td>
@@ -107,6 +121,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
                                         <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail">
                                         <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial">
                                         <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular">
+                                        <input type="hidden" id="edicao" name="edicao[]" value="0">
                                         <button type="button" class="btn btn-success lineClone" id="tr_contato">Adicionar outro</button>
                                     </div>
                                 </div>
@@ -122,6 +137,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
                                         <input type="text" class="span3" id="emailContato" name="emailContato[]" placeholder="E-mail">
                                         <input type="text" class="span2" id="telefoneContato" name="telefoneContato[]" placeholder="Telefone Comercial">
                                         <input type="text" class="span2" id="celularContato" name="celularContato[]" placeholder="Celular">
+                                        <input type="hidden" id="edicao" name="edicao[]" value="0">
                                         <button type="button" class="btn btn-danger lineRemove">Deletar</button>
                                     </div>
                                 </div>
@@ -190,7 +206,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
                     </div>
                     <br>
                     <h4>Vincular a outra empresa</h4>
-                    <div class="row">
+                    <div class="row" id="lastRow">
                         <div class="span10">
                             <select class="span6" id="clientes" name="clientes">
                                 <option value="">Escolha a empresa:</option>

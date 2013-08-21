@@ -122,10 +122,14 @@ switch ($op) {
 				$clienteClass->setIdPai($clientes);
 				
 				$contatoController = new ContatoController();
-				$contatoController->deleteAction($id);
+				if(isset($ce)){
+					foreach($ce as $kContatoDel => $vContatoDel){
+						$contatoController->deleteOnlyOneAction($ce[$kContatoDel]);
+					}
+				}
 				
 				foreach($nomeContato as $kContato => $vContato){
-					if ($nomeContato[$kContato] != "" && $sobrenomeContato[$kContato] != "" && $emailContato[$kContato] != "" && $telefoneContato[$kContato] != "" && $celularContato[$kContato] != ""){
+					if ($nomeContato[$kContato] != ""){
 						$contatoClass = new Contato();
 						
 						$contatoClass->setNome($nomeContato[$kContato]);
@@ -135,7 +139,12 @@ switch ($op) {
 						$contatoClass->setCelular($celularContato[$kContato]);
 						$contatoClass->setClienteId($id);
 						
-						$contatoId = $contatoController->insertAction($contatoClass);
+						if($edicao[$kContato] == 0){
+							$contatoId = $contatoController->insertAction($contatoClass);
+						}else{
+							$contatoClass->setId($edicao[$kContato]);
+							$contatoId = $contatoController->editAction($contatoClass);
+						}
 					}
 				}
 

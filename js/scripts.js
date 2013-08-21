@@ -1,3 +1,22 @@
+function validaOportunidade(modSalvar){
+	if(modSalvar == 'aplicar'){
+		$("#modSalvar").val(modSalvar);
+	}
+	if($("#jaCliente").val() == "2" && $("#nome").val() == "")
+	{
+		alert("Preencha pelo menos o nome da empresa");
+		document.getElementById("nome").focus();
+		return false;
+	}
+	if($("#jaContato").val() == "2" && $("#nomeContato").val() == "")
+	{
+		alert("Preencha pelo menos o nome do contato");
+		document.getElementById("nomeContato").focus();
+		return false;
+	}
+	$(".cloneInv").remove();
+	document.gravarOportunidade.submit();
+}
 function validaSala(){
 	if(document.getElementById("unidade").value == "")
 	{
@@ -121,18 +140,6 @@ function validaProduto(tipo){
 }
 
 function validaCliente(){
-	var nomesContato = document.getElementsByName('nomeContato[]');
-	var sobrenomesContato = document.getElementsByName('sobrenomeContato[]');
-	var emailsContato = document.getElementsByName('emailContato[]');
-	var telefonesContato = document.getElementsByName('telefoneContato[]');
-	var celularesContato = document.getElementsByName('celularContato[]');
-
-	if(nomesContato[0].value == '' || sobrenomesContato[0].value == '' || emailsContato[0].value == '' || telefonesContato[0].value == '' || celularesContato[0].value == '')
-	{
-		alert("Preencha pelo menos todos os campos do primeiro contato!");
-		return false;
-	}
-
 	if(document.getElementById("nome").value == "")
 	{
 		alert("Preencha o nome");

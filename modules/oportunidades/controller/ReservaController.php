@@ -68,7 +68,28 @@ class ReservaController {
 
         return $retArr;
     }
+	
+	public function listByPropostaAction($id = false) {
 
+        $whereQuery[] = (!$id) ? "1 = 1" : "proposta_10_id = " . $id;
+
+        $strQuery = "SELECT * FROM sta_reservas WHERE ".implode(" AND ", $whereQuery);
+
+        $result = mysql_query($strQuery);
+
+        $retArr = array();
+        $i = 1;
+
+        if (mysql_num_rows($result) > 0) {
+            while ($row = mysql_fetch_assoc($result)) {
+                $retArr[$i] = $row;
+                $i++;
+            }
+        }
+
+        return $retArr;
+    }
+	
     public function getReservaAction($field, $value, $op = "=") {
 
         $field = addslashes($field);

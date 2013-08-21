@@ -4,7 +4,7 @@ class ContatoController {
 
     public function insertAction(Contato $contato) {
 			
-        if ($contato->getNome() != "" && $contato->getSobrenome() != "" && $contato->getEmail() != "" && $contato->getTelefone() != "" && $contato->getCelular() != "" && $contato->getClienteId() != ""){
+        if ($contato->getNome() != ""){
 
             $contatoAr = $contato->assocEntity();
 
@@ -25,7 +25,7 @@ class ContatoController {
 
     public function editAction(Contato $contato){
         
-        if ($contato->getId() != "" && $contato->getNome() != "" && $contato->getSobrenome() != "" && $contato->getEmail() != "" && $contato->getTelefone() != "" && $contato->getCelular() != "" && $contato->getClienteId() != ""){
+        if ($contato->getId() != "" && $contato->getNome() != ""){
 			
             $contatoAr = $contato->assocEntity();
             
@@ -72,6 +72,22 @@ class ContatoController {
 	public function deleteAction($id = false){
             
             $whereQuery[] = (!$id) ? "1 = 1" : "cliente_10_id = " . $id;
+
+        	$sqlQuery = "DELETE FROM sta_contatos_cliente WHERE ".implode(" AND ", $whereQuery);
+			
+            $deletar = mysql_query($sqlQuery);
+			
+       if($deletar){     
+            return true;
+        }else {
+            return false;
+        }
+        
+    }
+	
+	public function deleteOnlyOneAction($id = false){
+            
+            $whereQuery[] = (!$id) ? "1 = 1" : "contato_cliente_10_id = " . $id;
 
         	$sqlQuery = "DELETE FROM sta_contatos_cliente WHERE ".implode(" AND ", $whereQuery);
 			
