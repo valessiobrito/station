@@ -139,6 +139,15 @@ function validaProduto(tipo){
 	}
 }
 
+function validaContato(){
+	if(document.getElementById("clientes").value == "")
+	{
+		alert("Preencha o cliente");
+		document.getElementById("clientes").focus();
+		return false;
+	}
+	document.gravarContato.submit();
+}
 function validaCliente(){
 	if(document.getElementById("nome").value == "")
 	{
@@ -455,6 +464,50 @@ function deletaCliente(idCliente){
 	}
 }
 
+function pesquisarContatos(idCliente)
+{
+	if(idCliente == "")
+	{
+		alert("Selecione o cliente");
+		document.getElementById("clientes").focus();
+		return false;
+	}
+
+	$("#tabelaBusca").empty();
+	$.post(
+		'/agenda/process/buscarContatos.php',
+		{cliente:idCliente},
+
+		function(data){
+
+			$("#tabelaBusca").append("<tr><th>Nome</th><th>Sobrenome</th><th>Ações</th></tr>");
+			$.each(data, function(i,data){
+				$("#tabelaBusca").append("<tr><td>"+data.nomeContato+"</td><td>"+data.sobrenomeContato+"</td><td><a href='editarContato.php?id="+data.idContato+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaContato('"+data.idContato+"','"+idCliente+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+			});
+		},'json');
+
+	$("#resultadoBusca").show();
+}
+function deletaContato(idContato,idCliente){
+	if(confirm("Deseja realmente deletar esse contato?")){
+		$.ajax({
+			type: "POST",
+			url: "/agenda/process/deletarContato.php",
+			data: "ic="+idContato,
+			success: function(resposta){
+				if(resposta == 'ok'){
+					alert("Contato deletado!");
+					pesquisarContatos(idCliente);
+				}else{
+					alert("Ocorreu um erro");
+				}
+			}
+		});
+	}else{
+		return false;
+	}
+}
+
 function verificaJaCliente(el){
 	jaCliente = $(el).val();
 
@@ -613,7 +666,7 @@ function verificaPeriodo(el){
 	trParentId = $(el).closest("tr").attr("id");
 	unidade = $("#"+trParentId+" #unidade").val();
 	data = $("#"+trParentId+" #data").val();
-	
+
 	if(valor == ""){
 		$("#"+trParentId+" #rowSala").hide();
 		$("#"+trParentId+" #salas").val(0);
@@ -632,7 +685,7 @@ function verificaPeriodo(el){
 			$("#"+trParentId+" .detalhesSala").hide();
 			$("#"+trParentId+" #formatoSala").val(0);
 			$("#"+trParentId+" #qtdeParticipantes").val("");
-			
+
 			$.each(data, function(i, obj){
 
 				option[i] = document.createElement('option');
@@ -642,7 +695,7 @@ function verificaPeriodo(el){
 				$("#"+trParentId+" #salas").append( option[i] );
 			});
 		},'json');
-		
+
 		$("#"+trParentId+" #rowSala").show();
 	}
 }
@@ -663,7 +716,7 @@ function verificaFormatoSala(el){
 	valor = $(el).val();
 	trParentId = $(el).closest("tr").attr("id");
 	sala = $("#"+trParentId+" #salas").val();
-	
+
 	if(valor == ""){
 		sala = $("#"+trParentId+" #qtdeParticipantes").val("");
 	}else{
@@ -708,11 +761,11 @@ function verificaTipoProduto(el)
 {
 	valorPai = $(el).val();
 	trParentId = $(el).closest("tr").attr("id");
-	
+
 	cloneIdCru = $(el).closest("table").attr("id");
 	cloneIdArr = cloneIdCru.split("_");
 	cloneId = cloneIdArr[3];
-	
+
 	$.ajax({cache:false});
 	$.post(
 		'/agenda/process/selecionaGeral.php',

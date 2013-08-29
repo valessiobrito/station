@@ -15,6 +15,7 @@ $urlModules = $urlGeral."/modules";
 $urlUnidades = $urlModules."/unidades";
 $urlProdutos = $urlModules."/produtos";
 $urlClientes = $urlModules."/clientes";
+$urlContatos = $urlModules."/contatos";
 $urlUsuarios = $urlModules."/usuarios";
 $urlOportunidades = $urlModules."/oportunidades";
 /* /Modules */

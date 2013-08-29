@@ -14,9 +14,9 @@ switch ($op) {
             foreach ($_POST as $k => $v) {
                $$k = $v;
             }
-			
+
             if ($nome != "" && $cnpj != "" && $razaoSocial != "" && $inscEstadual != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "" && $nomeResponsavel != "" && $sobrenomeResponsavel != "" && $emailResponsavel != "" && $telefoneResponsavel != "" && $celularResponsavel != "") {
-				
+
                 $clienteClass = new Cliente();
                 $clienteController = new ClienteController();
 
@@ -35,31 +35,15 @@ switch ($op) {
 				$clienteClass->setEmailResponsavel($emailResponsavel);
 				$clienteClass->setTelefoneResponsavel($telefoneResponsavel);
 				$clienteClass->setCelularResponsavel($celularResponsavel);
-				
+
 				if($clientes == ""){
 					$clientes = 0;
 				}
-				
+
 				$clienteClass->setIdPai($clientes);
-                
+
                 $clienteId = $clienteController->insertAction($clienteClass);
-				
-				$contatoController = new ContatoController();
-				foreach($nomeContato as $kContato => $vContato){
-					if ($nomeContato[$kContato] != "" && $sobrenomeContato[$kContato] != "" && $emailContato[$kContato] != "" && $telefoneContato[$kContato] != "" && $celularContato[$kContato] != ""){
-						$contatoClass = new Contato();
-						
-						$contatoClass->setNome($nomeContato[$kContato]);
-						$contatoClass->setSobrenome($sobrenomeContato[$kContato]);
-						$contatoClass->setEmail($emailContato[$kContato]);
-						$contatoClass->setTelefone($telefoneContato[$kContato]);
-						$contatoClass->setCelular($celularContato[$kContato]);
-						$contatoClass->setClienteId($clienteId);
-					
-						$contatoId = $contatoController->insertAction($contatoClass);
-					}
-				}
-				 
+
                 if ($clienteId != 0) {
                     echo("<script>
 						alert('Cliente salvo com sucesso!')
@@ -92,10 +76,10 @@ switch ($op) {
             foreach ($_POST as $k => $v) {
                 $$k = $v;
             }
-           
+
             if ($id != "" && $nome != "" && $cnpj != "" && $razaoSocial != "" && $inscEstadual != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "" && $nomeResponsavel != "" && $sobrenomeResponsavel != "" && $emailResponsavel != "" && $telefoneResponsavel != "" && $celularResponsavel != "") {
 
-                 $clienteClass = new Cliente();
+                $clienteClass = new Cliente();
                 $clienteController = new ClienteController();
 
 				$clienteClass->setId($id);
@@ -114,39 +98,12 @@ switch ($op) {
 				$clienteClass->setEmailResponsavel($emailResponsavel);
 				$clienteClass->setTelefoneResponsavel($telefoneResponsavel);
 				$clienteClass->setCelularResponsavel($celularResponsavel);
-				
+
 				if($clientes == ""){
 					$clientes = 0;
 				}
-				
+
 				$clienteClass->setIdPai($clientes);
-				
-				$contatoController = new ContatoController();
-				if(isset($ce)){
-					foreach($ce as $kContatoDel => $vContatoDel){
-						$contatoController->deleteOnlyOneAction($ce[$kContatoDel]);
-					}
-				}
-				
-				foreach($nomeContato as $kContato => $vContato){
-					if ($nomeContato[$kContato] != ""){
-						$contatoClass = new Contato();
-						
-						$contatoClass->setNome($nomeContato[$kContato]);
-						$contatoClass->setSobrenome($sobrenomeContato[$kContato]);
-						$contatoClass->setEmail($emailContato[$kContato]);
-						$contatoClass->setTelefone($telefoneContato[$kContato]);
-						$contatoClass->setCelular($celularContato[$kContato]);
-						$contatoClass->setClienteId($id);
-						
-						if($edicao[$kContato] == 0){
-							$contatoId = $contatoController->insertAction($contatoClass);
-						}else{
-							$contatoClass->setId($edicao[$kContato]);
-							$contatoId = $contatoController->editAction($contatoClass);
-						}
-					}
-				}
 
                 if ($clienteController->editAction($clienteClass)) {
                     echo("<script>

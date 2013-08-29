@@ -6,6 +6,7 @@ $geralClass = $_SERVER['DOCUMENT_ROOT']."/agenda/modules";
 $unidadesClass = $geralClass."/unidades";
 $produtosClass = $geralClass."/produtos";
 $clientesClass = $geralClass."/clientes";
+$contatosClass = $geralClass."/contatos";
 $usuariosClass = $geralClass."/usuarios";
 $oportunidadesClass = $geralClass."/oportunidades";
 
@@ -22,9 +23,12 @@ include_once $produtosClass.'/controller/ProdutoController.php';
 /* Clientes Module */
 include_once $clientesClass.'/entity/Cliente.php';
 include_once $clientesClass.'/controller/ClienteController.php';
-include_once $clientesClass.'/entity/Contato.php';
-include_once $clientesClass.'/controller/ContatoController.php';
 /* /Clientes Module */
+
+/* Contatos Module */
+include_once $contatosClass.'/entity/Contato.php';
+include_once $contatosClass.'/controller/ContatoController.php';
+/* Contatos Module */
 
 /* Propostas Module */
 include_once $oportunidadesClass.'/entity/Oportunidade.php';

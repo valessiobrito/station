@@ -52,6 +52,13 @@
                     </a>
                 </li>
                 <li>
+                    <a id="dropProdutos" href="<?php echo $urlContatos; ?>/listarContato.php" role="button">
+                        <i class="icon-large icon-parents"></i>
+                        <br>
+                        <span>Contatos</span>
+                    </a>
+                </li>
+                <li>
                 	<a id="dropProdutos" href="<?php echo $urlProdutos; ?>/listarProduto.php" role="button">
                     	<i class="icon-large icon-ipad"></i>
                 		<br>
