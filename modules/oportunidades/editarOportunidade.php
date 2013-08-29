@@ -6,23 +6,23 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
 if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)){
 	header("Location: index.php");
 }else{
-    
+
     $oportunidadeController = new OportunidadeController();
     $oportunidade = $oportunidadeController->listAction($_GET['id']);
-    
+
     if (count($oportunidade) == 0){
         header("Location: ".$urlOportunidades."/listarOportunidade.php");
     }
-	
-    $produtoClass = new Oportunidade();
-    $produtoClass->fetchEntity($oportunidade[1]);
+
+    $oportunidadeClass = new Oportunidade();
+    $oportunidadeClass->fetchEntity($oportunidade[1]);
 	$title = "Editar Oportunidade - ".$_GET['id'];
 
 ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<script>
 			$(document).ready(function(){
-				var dataPicker = $('#primeiraReserva #data').datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
+				var dataPicker = $('.data').datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
 					dataPicker.datepicker('hide');
 					dataPicker.blur();
 					verificaData(this);
@@ -112,13 +112,13 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
         	<ul class="breadcrumb">
                 <li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
                 <li><a href="/agenda/modules/oportunidades/listarOportunidade.php">Oportunidades</a> <span class="divider">/</span></li>
-                <li class="active">Nova Oportunidade</li>
+                <li class="active">Editar Oportunidade - <?php echo $_GET['id']?></li>
             </ul>
             <div class="span10">
             	<div class="page-header">
-                	<h1>Nova Oportunidade</h1>
+                	<h1>Editar Oportunidade - <?php echo $_GET['id']?></h1>
                 </div>
-                <form name="gravarOportunidade" method="post" action="<?php echo $urlOportunidades;?>/action/crudOportunidade.php?op=novo">
+                <form name="gravarOportunidade" method="post" action="<?php echo $urlOportunidades;?>/action/crudOportunidade.php?op=editar">
                     <h4>Informações Básicas</h4>
                     <div class="row">
                         <div class="span10">
@@ -535,5 +535,5 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
         </div>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
-	}	
-?>                                                      
+	}
+?>
