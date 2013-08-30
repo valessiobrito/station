@@ -101,11 +101,13 @@ switch ($op) {
 				$reservaId = $reservaController->insertAction($reservaClass);
 
 				foreach(${'tipoProduto_'.$cloneId} as $kProduto => $vProduto){
-						$tipoProduto = ${'tipoProduto_'.$cloneId}[$kProduto];
+						$tipoProd = ${'tipoProduto_'.$cloneId}[$kProduto];
 						$produtoId = ${'produtos_'.$cloneId}[$kProduto];
+						$quantidadeProd = ${'quantidadeProduto_'.$cloneId}[$kProduto];
 						$reservaEquipamentoClass = new ReservaEquipamento();
-						$reservaEquipamentoClass->setTipoProdutoId($tipoProduto);
+						$reservaEquipamentoClass->setTipoProdutoId($tipoProd);
 						$reservaEquipamentoClass->setProdutoId($produtoId);
+						$reservaEquipamentoClass->setQuantidade($quantidadeProd);
 						$reservaEquipamentoClass->setReservaId($reservaId);
 						
 						$reservaEquipamentoId = $reservaEquipamentoController->insertAction($reservaEquipamentoClass);

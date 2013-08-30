@@ -15,12 +15,14 @@
 					dataPicker.blur();
 					verificaData(this);
 				});
-
+				
 				carregaCombo('clientesCadastrados','');
 				carregaCombo('clientes','');
                 carregaComboClone('unidade','');
                 carregaComboClone('tipoCoffee','');
 				carregaComboClone('tipoProduto','');
+				
+				$("#status").val("1");
 
 				$(".lineClone").live("click",function(){
 
@@ -225,9 +227,110 @@
                             </div>
                         </div>
                     </div>
-
+                    
+<!-- Inicio Briefing -->
                     <br>
                     <h4>Briefing</h4>
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span2" id="coffeeBriefing" name="coffeeBriefing" onchange="verificaCoffeeBriefing(this)">
+                                <option value="">Coffee Break?</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>
+                            </select>
+                            <select class="span3 tipoCoffeeBriefing detalhesCoffeBriefing" style="display:none;" id="tipoCoffeeBriefing" name="tipoCoffeeBriefing">
+                                <option value="">Qual Coffee?</option>
+                            </select>
+                            <input type="text" class="span2 detalhesCoffeBriefing" style="display:none;" id="qtdeCoffeeBriefing" name="qtdeCoffeeBriefing" placeholder="Qtde. Pessoas">
+                            <select class="span3 detalhesCoffeBriefing" style="display:none;" id="periodoCoffeeBriefing" name="periodoCoffeeBriefing">
+                                <option value="">Período Coffee?</option>
+                                <option value="1">Apenas Manhã</option>
+                                <option value="2">Apenas Tarde</option>
+                                <option value="3">Manhã e Tarde</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span2" id="cafeBriefing" name="cafeBriefing" onchange="verificaCafeBriefing(this)">
+                                <option value="">Jarras de Café?</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>
+                            </select>
+                            <input type="text" class="span2 detalhesCafeBriefing" style="display:none;" id="qtdeCafeBriefing" name="qtdeCafeBriefing" placeholder="Quantidade">
+                            <select class="span3 detalhesCafeBriefing" style="display:none;" id="periodoCafeBriefing" name="periodoCafeBriefing">
+                                <option value="">Período Café?</option>
+                                <option value="1">Apenas Manhã</option>
+                                <option value="2">Apenas Tarde</option>
+                                <option value="3">Manhã e Tarde</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span2" id="aguaBriefing" name="aguaBriefing" onchange="verificaAguaBriefing(this)">
+                                <option value="">Água?</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>
+                            </select>
+                            <input type="text" class="span2 detalhesAguaBriefing" style="display:none;" id="qtdeAguaBriefing" name="qtdeAguaBriefing" placeholder="Quantidade">
+                            <select class="span3 detalhesAguaBriefing" style="display:none;" id="periodoAguaBriefing" name="periodoAguaBriefing">
+                                <option value="">Período Água?</option>
+                                <option value="1">Apenas Manhã</option>
+                                <option value="2">Apenas Tarde</option>
+                                <option value="3">Manhã e Tarde</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span10">
+                            <table id="tbody_tr_produtos_cloneBriefing">
+                                <tr id="produtoCloneBriefing">
+                                    <td>
+                                        <select class="span3 tipoProduto" id="tipoProduto_cloneBriefing" name="tipoProduto_cloneBriefing[]" onchange="verificaTipoProduto(this);">
+                                            <option value="">Tipos de Produto</option>
+                                        </select>
+                                        <select class="span3" id="produtos_cloneBriefing" name="produtos_cloneBriefing[]">
+                                            <option value="">Produtos</option>
+                                        </select>
+                                        
+                                        <div class="input-append">
+                                            <input type="text" class="span2" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
+                                            <input type="button" id="tr_produtos_cloneBriefing" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="tr_produtos_cloneBriefing_inv" style="display: none;" class="cloneInv">
+                                    <td>
+                                        <select class="span3 tipoProduto" id="tipoProduto_cloneBriefing" name="tipoProduto_cloneBriefing[]" onchange="verificaTipoProduto(this);">
+                                            <option value="">Tipos de Produto</option>
+                                        </select>
+                                        <select class="span3" id="produtos_cloneBriefing" name="produtos_cloneBriefing[]">
+                                            <option value="">Produtos</option>
+                                        </select>
+                                        <div class="input-append">
+                                            <input type="text" class="span2" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
+                                            <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
+                                        </div>
+                                    </td>
+                                 </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span10">
+                            <textarea class="span6" id="obsCoffeeBriefing" name="obsCoffeeBriefing" placeholder="Observações do Coffee"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span10">
+                            <textarea class="span6" id="observacoesBriefing" name="observacoesBriefing" placeholder="Observações do Briefing"></textarea>
+                        </div>
+                    </div>
+                    
+<!-- Inicio Agenda -->
+                    <br>
+                    <h4>Agenda</h4>
                     <table id="tbody_tr_reserva">
                         <tr id="primeiraReserva">
                         	<td>
@@ -329,10 +432,11 @@
                                                     <select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                         <option value="">Tipos de Produto</option>
                                                     </select>
+                                                    <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <option value="">Produtos</option>
+                                                    </select>
                                                     <div class="input-append">
-                                                        <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
-                                                            <option value="">Produtos</option>
-                                                        </select>
+                                                        <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
                                                         <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                     </div>
                                                 </td>
@@ -342,10 +446,12 @@
                                                 	<select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                         <option value="">Tipos de Produto</option>
                                                     </select>
+                                                    <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <option value="">Produtos</option>
+                                                    </select>
+                                                    
                                                     <div class="input-append">
-                                                        <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
-                                                            <option value="">Produtos</option>
-                                                        </select>
+                                                        <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
                                                         <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                     </div>
                                               	</td>
@@ -471,10 +577,11 @@
                                                     <select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                         <option value="">Tipos de Produto</option>
                                                     </select>
+                                                    <select class="span3" id="produtos_clone" name="produtos_clone[]">
+                                                        <option value="">Produtos</option>
+                                                    </select>
                                                     <div class="input-append">
-                                                        <select class="span3" id="produtos_clone" name="produtos_clone[]">
-                                                            <option value="">Produtos</option>
-                                                        </select>
+                                                        <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
                                                         <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                     </div>
                                                 </td>
@@ -484,10 +591,11 @@
                                                 	<select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                         <option value="">Tipos de Produto</option>
                                                     </select>
+                                                    <select class="span3" id="produtos_clone" name="produtos_clone[]">
+                                                        <option value="">Produtos</option>
+                                                    </select>
                                                     <div class="input-append">
-                                                        <select class="span3" id="produtos_clone" name="produtos_clone[]">
-                                                            <option value="">Produtos</option>
-                                                        </select>
+                                                        <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
                                                         <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                     </div>
                                               	</td>

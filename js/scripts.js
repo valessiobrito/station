@@ -757,6 +757,30 @@ function verificaAgua(el){
 		$("#"+trParentId+" .detalhesAgua").show();
 	}
 }
+function verificaCoffeeBriefing(el){
+	valor = $(el).val();
+	if(valor == "" || valor == "2"){
+		$(".detalhesCoffeBriefing").hide();
+	}else{
+		$(".detalhesCoffeBriefing").show();
+	}
+}
+function verificaCafeBriefing(el){
+	valor = $(el).val();
+	if(valor == "" || valor == "2"){
+		$(".detalhesCafeBriefing").hide();
+	}else{
+		$(".detalhesCafeBriefing").show();
+	}
+}
+function verificaAguaBriefing(el){
+	valor = $(el).val();
+	if(valor == "" || valor == "2"){
+		$(".detalhesAguaBriefing").hide();
+	}else{
+		$(".detalhesAguaBriefing").show();
+	}
+}
 function verificaTipoProduto(el)
 {
 	valorPai = $(el).val();

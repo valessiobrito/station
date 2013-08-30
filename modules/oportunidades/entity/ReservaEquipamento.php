@@ -7,6 +7,8 @@ class ReservaEquipamento {
 	protected $tipoProdutoId;
 
     protected $produtoId;
+	
+	protected $quantidade;
 
     protected $reservaId;
 
@@ -39,6 +41,16 @@ class ReservaEquipamento {
     {
         $this->produtoId = $produtoId;
     }
+	
+	public function getQuantidade()
+    {
+        return $this->quantidade;
+    }
+
+    public function setQuantidade($quantidade)
+    {
+        $this->quantidade = $quantidade;
+    }
 
     public function getReservaId()
     {
@@ -56,6 +68,7 @@ class ReservaEquipamento {
             "reserva_equipamento_10_id"            => $this->getId(),
 			"tipo_produto_10_id"     		       => $this->getTipoProdutoId(),
             "produto_10_id"     		           => $this->getProdutoId(),
+			"reserva_equipamento_20_quantidade"    => $this->getQuantidade(),
             "reserva_10_id"                        => $this->getReservaId()
             );
 
@@ -68,6 +81,7 @@ class ReservaEquipamento {
         $this->setId($row['reserva_equipamento_10_id']);
 		$this->setTipoProdutoId($row['tipo_produto_10_id']);
         $this->setProdutoId($row['produto_10_id']);
+		$this->setQuantidade($row['reserva_equipamento_20_quantidade']);
         $this->setReservaId($row['reserva_10_id']);
 
         return $this;
