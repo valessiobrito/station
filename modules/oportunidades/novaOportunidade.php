@@ -15,13 +15,14 @@
 					dataPicker.blur();
 					verificaData(this);
 				});
-				
+
 				carregaCombo('clientesCadastrados','');
 				carregaCombo('clientes','');
                 carregaComboClone('unidade','');
                 carregaComboClone('tipoCoffee','');
+                carregaComboClone('tipoCoffeeBriefing','');
 				carregaComboClone('tipoProduto','');
-				
+
 				$("#status").val("1");
 
 				$(".lineClone").live("click",function(){
@@ -227,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 <!-- Inicio Briefing -->
                     <br>
                     <h4>Briefing</h4>
@@ -293,7 +294,7 @@
                                         <select class="span3" id="produtos_cloneBriefing" name="produtos_cloneBriefing[]">
                                             <option value="">Produtos</option>
                                         </select>
-                                        
+
                                         <div class="input-append">
                                             <input type="text" class="span2" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
                                             <input type="button" id="tr_produtos_cloneBriefing" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
@@ -327,301 +328,322 @@
                             <textarea class="span6" id="observacoesBriefing" name="observacoesBriefing" placeholder="Observações do Briefing"></textarea>
                         </div>
                     </div>
-                    
-<!-- Inicio Agenda -->
                     <br>
                     <h4>Agenda</h4>
-                    <table id="tbody_tr_reserva">
-                        <tr id="primeiraReserva">
-                        	<td>
-                            	<div class="row">
-                                    <div class="span10">
-                                        <select class="span6 unidade" id="unidade" name="unidade[]" onchange="verificaUnidade(this)">
-                                            <option value="">Escolha a Unidade:</option>
-                                        </select>
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span3" id="criarAgenda" name="criarAgenda" onchange="verificaCriarAgenda(this)">
+                                <option value="">Criar agenda agora?</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>
+                            </select>
+                        </div>
+                    </div>
+
+<!-- Inicio Agenda -->
+                    <div id="agendaReservas" style="display:none;">
+                        <table id="tbody_tr_reserva">
+                            <tr id="primeiraReserva">
+                            	<td>
+                                	<div class="row">
+                                        <div class="span10">
+                                            <select class="span6 unidade" id="unidade" name="unidade[]" onchange="verificaUnidade(this)">
+                                                <option value="">Escolha a Unidade:</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <input type="text" class="span6 data" id="data" name="data[]" placeholder="Data do treinamento" style="display:none;">
+                                    <div class="row">
+                                        <div class="span10">
+                                            <input type="text" class="span6 data" id="data" name="data[]" placeholder="Data do treinamento" style="display:none;">
+                                        </div>
                                     </div>
-                                </div>
-                                 <div class="row">
-                                    <div class="span10">
-                                        <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this)">
-                                            <option value="">Escolha o período:</option>
-                                            <option value="1">Manhã</option>
-                                            <option value="2">Tarde</option>
-                                            <option value="3">Noite</option>
-                                            <option value="4">Integral</option>
-                                        </select>
+                                     <div class="row">
+                                        <div class="span10">
+                                            <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this)">
+                                                <option value="">Escolha o período:</option>
+                                                <option value="1">Manhã</option>
+                                                <option value="2">Tarde</option>
+                                                <option value="3">Noite</option>
+                                                <option value="4">Integral</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row" id="rowSala" style="display:none">
-                                    <div class="span10">
-                                        <select class="span4" id="salas" name="salas[]" onchange="verificaSala(this)">
-                                            <option value="">Salas disponíveis:</option>
-                                        </select>
-                                        <select class="span4 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
-                                            <option value="">Formato da Sala:</option>
-                                            <option value="1">"U" com mesa</option>
-                                            <option value="2">"U" simples</option>
-                                            <option value="3">Grupos</option>
-                                            <option value="4">Escolar</option>
-                                            <option value="5">Auditório</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesSala" id="qtdeParticipantes" name="qtdeParticipantes[]" placeholder="Qtde. Participantes" style="display:none;">
+                                    <div class="row" id="rowSala" style="display:none">
+                                        <div class="span10">
+                                            <select class="span4" id="salas" name="salas[]" onchange="verificaSala(this)">
+                                                <option value="">Salas disponíveis:</option>
+                                            </select>
+                                            <select class="span4 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
+                                                <option value="">Formato da Sala:</option>
+                                                <option value="1">"U" com mesa</option>
+                                                <option value="2">"U" simples</option>
+                                                <option value="3">Grupos</option>
+                                                <option value="4">Escolar</option>
+                                                <option value="5">Auditório</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesSala" id="qtdeParticipantes" name="qtdeParticipantes[]" placeholder="Qtde. Participantes" style="display:none;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <select class="span2" id="coffee" name="coffee[]" onchange="verificaCoffee(this)">
-                                            <option value="">Coffee Break?</option>
-                                            <option value="1">Sim</option>
-                                            <option value="2">Não</option>
-                                        </select>
-                                        <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
-                                            <option value="">Qual Coffee?</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
-                                        <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
-                                            <option value="">Período Coffee?</option>
-                                            <option value="1">Apenas Manhã</option>
-                                            <option value="2">Apenas Tarde</option>
-                                            <option value="3">Manhã e Tarde</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <select class="span2" id="coffee" name="coffee[]" onchange="verificaCoffee(this)">
+                                                <option value="">Coffee Break?</option>
+                                                <option value="1">Sim</option>
+                                                <option value="2">Não</option>
+                                            </select>
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
+                                                <option value="">Qual Coffee?</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
+                                                <option value="">Período Coffee?</option>
+                                                <option value="1">Apenas Manhã</option>
+                                                <option value="2">Apenas Tarde</option>
+                                                <option value="3">Manhã e Tarde</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <select class="span2" id="cafe" name="cafe[]" onchange="verificaCafe(this)">
-                                            <option value="">Jarras de Café?</option>
-                                            <option value="1">Sim</option>
-                                            <option value="2">Não</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
-                                        <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
-                                            <option value="">Período Café?</option>
-                                            <option value="1">Apenas Manhã</option>
-                                            <option value="2">Apenas Tarde</option>
-                                            <option value="3">Manhã e Tarde</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <select class="span2" id="cafe" name="cafe[]" onchange="verificaCafe(this)">
+                                                <option value="">Jarras de Café?</option>
+                                                <option value="1">Sim</option>
+                                                <option value="2">Não</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
+                                                <option value="">Período Café?</option>
+                                                <option value="1">Apenas Manhã</option>
+                                                <option value="2">Apenas Tarde</option>
+                                                <option value="3">Manhã e Tarde</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <select class="span2" id="agua" name="agua[]" onchange="verificaAgua(this)">
-                                            <option value="">Água?</option>
-                                            <option value="1">Sim</option>
-                                            <option value="2">Não</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
-                                        <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
-                                            <option value="">Período Água?</option>
-                                            <option value="1">Apenas Manhã</option>
-                                            <option value="2">Apenas Tarde</option>
-                                            <option value="3">Manhã e Tarde</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <select class="span2" id="agua" name="agua[]" onchange="verificaAgua(this)">
+                                                <option value="">Água?</option>
+                                                <option value="1">Sim</option>
+                                                <option value="2">Não</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
+                                                <option value="">Período Água?</option>
+                                                <option value="1">Apenas Manhã</option>
+                                                <option value="2">Apenas Tarde</option>
+                                                <option value="3">Manhã e Tarde</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                    	<table id="tbody_tr_produtos_clone1">
-                                            <tr id="produtoClone1">
-                                            	<td>
-                                                    <select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
-                                                        <option value="">Tipos de Produto</option>
-                                                    </select>
-                                                    <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
-                                                        <option value="">Produtos</option>
-                                                    </select>
-                                                    <div class="input-append">
-                                                        <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
-                                                        <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr id="tr_produtos_clone1_inv" style="display: none;" class="cloneInv">
-                        						<td>
-                                                	<select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
-                                                        <option value="">Tipos de Produto</option>
-                                                    </select>
-                                                    <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
-                                                        <option value="">Produtos</option>
-                                                    </select>
-                                                    
-                                                    <div class="input-append">
-                                                        <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
-                                                        <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
-                                                    </div>
-                                              	</td>
-                                             </tr>
-                                        </table>
+                                    <div class="row">
+                                        <div class="span10">
+                                        	<table id="tbody_tr_produtos_clone1">
+                                                <tr id="produtoClone1">
+                                                	<td>
+                                                        <select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
+                                                            <option value="">Tipos de Produto</option>
+                                                        </select>
+                                                        <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
+                                                            <option value="">Produtos</option>
+                                                        </select>
+                                                        <div class="input-append">
+                                                            <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr id="tr_produtos_clone1_inv" style="display: none;" class="cloneInv">
+                            						<td>
+                                                    	<select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
+                                                            <option value="">Tipos de Produto</option>
+                                                        </select>
+                                                        <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
+                                                            <option value="">Produtos</option>
+                                                        </select>
+
+                                                        <div class="input-append">
+                                                            <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
+                                                        </div>
+                                                  	</td>
+                                                 </tr>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <textarea class="span6" id="obsCoffee" name="obsCoffee[]" placeholder="Observações do Coffee"></textarea>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <textarea class="span6" id="obsCoffee" name="obsCoffee[]" placeholder="Observações do Coffee"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Reserva"></textarea>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <textarea class="span6" id="obsBriefing" name="obsBriefing[]" placeholder="Observações do Briefing"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <input type="button" id="tr_reserva" class="btn btn-success lineClone" value="Adicionar nova data a proposta" />
-                                        <input type="hidden" id="nrClone" name="nrClone[]" value="clone1" />
+                                    <div class="row">
+                                        <div class="span10">
+                                            <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Data"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr id="tr_reserva_inv" style="display: none;" class="cloneInv">
-                        	<td>
-                            	<div class="row" style="margin-top:15px;">
-                                    <div class="span10">
-                                        <select class="span6 unidade" id="unidade" name="unidade[]" onchange="verificaUnidade(this)">
-                                            <option value="">Escolha a Unidade:</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <input type="button" id="tr_reserva" class="btn btn-success lineClone" value="Adicionar nova data a proposta" />
+                                            <input type="hidden" id="nrClone" name="nrClone[]" value="clone1" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <input type="text" class="span6 data" id="data" name="data[]" placeholder="Data do treinamento" style="display:none;">
+                                </td>
+                            </tr>
+                            <tr id="tr_reserva_inv" style="display: none;" class="cloneInv">
+                            	<td>
+                                	<div class="row" style="margin-top:15px;">
+                                        <div class="span10">
+                                            <select class="span6 unidade" id="unidade" name="unidade[]" onchange="verificaUnidade(this)">
+                                                <option value="">Escolha a Unidade:</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                 <div class="row">
-                                    <div class="span10">
-                                        <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this)">
-                                            <option value="">Escolha o período:</option>
-                                            <option value="1">Manhã</option>
-                                            <option value="2">Tarde</option>
-                                            <option value="3">Noite</option>
-                                            <option value="4">Integral</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <input type="text" class="span6 data" id="data" name="data[]" placeholder="Data do treinamento" style="display:none;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row" id="rowSala" style="display:none">
-                                    <div class="span10">
-                                        <select class="span4" id="salas" name="salas[]" onchange="verificaSala(this)">
-                                            <option value="">Salas disponíveis:</option>
-                                        </select>
-                                        <select class="span4 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
-                                            <option value="">Formato da Sala:</option>
-                                            <option value="1">"U" com mesa</option>
-                                            <option value="2">"U" simples</option>
-                                            <option value="3">Grupos</option>
-                                            <option value="4">Escolar</option>
-                                            <option value="5">Auditório</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesSala" id="qtdeParticipantes" name="qtdeParticipantes[]" placeholder="Qtde. Participantes" style="display:none;">
+                                     <div class="row">
+                                        <div class="span10">
+                                            <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this)">
+                                                <option value="">Escolha o período:</option>
+                                                <option value="1">Manhã</option>
+                                                <option value="2">Tarde</option>
+                                                <option value="3">Noite</option>
+                                                <option value="4">Integral</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <select class="span2" id="coffee" name="coffee[]" onchange="verificaCoffee(this)">
-                                            <option value="">Coffee Break?</option>
-                                            <option value="1">Sim</option>
-                                            <option value="2">Não</option>
-                                        </select>
-                                        <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
-                                            <option value="">Qual Coffee?</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
-                                        <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
-                                            <option value="">Período Coffee?</option>
-                                            <option value="1">Apenas Manhã</option>
-                                            <option value="2">Apenas Tarde</option>
-                                            <option value="3">Manhã e Tarde</option>
-                                        </select>
+                                    <div class="row" id="rowSala" style="display:none">
+                                        <div class="span10">
+                                            <select class="span4" id="salas" name="salas[]" onchange="verificaSala(this)">
+                                                <option value="">Salas disponíveis:</option>
+                                            </select>
+                                            <select class="span4 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
+                                                <option value="">Formato da Sala:</option>
+                                                <option value="1">"U" com mesa</option>
+                                                <option value="2">"U" simples</option>
+                                                <option value="3">Grupos</option>
+                                                <option value="4">Escolar</option>
+                                                <option value="5">Auditório</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesSala" id="qtdeParticipantes" name="qtdeParticipantes[]" placeholder="Qtde. Participantes" style="display:none;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <select class="span2" id="cafe" name="cafe[]" onchange="verificaCafe(this)">
-                                            <option value="">Jarras de Café?</option>
-                                            <option value="1">Sim</option>
-                                            <option value="2">Não</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
-                                        <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
-                                            <option value="">Período Café?</option>
-                                            <option value="1">Apenas Manhã</option>
-                                            <option value="2">Apenas Tarde</option>
-                                            <option value="3">Manhã e Tarde</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <select class="span2" id="coffee" name="coffee[]" onchange="verificaCoffee(this)">
+                                                <option value="">Coffee Break?</option>
+                                                <option value="1">Sim</option>
+                                                <option value="2">Não</option>
+                                            </select>
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
+                                                <option value="">Qual Coffee?</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
+                                                <option value="">Período Coffee?</option>
+                                                <option value="1">Apenas Manhã</option>
+                                                <option value="2">Apenas Tarde</option>
+                                                <option value="3">Manhã e Tarde</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <select class="span2" id="agua" name="agua[]" onchange="verificaAgua(this)">
-                                            <option value="">Água?</option>
-                                            <option value="1">Sim</option>
-                                            <option value="2">Não</option>
-                                        </select>
-                                        <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
-                                        <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
-                                            <option value="">Período Água?</option>
-                                            <option value="1">Apenas Manhã</option>
-                                            <option value="2">Apenas Tarde</option>
-                                            <option value="3">Manhã e Tarde</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <select class="span2" id="cafe" name="cafe[]" onchange="verificaCafe(this)">
+                                                <option value="">Jarras de Café?</option>
+                                                <option value="1">Sim</option>
+                                                <option value="2">Não</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
+                                                <option value="">Período Café?</option>
+                                                <option value="1">Apenas Manhã</option>
+                                                <option value="2">Apenas Tarde</option>
+                                                <option value="3">Manhã e Tarde</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                    	<table id="tbody_tr_produtos_clone">
-                                            <tr id="produtoClone">
-                                            	<td>
-                                                    <select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
-                                                        <option value="">Tipos de Produto</option>
-                                                    </select>
-                                                    <select class="span3" id="produtos_clone" name="produtos_clone[]">
-                                                        <option value="">Produtos</option>
-                                                    </select>
-                                                    <div class="input-append">
-                                                        <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
-                                                        <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr id="tr_produtos_clone_inv" style="display: none;" class="cloneInv">
-                        						<td>
-                                                	<select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
-                                                        <option value="">Tipos de Produto</option>
-                                                    </select>
-                                                    <select class="span3" id="produtos_clone" name="produtos_clone[]">
-                                                        <option value="">Produtos</option>
-                                                    </select>
-                                                    <div class="input-append">
-                                                        <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
-                                                        <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
-                                                    </div>
-                                              	</td>
-                                             </tr>
-                                        </table>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <select class="span2" id="agua" name="agua[]" onchange="verificaAgua(this)">
+                                                <option value="">Água?</option>
+                                                <option value="1">Sim</option>
+                                                <option value="2">Não</option>
+                                            </select>
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
+                                                <option value="">Período Água?</option>
+                                                <option value="1">Apenas Manhã</option>
+                                                <option value="2">Apenas Tarde</option>
+                                                <option value="3">Manhã e Tarde</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <textarea class="span6" id="obsCoffee" name="obsCoffee[]" placeholder="Observações do Coffee"></textarea>
+                                    <div class="row">
+                                        <div class="span10">
+                                        	<table id="tbody_tr_produtos_clone">
+                                                <tr id="produtoClone">
+                                                	<td>
+                                                        <select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
+                                                            <option value="">Tipos de Produto</option>
+                                                        </select>
+                                                        <select class="span3" id="produtos_clone" name="produtos_clone[]">
+                                                            <option value="">Produtos</option>
+                                                        </select>
+                                                        <div class="input-append">
+                                                            <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr id="tr_produtos_clone_inv" style="display: none;" class="cloneInv">
+                            						<td>
+                                                    	<select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
+                                                            <option value="">Tipos de Produto</option>
+                                                        </select>
+                                                        <select class="span3" id="produtos_clone" name="produtos_clone[]">
+                                                            <option value="">Produtos</option>
+                                                        </select>
+                                                        <div class="input-append">
+                                                            <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
+                                                        </div>
+                                                  	</td>
+                                                 </tr>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Reserva"></textarea>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <textarea class="span6" id="obsCoffee" name="obsCoffee[]" placeholder="Observações do Coffee"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="span10">
-                                        <input type="button" class="btn btn-danger lineRemove" value="Remover data" />
-                                        <input type="hidden" id="nrClone" name="nrClone[]" />
+                                    <div class="row">
+                                        <div class="span10">
+                                            <textarea class="span6" id="obsBriefing" name="obsBriefing[]" placeholder="Observações do Briefing"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                    	</tr>
-                    </table>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Data"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="span10">
+                                            <input type="button" class="btn btn-danger lineRemove" value="Remover data" />
+                                            <input type="hidden" id="nrClone" name="nrClone[]" />
+                                        </div>
+                                    </div>
+                                </td>
+                        	</tr>
+                        </table>
+                    </div>
                  	<br>
                     <input type="hidden" id="modSalvar" name="modSalvar" value="salvar" />
                     <input type="button" onclick="validaOportunidade('aplicar')" class="btn btn-info btn-large" value="Aplicar" />

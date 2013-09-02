@@ -730,6 +730,17 @@ function verificaFormatoSala(el){
 		},'json');
 	}
 }
+
+function verificaCriarAgenda(el){
+	valor = $(el).val();
+	if(valor == "" || valor == "2"){
+		$("#agendaReservas").hide();
+	}else{
+		$("#agendaReservas").show();
+		copiaBriefing('primeiraReserva');
+	}
+}
+
 function verificaCoffee(el){
 	valor = $(el).val();
 	trParentId = $(el).closest("tr").attr("id");
@@ -808,4 +819,42 @@ function verificaTipoProduto(el)
 				$("#"+trParentId+" #produtos_"+cloneId).append( option[i] );
 			});
 		},'json');
+}
+
+function copiaBriefing(trParentId){
+	valorCoffe = $("#coffeeBriefing").val();
+	valorCafe = $("#cafeBriefing").val();
+	valorAgua = $("#detalhesAguaBriefing").val();
+
+	$("#"+trParentId+" #coffee").val(valorCoffe);
+	$("#"+trParentId+" #cafe").val(valorCafe);
+	$("#"+trParentId+" #agua").val(valorAgua);
+
+	if(valorCoffe == "" || valorCoffe == "2"){
+		$("#"+trParentId+" .detalhesCoffe").hide();
+	}else{
+		$("#"+trParentId+" .detalhesCoffe").show();
+
+		$("#"+trParentId+" #tipoCoffee").val($("#tipoCoffeeBriefing").val());
+		$("#"+trParentId+" #qtdeCoffee").val($("#qtdeCoffeeBriefing").val());
+		$("#"+trParentId+" #periodoCoffee").val($("#periodoCoffeeBriefing").val());
+	}
+
+	if(valorCafe == "" || valorCafe == "2"){
+		$("#"+trParentId+" .detalhesCafe").hide();
+	}else{
+		$("#"+trParentId+" .detalhesCafe").show();
+
+		$("#"+trParentId+" #qtdeCafe").val($("#qtdeCafeBriefing").val());
+		$("#"+trParentId+" #periodoCafe").val($("#periodoCafeBriefing").val());
+	}
+
+	if(valorAgua == "" || valorAgua == "2"){
+		$("#"+trParentId+" .detalhesAgua").hide();
+	}else{
+		$("#"+trParentId+" .detalhesAgua").show();
+
+		$("#"+trParentId+" #qtdeAgua").val($("#qtdeAguaBriefing").val());
+		$("#"+trParentId+" #periodoAgua").val($("#periodoAguaBriefing").val());
+	}
 }
