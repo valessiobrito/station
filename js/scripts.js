@@ -824,7 +824,7 @@ function verificaTipoProduto(el)
 function copiaBriefing(trParentId){
 	valorCoffe = $("#coffeeBriefing").val();
 	valorCafe = $("#cafeBriefing").val();
-	valorAgua = $("#detalhesAguaBriefing").val();
+	valorAgua = $("#aguaBriefing").val();
 
 	$("#"+trParentId+" #coffee").val(valorCoffe);
 	$("#"+trParentId+" #cafe").val(valorCafe);
@@ -856,5 +856,46 @@ function copiaBriefing(trParentId){
 
 		$("#"+trParentId+" #qtdeAgua").val($("#qtdeAguaBriefing").val());
 		$("#"+trParentId+" #periodoAgua").val($("#periodoAguaBriefing").val());
+	}
+
+	var tiposProdutoBriefing = document.getElementsByName('tipoProduto_cloneBriefing[]');
+
+	alert(trParentId);
+	alert(tiposProdutoBriefing.length);
+
+	var idClone;
+
+	if(trParentId == "primeiraReserva"){
+		idClone = "clone1";
+		idTbody = "tr_produtos_clone1";
+	}else{
+		idClone = trParentId;
+		idTbody = "tr_produtos_"+idClone;
+	}
+
+	for (var i=0; i <= tiposProdutoBriefing.length - 1; i++) {
+		if(i == 0){
+
+
+		}else if(i == 1){
+		}else{
+			invLine = "tr_produtos_"+idClone+"_inv";
+
+			newLine = $("#"+invLine).clone();
+
+			numPossibilidades = 90231290523432 - 1;
+			aleat = Math.random() * numPossibilidades;
+			aleat = Math.floor(aleat);
+
+			newLineId = "produtoClone"+parseInt(1) + aleat;
+
+			newLine.attr("style","");
+			newLine.attr("class","");
+			newLine.attr("id",newLineId);
+			newLine.appendTo("#tbody_"+idTbody);
+
+			$("#"+newLineId+" .lineRemoveProduto").attr("id","rm_"+newLineId+"_"+$(this).attr("id"));
+		}
+
 	}
 }
