@@ -40,6 +40,8 @@ class Reserva {
 
     protected $coffeObs;
 
+    protected $briefingObs;
+
 	protected $observacoes;
 
     public function getId()
@@ -232,6 +234,16 @@ class Reserva {
     	$this->coffeObs = $coffeObs;
     }
 
+    public function getBriefingObs()
+    {
+        return $this->briefingObs;
+    }
+
+    public function setBriefingObs($briefingObs)
+    {
+        $this->briefingObs = $briefingObs;
+    }
+
 	public function getObservacoes() {
         return $this->observacoes;
     }
@@ -262,6 +274,7 @@ class Reserva {
             "reserva_20_quantidadeParticipantes"    => $this->getQuantideParticipantes(),
             "reserva_12_formatoSala"                => $this->getFormatoSala(),
             "reserva_60_coffeeObs"                  => $this->getCoffeObs(),
+            "reserva_60_briefingObs"                => $this->getBriefingObs(),
 			"reserva_60_observacoes"   				=> $this->getObservacoes()
         );
 
@@ -290,6 +303,7 @@ class Reserva {
         $this->setQuantideParticipantes($row['reserva_20_quantidadeParticipantes']);
         $this->setFormatoSala($row['reserva_12_formatoSala']);
         $this->setCoffeObs($row['reserva_60_coffeeObs']);
+        $this->setBriefingObs($row['reserva_60_briefingObs']);
 		$this->setObservacoes($row['reserva_60_observacoes']);
 
         return $this;

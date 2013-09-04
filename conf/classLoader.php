@@ -37,5 +37,9 @@ include_once $oportunidadesClass.'/entity/Reserva.php';
 include_once $oportunidadesClass.'/controller/ReservaController.php';
 include_once $oportunidadesClass.'/entity/ReservaEquipamento.php';
 include_once $oportunidadesClass.'/controller/ReservaEquipamentoController.php';
+include_once $oportunidadesClass.'/entity/Briefing.php';
+include_once $oportunidadesClass.'/controller/BriefingController.php';
+include_once $oportunidadesClass.'/entity/BriefingEquipamento.php';
+include_once $oportunidadesClass.'/controller/BriefingEquipamentoController.php';
 /* /Propostas Module */
 ?>

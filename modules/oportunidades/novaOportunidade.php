@@ -5,7 +5,7 @@
 	if ($_SESSION['LogadoSTATION'] != "1"){
 		header("Location: index.php");
 	}else{
-		$title = "Adicionar Proposta";
+		$title = "Adicionar Oportunidade";
 ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<script>
@@ -48,6 +48,7 @@
 					$("#"+newLineId+" #produtoClone").attr("id","produtoClone"+newLineNr);
                     $("#"+newLineId+" #tipoProduto_clone").attr("id","tipoProduto_"+newLineId).attr("name","tipoProduto_"+newLineId+"[]");
                     $("#"+newLineId+" #produtos_clone").attr("id","produtos_"+newLineId).attr("name","produtos_"+newLineId+"[]");
+                    $("#"+newLineId+" #quantidadeProduto_clone").attr("id","quantidadeProduto_"+newLineId).attr("name","quantidadeProduto_"+newLineId+"[]");
                     $("#"+newLineId+" #tr_produtos_clone").attr("id","tr_produtos_"+newLineId);
                     $("#"+newLineId+" #tr_produtos_clone_inv").attr("id","tr_produtos_"+newLineId+"_inv");
                     $("#"+newLineId+" #nrClone").val(newLineId);
@@ -57,6 +58,8 @@
 						dataPicker.blur();
 						verificaData(this);
 					});
+
+                    copiaBriefing(newLineId);
 				});
 
 				$(".lineRemove").live("click",function(){
@@ -291,12 +294,12 @@
                                         <select class="span3 tipoProduto" id="tipoProduto_cloneBriefing" name="tipoProduto_cloneBriefing[]" onchange="verificaTipoProduto(this);">
                                             <option value="">Tipos de Produto</option>
                                         </select>
-                                        <select class="span3" id="produtos_cloneBriefing" name="produtos_cloneBriefing[]">
+                                        <select class="span3 produtos" id="produtos_cloneBriefing" name="produtos_cloneBriefing[]">
                                             <option value="">Produtos</option>
                                         </select>
 
                                         <div class="input-append">
-                                            <input type="text" class="span2" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
+                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
                                             <input type="button" id="tr_produtos_cloneBriefing" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                         </div>
                                     </td>
@@ -306,11 +309,11 @@
                                         <select class="span3 tipoProduto" id="tipoProduto_cloneBriefing" name="tipoProduto_cloneBriefing[]" onchange="verificaTipoProduto(this);">
                                             <option value="">Tipos de Produto</option>
                                         </select>
-                                        <select class="span3" id="produtos_cloneBriefing" name="produtos_cloneBriefing[]">
+                                        <select class="span3 produtos" id="produtos_cloneBriefing" name="produtos_cloneBriefing[]">
                                             <option value="">Produtos</option>
                                         </select>
                                         <div class="input-append">
-                                            <input type="text" class="span2" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
+                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                         </div>
                                     </td>
@@ -359,7 +362,7 @@
                                     </div>
                                      <div class="row">
                                         <div class="span10">
-                                            <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this)">
+                                            <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this,'0')">
                                                 <option value="">Escolha o período:</option>
                                                 <option value="1">Manhã</option>
                                                 <option value="2">Tarde</option>
@@ -443,11 +446,11 @@
                                                         <select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
                                                             <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                         </div>
                                                     </td>
@@ -457,12 +460,12 @@
                                                     	<select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]">
                                                             <option value="">Produtos</option>
                                                         </select>
 
                                                         <div class="input-append">
-                                                            <input type="text" class="span2" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
                                                   	</td>
@@ -509,7 +512,7 @@
                                     </div>
                                      <div class="row">
                                         <div class="span10">
-                                            <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this)">
+                                            <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this,'0')">
                                                 <option value="">Escolha o período:</option>
                                                 <option value="1">Manhã</option>
                                                 <option value="2">Tarde</option>
@@ -593,11 +596,11 @@
                                                         <select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3" id="produtos_clone" name="produtos_clone[]">
+                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
                                                             <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                         </div>
                                                     </td>
@@ -607,11 +610,11 @@
                                                     	<select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3" id="produtos_clone" name="produtos_clone[]">
+                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
                                                   	</td>

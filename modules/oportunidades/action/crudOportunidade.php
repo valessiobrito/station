@@ -14,7 +14,7 @@ switch ($op) {
             foreach ($_POST as $k => $v) {
                 $$k = $v;
             }
-			
+
             $oportunidadeController = new OportunidadeController();
             $oportunidadeClass = new Oportunidade();
 
@@ -70,7 +70,39 @@ switch ($op) {
             $oportunidadeClass->setStatus($status);
             $oportunidadeClass->setData(date("Y-m-d"));
             $oportunidadeId = $oportunidadeController->insertAction($oportunidadeClass);
-			
+
+            $briefingController = new BriefingController();
+            $briefingEquipamentoController = new BriefingEquipamentoController();
+            $briefingClass = new Briefing();
+
+            $briefingClass->setPropostaId($oportunidadeId);
+            $briefingClass->setCoffee($coffeeBriefing);
+			$briefingClass->setCoffeeId($tipoCoffeeBriefing);
+			$briefingClass->setCoffeePeriodo($periodoCoffeeBriefing);
+			$briefingClass->setCoffeeQuantidade($qtdeCoffeeBriefing);
+			$briefingClass->setCafe($cafeBriefing);
+			$briefingClass->setQuantidadeCafe($qtdeCafeBriefing);
+			$briefingClass->setPeriodoCafe($periodoCafeBriefing);
+			$briefingClass->setAgua($aguaBriefing);
+			$briefingClass->setQuantidadeAgua($qtdeAguaBriefing);
+			$briefingClass->setPeriodoAgua($periodoAguaBriefing);
+			$briefingClass->setCoffeObs($obsCoffeeBriefing);
+			$briefingClass->setObservacoes($observacoesBriefing);
+			$briefingId = $briefingController->insertAction($briefingClass);
+
+			foreach($tipoProduto_cloneBriefing as $kBriefingProduto => $vBriefingProduto){
+					$tipoProd = $tipoProduto_cloneBriefing[$kBriefingProduto];
+					$produtoId = $produtos_cloneBriefing[$kBriefingProduto];
+					$quantidadeProd = $quantidadeProduto_cloneBriefing[$kBriefingProduto];
+					$briefingEquipamentoClass = new BriefingEquipamento();
+					$briefingEquipamentoClass->setTipoProdutoId($tipoProd);
+					$briefingEquipamentoClass->setProdutoId($produtoId);
+					$briefingEquipamentoClass->setQuantidade($quantidadeProd);
+					$briefingEquipamentoClass->setBriefingId($briefingId);
+
+					$briefingEquipamentoId = $briefingEquipamentoController->insertAction($briefingEquipamentoClass);
+			}
+
             $reservaController = new ReservaController();
             $reservaEquipamentoController = new ReservaEquipamentoController();
             foreach($unidade as $kReserva => $vReserva){
@@ -97,6 +129,7 @@ switch ($op) {
 				$reservaClass->setQuantideParticipantes($qtdeParticipantes[$kReserva]);
 				$reservaClass->setFormatoSala($formatoSala[$kReserva]);
 				$reservaClass->setCoffeObs($obsCoffee[$kReserva]);
+				$reservaClass->setBriefingObs($obsBriefing[$kReserva]);
 				$reservaClass->setObservacoes($observacoes[$kReserva]);
 				$reservaId = $reservaController->insertAction($reservaClass);
 
@@ -109,7 +142,7 @@ switch ($op) {
 						$reservaEquipamentoClass->setProdutoId($produtoId);
 						$reservaEquipamentoClass->setQuantidade($quantidadeProd);
 						$reservaEquipamentoClass->setReservaId($reservaId);
-						
+
 						$reservaEquipamentoId = $reservaEquipamentoController->insertAction($reservaEquipamentoClass);
 				}
             }

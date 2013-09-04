@@ -661,7 +661,7 @@ function verificaData(el){
 		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}
 }
-function verificaPeriodo(el){
+function verificaPeriodo(el,idReserva){
 	valor = $(el).val();
 	trParentId = $(el).closest("tr").attr("id");
 	unidade = $("#"+trParentId+" #unidade").val();
@@ -676,7 +676,7 @@ function verificaPeriodo(el){
 		$.ajax({cache:false});
 	$.post(
 		'/agenda/process/selecionaSalas.php',
-		{unidade: unidade, data:data, periodo:valor},
+		{unidade: unidade, data:data, periodo:valor, idReserva:idReserva},
 
 		function(data){
 			var option = new Array();
@@ -821,6 +821,33 @@ function verificaTipoProduto(el)
 		},'json');
 }
 
+function verificaTipoProdutoCallback(idLine,idProduto)
+{
+	valorPai = $("#"+idLine+" .tipoProduto").val();
+
+	$.ajax({cache:false});
+	$.post(
+		'/agenda/process/selecionaGeral.php',
+		{elemento: 'produtos', valorPai:valorPai},
+
+		function(data){
+			var option = new Array();
+
+			$("#"+idLine+" .produtos").empty();
+			$.each(data, function(i, obj){
+
+				option[i] = document.createElement('option');
+				$( option[i] ).attr( {value : obj.idSelecao} );
+				$( option[i] ).append( obj.nomeSelecao );
+
+				$("#"+idLine+" .produtos").append( option[i] );
+			});
+
+			$("#"+idLine+" .produtos").val(idProduto);
+
+		},'json');
+}
+
 function copiaBriefing(trParentId){
 	valorCoffe = $("#coffeeBriefing").val();
 	valorCafe = $("#cafeBriefing").val();
@@ -859,25 +886,30 @@ function copiaBriefing(trParentId){
 	}
 
 	var tiposProdutoBriefing = document.getElementsByName('tipoProduto_cloneBriefing[]');
-
-	alert(trParentId);
-	alert(tiposProdutoBriefing.length);
+	var produtosBriefing = document.getElementsByName('produtos_cloneBriefing[]');
+	var quantidadeProdutoBriefing = document.getElementsByName('quantidadeProduto_cloneBriefing[]');
 
 	var idClone;
 
 	if(trParentId == "primeiraReserva"){
 		idClone = "clone1";
+		trId = "1";
 		idTbody = "tr_produtos_clone1";
 	}else{
 		idClone = trParentId;
+		trId = trParentId;
 		idTbody = "tr_produtos_"+idClone;
 	}
 
 	for (var i=0; i <= tiposProdutoBriefing.length - 1; i++) {
 		if(i == 0){
-
-
+			if(trParentId == "primeiraReserva"){
+				newLineId = "produtoClone"+trId;
+			}else{
+				newLineId = "produto"+trParentId.substr(0,1).toUpperCase()+trParentId.substr(1);
+			}
 		}else if(i == 1){
+			newLineId = "InvClone"+idClone;
 		}else{
 			invLine = "tr_produtos_"+idClone+"_inv";
 
@@ -897,5 +929,94 @@ function copiaBriefing(trParentId){
 			$("#"+newLineId+" .lineRemoveProduto").attr("id","rm_"+newLineId+"_"+$(this).attr("id"));
 		}
 
+		preencheCloneProduto(tiposProdutoBriefing[i].value,produtosBriefing[i].value,quantidadeProdutoBriefing[i].value,newLineId);
 	}
+
+	$("#"+trParentId+" #obsCoffee").val($("#obsCoffeeBriefing").val());
+	$("#"+trParentId+" #obsBriefing").val($("#observacoesBriefing").val());
 }
+
+function preencheCloneProduto(idTipoProduto,idProduto,quantidade,lineId){
+	$("#"+lineId+" .tipoProduto").val(idTipoProduto);
+	verificaTipoProdutoCallback(lineId,idProduto);
+	$("#"+lineId+" .quantidadeProduto").val(quantidade);
+}
+
+function carregaEdicaoOportunidade(idOportunidade){
+	$.ajax({cache:false});
+		$.post(
+			'/agenda/process/selecionaOportunidade.php',
+			{idOportunidade: idOportunidade},
+
+			function(data){
+				var option = new Array();
+
+				$.each(data, function(i, obj){
+					$("#status").val(obj.proposta_12_status);
+					if(obj.cliente_10_id != "0"){
+						$("#jaCliente").val("1");
+						verificaJaCliente($("#jaCliente"));
+						$("#clientes").val(obj.cliente_10_id);
+						if(obj.contato_10_id != "0"){
+							$("#jaContato").val("1");
+							verificaJaContato($("#jaContato"));
+							carregaComboDependente("contatos",obj.contato_10_id,$("#clientes"));
+						}
+					}
+					$.each(obj.dadosBriefing, function(j, objBrie){
+						if(objBrie.briefing_12_coffee != "0"){
+							$("#coffeeBriefing").val(objBrie.briefing_12_coffee);
+							verificaCoffeeBriefing($("#coffeeBriefing"));
+							if(objBrie.briefing_12_coffee == "1"){
+								$("#tipoCoffeeBriefing").val(objBrie.coffe_10_id);
+								$("#qtdeCoffeeBriefing").val(objBrie.coffee_12_periodo);
+								$("#periodoCoffeeBriefing").val(objBrie.coffee_20_quantidade);
+							}
+						}
+						if(objBrie.briefing_12_cafe != "0"){
+							$("#cafeBriefing").val(objBrie.briefing_12_cafe);
+							verificaCafeBriefing($("#cafeBriefing"));
+							if(objBrie.briefing_12_cafe == "1"){
+								$("#qtdeCafeBriefing").val(objBrie.briefing_20_quantidadeCafe);
+								$("#periodoCafeBriefing").val(objBrie.briefing_12_periodoCafe);
+							}
+						}
+						if(objBrie.briefing_12_agua != "0"){
+							$("#aguaBriefing").val(objBrie.briefing_12_agua);
+							verificaAguaBriefing($("#aguaBriefing"));
+							if(objBrie.briefing_12_agua == "1"){
+								$("#qtdeAguaBriefing").val(objBrie.briefing_20_quantidadeAgua);
+								$("#periodoAguaBriefing").val(objBrie.briefing_12_periodoAgua);
+							}
+						}
+						$.each(objBrie.briefingEquipamentos, function(k, objBrieEquip){
+							if(k == "1"){
+								newLineId = "produtoCloneBriefing";
+							}else{
+								invLine = "tr_produtos_cloneBriefing_inv";
+
+								newLine = $("#"+invLine).clone();
+
+								numPossibilidades = 90231290523432 - 1;
+								aleat = Math.random() * numPossibilidades;
+								aleat = Math.floor(aleat);
+
+								newLineId = "produtoClone"+parseInt(1) + aleat;
+
+								newLine.attr("style","");
+								newLine.attr("class","");
+								newLine.attr("id",newLineId);
+								newLine.appendTo("#tbody_tr_produtos_cloneBriefing");
+
+								$("#"+newLineId+" .lineRemoveProduto").attr("id","rm_"+newLineId+"_"+$(this).attr("id"));
+							}
+							preencheCloneProduto(objBrieEquip.tipo_produto_10_id,objBrieEquip.produto_10_id,objBrieEquip.briefing_equipamento_20_quantidade,newLineId);
+						});
+
+						$("#obsCoffeeBriefing").val(objBrie.briefing_60_coffeeObs);
+						$("#observacoesBriefing").val(objBrie.briefing_60_observacoes);
+					});
+				});
+			},'json');
+}
+
