@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 04/09/2013 às 20:33:18
+-- Tempo de Geração: 04/09/2013 às 23:54:54
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.4.4
 
@@ -36,7 +36,42 @@ CREATE TABLE `sta_briefings` (
   `briefing_60_coffeeObs` longtext COLLATE utf8_unicode_ci NOT NULL,
   `briefing_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`briefing_10_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Extraindo dados da tabela `sta_briefings`
+--
+
+INSERT INTO `sta_briefings` (`briefing_10_id`, `proposta_10_id`, `briefing_12_coffee`, `coffe_10_id`, `coffee_12_periodo`, `coffee_20_quantidade`, `briefing_12_cafe`, `briefing_20_quantidadeCafe`, `briefing_12_periodoCafe`, `briefing_12_agua`, `briefing_20_quantidadeAgua`, `briefing_12_periodoAgua`, `briefing_60_coffeeObs`, `briefing_60_observacoes`) VALUES
+(1, 15, 1, 1, 1, '10', '2', '', 0, 2, '', 0, 'coffeeee', 'briefingggg'),
+(2, 16, 0, 0, 0, '', '', '', 0, 0, '', 0, '', ''),
+(3, 17, 2, 0, 0, '', '2', '', 0, 2, '', 0, 'obs coffee', 'obs briefing');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sta_briefings_equipamento`
+--
+
+CREATE TABLE `sta_briefings_equipamento` (
+  `briefing_equipamento_10_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_produto_10_id` int(11) NOT NULL,
+  `produto_10_id` int(11) NOT NULL,
+  `briefing_equipamento_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `briefing_10_id` int(11) NOT NULL,
+  PRIMARY KEY (`briefing_equipamento_10_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Extraindo dados da tabela `sta_briefings_equipamento`
+--
+
+INSERT INTO `sta_briefings_equipamento` (`briefing_equipamento_10_id`, `tipo_produto_10_id`, `produto_10_id`, `briefing_equipamento_20_quantidade`, `briefing_10_id`) VALUES
+(1, 3, 1, '20', 1),
+(2, 3, 1, '30', 1),
+(3, 0, 0, '', 2),
+(4, 3, 1, '10', 3),
+(5, 3, 1, '30', 3);
 
 -- --------------------------------------------------------
 
@@ -136,7 +171,7 @@ CREATE TABLE `sta_propostas` (
   `proposta_12_status` int(3) NOT NULL,
   `proposta_22_data` date NOT NULL,
   PRIMARY KEY (`proposta_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
 --
 -- Extraindo dados da tabela `sta_propostas`
@@ -150,7 +185,10 @@ INSERT INTO `sta_propostas` (`proposta_10_id`, `cliente_10_id`, `contato_10_id`,
 (11, 1, 1, 2, '2013-08-20'),
 (12, 1, 1, 3, '2013-08-20'),
 (13, 1, 1, 3, '2013-08-20'),
-(14, 0, 0, 0, '2013-08-21');
+(14, 0, 0, 0, '2013-08-21'),
+(15, 2, 3, 1, '2013-09-04'),
+(16, 0, 0, 1, '2013-09-04'),
+(17, 1, 5, 2, '2013-09-04');
 
 -- --------------------------------------------------------
 
@@ -181,7 +219,7 @@ CREATE TABLE `sta_reservas` (
   `reserva_60_briefingObs` longtext COLLATE utf8_unicode_ci NOT NULL,
   `reserva_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`reserva_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=31 ;
 
 --
 -- Extraindo dados da tabela `sta_reservas`
@@ -203,7 +241,12 @@ INSERT INTO `sta_reservas` (`reserva_10_id`, `proposta_10_id`, `unidade_10_id`, 
 (22, 12, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', 0, '', '', ''),
 (23, 13, 1, 1, 1, '2013-08-16', 2, 0, 0, '', '2', '', 0, 2, '', 0, '40', 3, 'cof obs 1', '', 'res obs 1'),
 (24, 13, 1, 1, 4, '2013-08-28', 2, 0, 0, '', '2', '', 0, 2, '', 0, '60', 5, 'cof obs 2', '', 'res obs 2'),
-(25, 14, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', 0, '', '', '');
+(25, 14, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', 0, '', '', ''),
+(26, 15, 1, 1, 4, '2013-09-05', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '50', 4, 'coffeeee', 'briefingggg', 'data1'),
+(27, 15, 1, 1, 1, '2013-09-06', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '20', 1, 'coffeeee', 'briefingggg', 'data2'),
+(28, 16, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', 0, '', '', ''),
+(29, 17, 1, 1, 2, '2013-09-10', 2, 0, 0, '', '2', '', 0, 2, '', 0, '40', 3, 'obs coffee', 'obs briefing', 'data1'),
+(30, 17, 1, 1, 3, '2013-09-09', 2, 0, 0, '', '2', '', 0, 2, '', 0, '20', 1, 'obs coffee', 'obs briefing', 'data2');
 
 -- --------------------------------------------------------
 
@@ -218,7 +261,7 @@ CREATE TABLE `sta_reservas_equipamento` (
   `reserva_equipamento_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `reserva_10_id` int(11) NOT NULL,
   PRIMARY KEY (`reserva_equipamento_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
 
 --
 -- Extraindo dados da tabela `sta_reservas_equipamento`
@@ -246,7 +289,16 @@ INSERT INTO `sta_reservas_equipamento` (`reserva_equipamento_10_id`, `tipo_produ
 (24, 3, 1, '', 23),
 (25, 3, 1, '', 24),
 (26, 3, 1, '', 24),
-(27, 0, 0, '', 25);
+(27, 0, 0, '', 25),
+(28, 3, 1, '20', 26),
+(29, 3, 1, '30', 26),
+(30, 3, 1, '20', 27),
+(31, 3, 1, '30', 27),
+(32, 0, 0, '', 28),
+(33, 3, 1, '10', 29),
+(34, 3, 1, '30', 29),
+(35, 3, 1, '10', 30),
+(36, 3, 1, '30', 30);
 
 -- --------------------------------------------------------
 
