@@ -25,6 +25,10 @@
 			$dadosReserva = $reservaController->listByPropostaAction($idOportunidade);
 
 			foreach ($dadosReserva as $kReserva => $vReserva) {
+				$dataCru = $dadosReserva[$kReserva]["reserva_22_data"];
+				$dataArr = explode("-", $dataCru);
+				$dadosReserva[$kReserva]["reserva_22_data"] = $dataArr[2]."/".$dataArr[1]."/".$dataArr[0];
+
 				$reservaEquipamentoController = new ReservaEquipamentoController();
 				$equipamentosReserva = $reservaEquipamentoController->listByReservaAction($dadosReserva[$kReserva]['reserva_10_id']);
 				$dadosReserva[$kReserva]['reservaEquipamentos'] = $equipamentosReserva;
