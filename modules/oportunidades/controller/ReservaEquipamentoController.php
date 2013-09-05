@@ -112,9 +112,9 @@ class ReservaEquipamentoController {
         return $retArr;
     }
 
-    public function deleteByReservaAction($id = false){
+    public function deleteByReservaAction($id){
 
-            $whereQuery[] = (!$id) ? "1 = 1" : "reserva_10_id = " . $id;
+            $whereQuery[] = "reserva_10_id = " . $id;
 
             $sqlQuery = "DELETE FROM sta_reservas_equipamento WHERE ".implode(" AND ", $whereQuery);
 

@@ -112,9 +112,9 @@ class BriefingEquipamentoController {
         return $retArr;
     }
 
-    public function deleteByBriefingAction($id = false){
+    public function deleteByBriefingAction($id){
 
-            $whereQuery[] = (!$id) ? "1 = 1" : "briefing_10_id = " . $id;
+            $whereQuery[] = "briefing_10_id = " . $id;
 
             $sqlQuery = "DELETE FROM sta_briefings_equipamento WHERE ".implode(" AND ", $whereQuery);
 

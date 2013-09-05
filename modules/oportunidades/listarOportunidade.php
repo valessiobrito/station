@@ -5,12 +5,12 @@
 	if ($_SESSION['LogadoSTATION'] != "1"){
 		header("Location: index.php");
 	}else{
-		$title = "Produtos";
+		$title = "Oportunidades";
 ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<script>
 			$(document).ready(function(){
-				carregaCombo('oportunidades','');
+				carregaCombo('clientes','');
 			});
 		</script>
 
@@ -33,12 +33,30 @@
                 <h4>Pesquisar</h4>
                 <div class="row">
                     <div class="span10">
+                        <input type="text" class="span5" id="nrOportunidade" name="nrOportunidade" placeholder="Número da Oportunidade">
+                        <select class="span5" id="status" name="status">
+                            <option value="">Escolha o status:</option>
+                            <option value="1">Oportunidade</option>
+                            <option value="2">Aprovada</option>
+                            <option value="3">Recusada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span10">
                         <div class="input-append">
-                            <select class="span6" id="tipo" name="tipo">
-                                <option value="">Escolha o tipo:</option>
+                            <select class="span5" id="clientes" name="clientes" onchange="carregaComboDependente('contatos','',this)">
+                                <option value="">Escolha o cliente:</option>
                             </select>
-                            <a role="button" class="btn" onclick="pesquisarOportunidade(document.getElementById('tipo').value)">Mostrar</a>
+                            <select class="span5" id="contatos" name="contatos">
+                                <option value="">Escolha o contato:</option>
+                            </select>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span10">
+                        <a role="button" class="btn" onclick="pesquisarOportunidade()">Mostrar</a>
                     </div>
                 </div>
                 <br>

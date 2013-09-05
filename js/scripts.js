@@ -1200,4 +1200,40 @@ function carregaEdicaoOportunidade(idOportunidade){
 				});
 			},'json');
 }
+function pesquisarOportunidade()
+{
+	$("#tabelaBusca").empty();
+	$.post(
+		'/agenda/process/buscarOportunidades.php',
+		{nrOportunidade:$("#nrOportunidade").val(),status:$("#status").val(),cliente:$("#clientes").val(),contato:$("#contatos").val()},
 
+		function(data){
+
+			$("#tabelaBusca").append("<tr><th>Número</th><th>Status</th><th>Cliente</th><th>Contato</th><th>Data</th><th>Ações</th></tr>");
+			$.each(data, function(i,data){
+				$("#tabelaBusca").append("<tr><td>"+data.idOportunidade+"</td><td>"+data.status+"</td><td>"+data.nomeCliente+"</td><td>"+data.nomeContato+"</td><td>"+data.dtOportunidade+"</td><td><a href='editarOportunidade.php?id="+data.idOportunidade+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaOportunidade('"+data.idOportunidade+"',this)\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+			});
+		},'json');
+
+	$("#resultadoBusca").show();
+}
+
+function deletaOportunidade(idOportunidade,el){
+	if(confirm("Deseja realmente deletar essa oportunidade e suas reservas?")){
+		$.ajax({
+			type: "POST",
+			url: "/agenda/process/deletarOportunidade.php",
+			data: "io="+idOportunidade,
+			success: function(resposta){
+				if(resposta == 'ok'){
+					alert("Oportunidade deletada!");
+					$(el).closest("tr").remove();
+				}else{
+					alert("Ocorreu um erro");
+				}
+			}
+		});
+	}else{
+		return false;
+	}
+}

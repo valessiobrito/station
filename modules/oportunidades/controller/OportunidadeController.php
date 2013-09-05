@@ -89,6 +89,22 @@ class OportunidadeController {
         return $retArr;
     }
 
+    public function deleteAction($id = false){
+
+            $whereQuery[] = (!$id) ? "1 = 1" : "proposta_10_id = " . $id;
+
+            $sqlQuery = "DELETE FROM sta_propostas WHERE ".implode(" AND ", $whereQuery);
+
+            $deletar = mysql_query($sqlQuery);
+
+       if($deletar){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
 }
 
 ?>
