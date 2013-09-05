@@ -124,7 +124,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
             	<div class="page-header">
                 	<h1>Oportunidade - <?php echo $oportunidadeClass->getId(); ?></h1>
                 </div>
-                <form name="gravarOportunidade" method="post" action="<?php echo $urlOportunidades;?>/action/crudOportunidade.php?op=novo">
+                <form name="gravarOportunidade" method="post" action="<?php echo $urlOportunidades;?>/action/crudOportunidade.php?op=editar">
                     <h4>Informações Básicas</h4>
                     <div class="row">
                         <div class="span10">
@@ -661,6 +661,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                     </div>
                  	<br>
                     <input type="hidden" id="modSalvar" name="modSalvar" value="salvar" />
+                    <input type="hidden" id="id" name="id" value="<?php echo $oportunidadeClass->getId(); ?>" />
                     <input type="button" onclick="validaOportunidade('aplicar')" class="btn btn-info btn-large" value="Aplicar" />
                     <input type="button" onclick="validaOportunidade('novo')" class="btn btn-success btn-large" value="Salvar e Fechar" />
                 </form>

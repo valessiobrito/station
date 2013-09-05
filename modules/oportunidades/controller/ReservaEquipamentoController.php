@@ -68,7 +68,7 @@ class ReservaEquipamentoController {
 
         return $retArr;
     }
-	
+
 	public function listByReservaAction($id = false) {
 
         $whereQuery[] = (!$id) ? "1 = 1" : "reserva_10_id = " . $id;
@@ -110,6 +110,22 @@ class ReservaEquipamentoController {
         }
 
         return $retArr;
+    }
+
+    public function deleteByReservaAction($id = false){
+
+            $whereQuery[] = (!$id) ? "1 = 1" : "reserva_10_id = " . $id;
+
+            $sqlQuery = "DELETE FROM sta_reservas_equipamento WHERE ".implode(" AND ", $whereQuery);
+
+            $deletar = mysql_query($sqlQuery);
+
+       if($deletar){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 }

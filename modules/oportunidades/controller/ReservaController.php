@@ -68,7 +68,7 @@ class ReservaController {
 
         return $retArr;
     }
-	
+
 	public function listByPropostaAction($id = false) {
 
         $whereQuery[] = (!$id) ? "1 = 1" : "proposta_10_id = " . $id;
@@ -89,7 +89,7 @@ class ReservaController {
 
         return $retArr;
     }
-	
+
     public function getReservaAction($field, $value, $op = "=") {
 
         $field = addslashes($field);
@@ -110,6 +110,22 @@ class ReservaController {
         }
 
         return $retArr;
+    }
+
+    public function deleteByPropostaAction($id = false){
+
+            $whereQuery[] = (!$id) ? "1 = 1" : "proposta_10_id = " . $id;
+
+            $sqlQuery = "DELETE FROM sta_reservas WHERE ".implode(" AND ", $whereQuery);
+
+            $deletar = mysql_query($sqlQuery);
+
+       if($deletar){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 }
