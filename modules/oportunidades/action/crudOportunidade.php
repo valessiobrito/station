@@ -76,6 +76,8 @@ switch ($op) {
             $briefingClass = new Briefing();
 
             $briefingClass->setPropostaId($oportunidadeId);
+            $briefingClass->setUnidadeId($unidadeBriefing);
+            $briefingClass->setQuantidadeParticipantes($qtdeParticipantesBriefing);
             $briefingClass->setCoffee($coffeeBriefing);
 			$briefingClass->setCoffeeId($tipoCoffeeBriefing);
 			$briefingClass->setCoffeePeriodo($periodoCoffeeBriefing);
@@ -127,6 +129,7 @@ switch ($op) {
 					$reservaClass->setAgua($agua[$kReserva]);
 					$reservaClass->setQuantidadeAgua($qtdeAgua[$kReserva]);
 					$reservaClass->setPeriodoAgua($periodoAgua[$kReserva]);
+					$reservaClass->setCapacidadeSala($capSala[$kReserva]);
 					$reservaClass->setQuantideParticipantes($qtdeParticipantes[$kReserva]);
 					$reservaClass->setFormatoSala($formatoSala[$kReserva]);
 					$reservaClass->setCoffeObs($obsCoffee[$kReserva]);
@@ -244,6 +247,8 @@ switch ($op) {
 
             $briefingClass->setId($briefingId);
             $briefingClass->setPropostaId($oportunidadeId);
+            $briefingClass->setUnidadeId($unidadeBriefing);
+            $briefingClass->setQuantidadeParticipantes($qtdeParticipantesBriefing);
             $briefingClass->setCoffee($coffeeBriefing);
 			$briefingClass->setCoffeeId($tipoCoffeeBriefing);
 			$briefingClass->setCoffeePeriodo($periodoCoffeeBriefing);
@@ -307,6 +312,7 @@ switch ($op) {
 					$reservaClass->setAgua($agua[$kReserva]);
 					$reservaClass->setQuantidadeAgua($qtdeAgua[$kReserva]);
 					$reservaClass->setPeriodoAgua($periodoAgua[$kReserva]);
+					$reservaClass->setCapacidadeSala($capSala[$kReserva]);
 					$reservaClass->setQuantideParticipantes($qtdeParticipantes[$kReserva]);
 					$reservaClass->setFormatoSala($formatoSala[$kReserva]);
 					$reservaClass->setCoffeObs($obsCoffee[$kReserva]);

@@ -6,6 +6,10 @@ class Briefing {
 
     protected $propostaId;
 
+    protected $unidadeId;
+
+    protected $quantidadeParticipantes;
+
 	protected $coffee;
 
     protected $coffeeId;
@@ -48,6 +52,26 @@ class Briefing {
     public function setPropostaId($propostaId)
     {
     	$this->propostaId = $propostaId;
+    }
+
+    public function getUnidadeId()
+    {
+        return $this->unidadeId;
+    }
+
+    public function setUnidadeId($unidadeId)
+    {
+        $this->unidadeId = $unidadeId;
+    }
+
+    public function getQuantidadeParticipantes()
+    {
+        return $this->quantidadeParticipantes;
+    }
+
+    public function setQuantidadeParticipantes($quantidadeParticipantes)
+    {
+        $this->quantidadeParticipantes = $quantidadeParticipantes;
     }
 
     public function getCoffee()
@@ -173,6 +197,8 @@ class Briefing {
         $fields = array(
             "briefing_10_id"       		            => $this->getId(),
             "proposta_10_id"     		            => $this->getPropostaId(),
+            "unidade_10_id"                         => $this->getUnidadeId(),
+            "briefing_20_quantidadeParticipantes"   => $this->getQuantidadeParticipantes(),
 			"briefing_12_coffee"    	            => $this->getCoffee(),
             "coffe_10_id"                           => $this->getCoffeeId(),
             "coffee_12_periodo"                     => $this->getCoffeePeriodo(),
@@ -195,6 +221,8 @@ class Briefing {
 
         $this->setId($row['briefing_10_id']);
         $this->setPropostaId($row['proposta_10_id']);
+        $this->setUnidadeId($row['unidade_10_id']);
+        $this->setQuantidadeParticipantes($row['briefing_20_quantidadeParticipantes']);
 		$this->setCoffee($row['briefing_12_coffee']);
         $this->setCoffeeId($row['coffe_10_id']);
         $this->setCoffeePeriodo($row['coffee_12_periodo']);

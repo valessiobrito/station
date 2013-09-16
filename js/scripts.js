@@ -718,7 +718,7 @@ function verificaFormatoSala(el){
 	sala = $("#"+trParentId+" #salas").val();
 
 	if(valor == ""){
-		sala = $("#"+trParentId+" #qtdeParticipantes").val("");
+		sala = $("#"+trParentId+" #capSala").val("");
 	}else{
 		$.ajax({cache:false});
 	$.post(
@@ -726,7 +726,8 @@ function verificaFormatoSala(el){
 		{sala: sala, tipoLotacao:valor},
 
 		function(data){
-			$("#"+trParentId+" #qtdeParticipantes").val(data);
+			$("#"+trParentId+" #capSala").val(data);
+			$("#"+trParentId+" #qtdeParticipantes").val($("#qtdeParticipantesBriefing").val());
 		},'json');
 	}
 }
@@ -774,6 +775,7 @@ function verificaCoffeeBriefing(el){
 		$(".detalhesCoffeBriefing").hide();
 	}else{
 		$(".detalhesCoffeBriefing").show();
+		$("#qtdeCoffeeBriefing").val($("#qtdeParticipantesBriefing").val());
 	}
 }
 function verificaCafeBriefing(el){
@@ -782,6 +784,7 @@ function verificaCafeBriefing(el){
 		$(".detalhesCafeBriefing").hide();
 	}else{
 		$(".detalhesCafeBriefing").show();
+		$("#qtdeCafeBriefing").val($("#qtdeParticipantesBriefing").val());
 	}
 }
 function verificaAguaBriefing(el){
@@ -790,6 +793,7 @@ function verificaAguaBriefing(el){
 		$(".detalhesAguaBriefing").hide();
 	}else{
 		$(".detalhesAguaBriefing").show();
+		$("#qtdeAguaBriefing").val($("#qtdeParticipantesBriefing").val());
 	}
 }
 function verificaTipoProduto(el)
@@ -888,6 +892,9 @@ function verificaPeriodoCallback(lineId,objGeral){
 			if(objGeral.reserva_12_formatoSala != "0"){
 				$("#"+lineId+" #formatoSala").val(objGeral.reserva_12_formatoSala);
 			}
+			if(objGeral.reserva_20_capacidadeSala != ""){
+				$("#"+lineId+" #capSala").val(objGeral.reserva_20_capacidadeSala);
+			}
 			if(objGeral.reserva_20_quantidadeParticipantes != ""){
 				$("#"+lineId+" #qtdeParticipantes").val(objGeral.reserva_20_quantidadeParticipantes);
 			}
@@ -901,13 +908,19 @@ function verificaPeriodoCallback(lineId,objGeral){
 }
 
 function copiaBriefing(trParentId){
+	idUnidade = $("#unidadeBriefing").val();
 	valorCoffe = $("#coffeeBriefing").val();
 	valorCafe = $("#cafeBriefing").val();
 	valorAgua = $("#aguaBriefing").val();
 
+	$("#"+trParentId+" #unidade").val(idUnidade);
 	$("#"+trParentId+" #coffee").val(valorCoffe);
 	$("#"+trParentId+" #cafe").val(valorCafe);
 	$("#"+trParentId+" #agua").val(valorAgua);
+
+	if(idUnidade != ""){
+		verificaUnidade($("#"+trParentId+" #unidade"));
+	}
 
 	if(valorCoffe == "" || valorCoffe == "2"){
 		$("#"+trParentId+" .detalhesCoffe").hide();
@@ -1064,6 +1077,12 @@ function carregaEdicaoOportunidade(idOportunidade){
 						}
 					}
 					$.each(obj.dadosBriefing, function(j, objBrie){
+						if(objBrie.briefing_20_quantidadeParticipantes != ""){
+							$("#qtdeParticipantesBriefing").val(objBrie.briefing_20_quantidadeParticipantes);
+						}
+						if(objBrie.unidade_10_id != "0"){
+							$("#unidadeBriefing").val(objBrie.unidade_10_id);
+						}
 						if(objBrie.briefing_12_coffee != "0"){
 							$("#coffeeBriefing").val(objBrie.briefing_12_coffee);
 							verificaCoffeeBriefing($("#coffeeBriefing"));

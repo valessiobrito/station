@@ -34,6 +34,8 @@ class Reserva {
 
 	protected $periodoAgua;
 
+    protected $capacidadeSala;
+
     protected $quantideParticipantes;
 
     protected $formatoSala;
@@ -204,6 +206,16 @@ class Reserva {
     	$this->periodoAgua = $periodoAgua;
     }
 
+    public function getCapacidadeSala()
+    {
+        return $this->capacidadeSala;
+    }
+
+    public function setCapacidadeSala($capacidadeSala)
+    {
+        $this->capacidadeSala = $capacidadeSala;
+    }
+
     public function getQuantideParticipantes()
     {
     	return $this->quantideParticipantes;
@@ -271,6 +283,7 @@ class Reserva {
             "reserva_12_agua"                       => $this->getAgua(),
             "reserva_20_quantidadeAgua"             => $this->getQuantidadeAgua(),
 			"reserva_12_periodoAgua"                => $this->getPeriodoAgua(),
+            "reserva_20_capacidadeSala"             => $this->getCapacidadeSala(),
             "reserva_20_quantidadeParticipantes"    => $this->getQuantideParticipantes(),
             "reserva_12_formatoSala"                => $this->getFormatoSala(),
             "reserva_60_coffeeObs"                  => $this->getCoffeObs(),
@@ -300,6 +313,7 @@ class Reserva {
         $this->setAgua($row['reserva_12_agua']);
         $this->setQuantidadeAgua($row['reserva_20_quantidadeAgua']);
 		$this->setPeriodoAgua($row['reserva_12_periodoAgua']);
+        $this->setCapacidadeSala($row['reserva_20_capacidadeSala']);
         $this->setQuantideParticipantes($row['reserva_20_quantidadeParticipantes']);
         $this->setFormatoSala($row['reserva_12_formatoSala']);
         $this->setCoffeObs($row['reserva_60_coffeeObs']);

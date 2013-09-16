@@ -235,6 +235,14 @@
 <!-- Inicio Briefing -->
                     <br>
                     <h4>Briefing</h4>
+                    <input type="text" class="span2 qtdeParticipantesBriefing" id="qtdeParticipantesBriefing" name="qtdeParticipantesBriefing" placeholder="Qtde. Participantes">
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span6 unidade" id="unidadeBriefing" name="unidadeBriefing">
+                                <option value="">Escolha a Unidade:</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="span10">
                             <select class="span2" id="coffeeBriefing" name="coffeeBriefing" onchange="verificaCoffeeBriefing(this)">
@@ -287,7 +295,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="span10">
+                        <div class="span12">
                             <table id="tbody_tr_produtos_cloneBriefing">
                                 <tr id="produtoCloneBriefing">
                                     <td>
@@ -314,6 +322,7 @@
                                         </select>
                                         <div class="input-append">
                                             <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
+                                            <input type="button" id="tr_produtos_cloneBriefing" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                         </div>
                                     </td>
@@ -376,7 +385,7 @@
                                             <select class="span4" id="salas" name="salas[]" onchange="verificaSala(this)">
                                                 <option value="">Salas disponíveis:</option>
                                             </select>
-                                            <select class="span4 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
+                                            <select class="span2 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
                                                 <option value="">Formato da Sala:</option>
                                                 <option value="1">"U" com mesa</option>
                                                 <option value="2">"U" simples</option>
@@ -384,6 +393,7 @@
                                                 <option value="4">Escolar</option>
                                                 <option value="5">Auditório</option>
                                             </select>
+                                            <input type="text" class="span2 detalhesSala" id="capSala" name="capSala[]" placeholder="Cap. Sala" style="display:none;" readonly>
                                             <input type="text" class="span2 detalhesSala" id="qtdeParticipantes" name="qtdeParticipantes[]" placeholder="Qtde. Participantes" style="display:none;">
                                         </div>
                                     </div>
@@ -439,7 +449,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="span10">
+                                        <div class="span12">
                                         	<table id="tbody_tr_produtos_clone1">
                                                 <tr id="produtoClone1">
                                                 	<td>
@@ -466,6 +476,7 @@
 
                                                         <div class="input-append">
                                                             <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
                                                   	</td>
@@ -526,7 +537,7 @@
                                             <select class="span4" id="salas" name="salas[]" onchange="verificaSala(this)">
                                                 <option value="">Salas disponíveis:</option>
                                             </select>
-                                            <select class="span4 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
+                                            <select class="span2 detalhesSala" id="formatoSala" name="formatoSala[]" style="display:none;" onchange="verificaFormatoSala(this)">
                                                 <option value="">Formato da Sala:</option>
                                                 <option value="1">"U" com mesa</option>
                                                 <option value="2">"U" simples</option>
@@ -534,6 +545,7 @@
                                                 <option value="4">Escolar</option>
                                                 <option value="5">Auditório</option>
                                             </select>
+                                            <input type="text" class="span2 detalhesSala" id="capSala" name="capSala[]" placeholder="Cap. Sala" style="display:none;" readonly>
                                             <input type="text" class="span2 detalhesSala" id="qtdeParticipantes" name="qtdeParticipantes[]" placeholder="Qtde. Participantes" style="display:none;">
                                         </div>
                                     </div>
@@ -589,7 +601,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="span10">
+                                        <div class="span12">
                                         	<table id="tbody_tr_produtos_clone">
                                                 <tr id="produtoClone">
                                                 	<td>
@@ -615,6 +627,7 @@
                                                         </select>
                                                         <div class="input-append">
                                                             <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
                                                   	</td>
@@ -639,7 +652,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="span10">
-                                            <input type="button" class="btn btn-danger lineRemove" value="Remover data" />
+                                            <div class="input-append">
+                                                <input type="button" id="tr_reserva" class="btn btn-success lineClone" value="Adicionar nova data a proposta" />
+                                                <input type="button" class="btn btn-danger lineRemove" value="Remover data" />
+                                            </div>
                                             <input type="hidden" id="nrClone" name="nrClone[]" />
                                         </div>
                                     </div>
