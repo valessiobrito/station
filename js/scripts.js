@@ -690,6 +690,7 @@ function verificaPeriodo(el,idReserva){
 
 				option[i] = document.createElement('option');
 				$( option[i] ).attr( {value : obj.idSelecao} );
+				$( option[i] ).attr( {class : obj.classe} );
 				$( option[i] ).append( obj.nomeSelecao );
 
 				$("#"+trParentId+" #salas").append( option[i] );
@@ -880,6 +881,7 @@ function verificaPeriodoCallback(lineId,objGeral){
 
 				option[i] = document.createElement('option');
 				$( option[i] ).attr( {value : obj.idSelecao} );
+				$( option[i] ).attr( {class : obj.classe} );
 				$( option[i] ).append( obj.nomeSelecao );
 
 				$("#"+lineId+" #salas").append( option[i] );

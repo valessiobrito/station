@@ -13,8 +13,11 @@
 
 		$resultado = array(
 			'idSelecao' => '',
-			'nomeSelecao' => 'Salas disponíveis:'
+			'nomeSelecao' => 'Salas disponíveis:',
+			'classe' => ''
 		);
+
+		$classe = '';
 
 		array_push($json, $resultado);
 
@@ -22,6 +25,7 @@
 		while($dadosSala = mysql_fetch_array($sqlSalas)){
 			$idSala = $dadosSala['sala_10_id'];
 			$nomeSala = $dadosSala['sala_30_nome'];
+			$classe = 'indisponivel';
 
 			if($periodo == "4"){
 				$sql = mysql_query("SELECT * FROM sta_reservas WHERE sala_10_id = '".$idSala."' AND reserva_22_data = '".$data."' AND reserva_10_id != '".$idReserva."'");
@@ -30,12 +34,15 @@
 			}
 
 			if(mysql_num_rows($sql) == 0){
-				$resultado = array(
-					'idSelecao' => $idSala,
-					'nomeSelecao' => $nomeSala
-				);
-				array_push($json, $resultado);
+				$classe = 'disponivel';
 			}
+
+			$resultado = array(
+				'idSelecao' => $idSala,
+				'nomeSelecao' => $nomeSala,
+				'classe' => $classe
+			);
+			array_push($json, $resultado);
 		}
 
 		$jsonstring = json_encode($json);
