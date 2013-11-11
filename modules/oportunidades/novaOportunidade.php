@@ -46,6 +46,7 @@
 					$("#"+newLineId+" .lineRemove").attr("id","rm_"+newLineId+"_"+$(this).attr("id"));
                     $("#"+newLineId+" #tbody_tr_produtos_clone").attr("id","tbody_tr_produtos_"+newLineId);
 					$("#"+newLineId+" #produtoClone").attr("id","produtoClone"+newLineNr);
+                    $("#"+newLineId+" #rm_produtoClone_tr_produtos_clone").attr("id","rm_produtoClone"+newLineNr+"_tr_produtos_"+newLineId);
                     $("#"+newLineId+" #tipoProduto_clone").attr("id","tipoProduto_"+newLineId).attr("name","tipoProduto_"+newLineId+"[]");
                     $("#"+newLineId+" #produtos_clone").attr("id","produtos_"+newLineId).attr("name","produtos_"+newLineId+"[]");
                     $("#"+newLineId+" #quantidadeProduto_clone").attr("id","quantidadeProduto_"+newLineId).attr("name","quantidadeProduto_"+newLineId+"[]");
@@ -95,10 +96,12 @@
 
                     slices = $(this).attr("id");
                     slices = slices.split("_");
-                    $("#"+slices[1]).remove();
+                    nrLinhas = $('#tbody_'+slices[2]+'_'+slices[3]+'_'+slices[4]+' tr').length;
+                    if(nrLinhas > 2){
+                        $("#"+slices[1]).remove();
+                    }
 
                 });
-
 			});
 		</script>
 
@@ -121,6 +124,7 @@
                                 <option value="1">Oportunidade</option>
                                 <option value="2">Aprovada</option>
                                 <option value="3">Recusada</option>
+                                <option value="4">Vencida</option>
                             </select>
                         </div>
                     </div>
@@ -309,6 +313,7 @@
                                         <div class="input-append">
                                             <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_cloneBriefing" name="quantidadeProduto_cloneBriefing[]" placeholder="Quantidade" />
                                             <input type="button" id="tr_produtos_cloneBriefing" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
+                                            <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" id="rm_produtoCloneBriefing_tr_produtos_cloneBriefing" />
                                         </div>
                                     </td>
                                 </tr>
@@ -462,6 +467,7 @@
                                                         <div class="input-append">
                                                             <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
                                                             <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
+                                                            <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" id="rm_produtoClone1_tr_produtos_clone1" />
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -614,6 +620,7 @@
                                                         <div class="input-append">
                                                             <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
                                                             <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
+                                                            <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" id="rm_produtoClone_tr_produtos_clone" />
                                                         </div>
                                                     </td>
                                                 </tr>

@@ -39,6 +39,7 @@
                             <option value="1">Oportunidade</option>
                             <option value="2">Aprovada</option>
                             <option value="3">Recusada</option>
+                            <option value="4">Vencida</option>
                         </select>
                     </div>
                 </div>

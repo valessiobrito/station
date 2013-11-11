@@ -25,7 +25,6 @@
 		while($dadosSala = mysql_fetch_array($sqlSalas)){
 			$idSala = $dadosSala['sala_10_id'];
 			$nomeSala = $dadosSala['sala_30_nome'];
-			$classe = 'indisponivel';
 
 			if($periodo == "4"){
 				$sql = mysql_query("SELECT * FROM sta_reservas WHERE sala_10_id = '".$idSala."' AND reserva_22_data = '".$data."' AND reserva_10_id != '".$idReserva."'");
@@ -35,6 +34,22 @@
 
 			if(mysql_num_rows($sql) == 0){
 				$classe = 'disponivel';
+			}else{
+				while($dadosReserva = mysql_fetch_array($sql)){
+					$idProposta = $dadosReserva['proposta_10_id'];
+					$sqlProposta = mysql_query("SELECT * FROM sta_propostas WHERE proposta_10_id = '".$idProposta."'");
+					$dadosProposta = mysql_fetch_array($sqlProposta);
+					$idStatus = $dadosProposta['proposta_12_status'];
+					if($idStatus == '1'){
+						$classe = 'oportunidade';
+					}else if($idStatus == '2'){
+						$classe = 'indisponivel';
+					}else if($idStatus == '3'){
+						$classe = 'disponivel';
+					}else if($idStatus == '4'){
+						$classe = 'vencida';
+					}
+				}
 			}
 
 			$resultado = array(
