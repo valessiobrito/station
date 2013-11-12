@@ -52,6 +52,8 @@
                     $("#"+newLineId+" #quantidadeProduto_clone").attr("id","quantidadeProduto_"+newLineId).attr("name","quantidadeProduto_"+newLineId+"[]");
                     $("#"+newLineId+" #tr_produtos_clone").attr("id","tr_produtos_"+newLineId);
                     $("#"+newLineId+" #tr_produtos_clone_inv").attr("id","tr_produtos_"+newLineId+"_inv");
+                    $("#"+newLineId+" #show_clone").attr("id","show_"+newLineId);
+                    $("#"+newLineId+" #min_clone").attr("id","min_"+newLineId);
                     $("#"+newLineId+" #nrClone").val(newLineId);
 
 					dataPicker = newLine.find(".data").datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
@@ -101,6 +103,23 @@
                         $("#"+slices[1]).remove();
                     }
 
+                });
+
+                $(".minReserva").live("click",function(){
+                    slices = $(this).attr("id");
+                    slices = slices.split("_");
+                    $("#"+slices[1]+" td:eq(1)").hide("slow");
+                    if($("#"+slices[1]+" #data").val() != ''){
+                        $("#"+slices[1]+" .showData h5").html("+" + $("#"+slices[1]+" #data").val());
+                    }
+                    $("#"+slices[1]+" td:eq(0)").show();
+                });
+
+                $(".showData").live("click",function(){
+                    slices = $(this).attr("id");
+                    slices = slices.split("_");
+                    $("#"+slices[1]+" td:eq(0)").hide();
+                    $("#"+slices[1]+" td:eq(1)").show("slow");
                 });
 			});
 		</script>
@@ -361,6 +380,9 @@
                     <div id="agendaReservas" style="display:none;">
                         <table id="tbody_tr_reserva">
                             <tr id="primeiraReserva">
+                                <td style="display:none;">
+                                    <div class="row showData" id="show_primeiraReserva"><h5>+ Data</h5></div>
+                                </td>
                             	<td>
                                 	<div class="row">
                                         <div class="span10">
@@ -507,13 +529,19 @@
                                     </div>
                                     <div class="row">
                                         <div class="span10">
-                                            <input type="button" id="tr_reserva" class="btn btn-success lineClone" value="Adicionar nova data a proposta" />
+                                            <div class="input-append">
+                                                <input type="button" id="tr_reserva" class="btn btn-success lineClone" value="Adicionar nova data a proposta" />
+                                                <input type="button" id="min_primeiraReserva" class="btn btn-info minReserva" value="Minimizar data" />
+                                            </div>
                                             <input type="hidden" id="nrClone" name="nrClone[]" value="clone1" />
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr id="tr_reserva_inv" style="display: none;" class="cloneInv">
+                                <td style="display:none;">
+                                    <div class="row showData" id="show_clone"><h5>+ Data</h5></div>
+                                </td>
                             	<td>
                                 	<div class="row" style="margin-top:15px;">
                                         <div class="span10">
@@ -662,6 +690,7 @@
                                             <div class="input-append">
                                                 <input type="button" id="tr_reserva" class="btn btn-success lineClone" value="Adicionar nova data a proposta" />
                                                 <input type="button" class="btn btn-danger lineRemove" value="Remover data" />
+                                                <input type="button" id="min_clone" class="btn btn-info minReserva" value="Minimizar data" />
                                             </div>
                                             <input type="hidden" id="nrClone" name="nrClone[]" />
                                         </div>
