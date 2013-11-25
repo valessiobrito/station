@@ -642,6 +642,22 @@ function verificaUnidade(el){
 		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}
 }
+function verificaUnidadeBriefing(el){
+	valor = $(el).val();
+	if(valor == ""){
+		$("#periodoBriefing").hide();
+		$("#periodoBriefing").val(0);
+		$("#rowSalaBriefing").hide();
+		$("#salasBriefing").val(0);
+		$("#formatoSalaBriefing").val(0);
+	}else{
+		$("#periodoBriefing").show();
+		$("#periodoBriefing").val(0);
+		$("#rowSalaBriefing").hide();
+		$("#salasBriefing").val(0);
+		$("#formatoSalaBriefing").val(0);
+	}
+}
 function verificaData(el){
 	valor = $(el).val();
 	trParentId = $(el).closest("tr").attr("id");
@@ -698,6 +714,41 @@ function verificaPeriodo(el,idReserva){
 		},'json');
 
 		$("#"+trParentId+" #rowSala").show();
+	}
+}
+function verificaPeriodoBriefing(){
+	unidade = $("#unidadeBriefing").val();
+
+	if(valor == ""){
+		$("#"+trParentId+" #rowSalaBriefing").hide();
+		$("#"+trParentId+" #salasBriefing").val(0);
+		$("#"+trParentId+" #formatoSalaBriefing").val(0);
+	}else{
+		$.ajax({cache:false});
+	$.post(
+		'/agenda/process/selecionaSalasBriefing.php',
+		{unidade: unidade},
+
+		function(data){
+			var option = new Array();
+
+			$("#salasBriefing").empty();
+			$(".detalhesSalaBriefing").hide();
+			$("#formatoSalaBriefing").val(0);
+			$("#qtdeParticipantesBriefing").val("");
+
+			$.each(data, function(i, obj){
+
+				option[i] = document.createElement('option');
+				$( option[i] ).attr( {value : obj.idSelecao} );
+				$( option[i] ).append( obj.nomeSelecao );
+
+				$("#salasBriefing").append( option[i] );
+			});
+		},'json');
+
+		$("#rowSalaBriefing").show();
+		$("#formatoSalaBriefing").val(0).show();
 	}
 }
 function verificaSala(el){

@@ -261,8 +261,34 @@
                     <input type="text" class="span2 qtdeParticipantesBriefing" id="qtdeParticipantesBriefing" name="qtdeParticipantesBriefing" placeholder="Qtde. Participantes">
                     <div class="row">
                         <div class="span10">
-                            <select class="span6 unidade" id="unidadeBriefing" name="unidadeBriefing">
+                            <select class="span6 unidade" id="unidadeBriefing" name="unidadeBriefing" onchange="verificaUnidadeBriefing(this)">
                                 <option value="">Escolha a Unidade:</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span10">
+                            <select class="span6" id="periodoBriefing" name="periodoBriefing" style="display:none;" onchange="verificaPeriodoBriefing()">
+                                <option value="">Período preferencial:</option>
+                                <option value="1">Manhã</option>
+                                <option value="2">Tarde</option>
+                                <option value="3">Noite</option>
+                                <option value="4">Integral</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="rowSalaBriefing" style="display:none">
+                        <div class="span10">
+                            <select class="span4" id="salasBriefing" name="salasBriefing">
+                                <option value="">Sala preferencial:</option>
+                            </select>
+                            <select class="span2" id="formatoSalaBriefing" name="formatoSalaBriefing" style="display:none;">
+                                <option value="">Formato da Sala:</option>
+                                <option value="1">"U" com mesa</option>
+                                <option value="2">"U" simples</option>
+                                <option value="3">Grupos</option>
+                                <option value="4">Escolar</option>
+                                <option value="5">Auditório</option>
                             </select>
                         </div>
                     </div>
@@ -396,7 +422,7 @@
                                             <input type="text" class="span6 data" id="data" name="data[]" placeholder="Data do treinamento" style="display:none;">
                                         </div>
                                     </div>
-                                     <div class="row">
+                                    <div class="row">
                                         <div class="span10">
                                             <select class="span6" id="periodo" name="periodo[]" style="display:none;" onchange="verificaPeriodo(this,'0')">
                                                 <option value="">Escolha o período:</option>
