@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 16/09/2013 às 04:39:29
+-- Tempo de Geração: 25/11/2013 às 21:16:09
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.4.4
 
@@ -30,6 +30,9 @@ CREATE TABLE `sta_briefings` (
   `briefing_10_id` int(11) NOT NULL AUTO_INCREMENT,
   `proposta_10_id` int(11) NOT NULL,
   `unidade_10_id` int(11) NOT NULL,
+  `briefing_12_periodo` int(3) NOT NULL,
+  `sala_10_id` int(11) NOT NULL,
+  `briefing_12_formatoSala` int(3) NOT NULL,
   `briefing_20_quantidadeParticipantes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `briefing_12_coffee` int(3) NOT NULL,
   `coffe_10_id` int(11) NOT NULL,
@@ -50,10 +53,10 @@ CREATE TABLE `sta_briefings` (
 -- Extraindo dados da tabela `sta_briefings`
 --
 
-INSERT INTO `sta_briefings` (`briefing_10_id`, `proposta_10_id`, `unidade_10_id`, `briefing_20_quantidadeParticipantes`, `briefing_12_coffee`, `coffe_10_id`, `coffee_12_periodo`, `coffee_20_quantidade`, `briefing_12_cafe`, `briefing_20_quantidadeCafe`, `briefing_12_periodoCafe`, `briefing_12_agua`, `briefing_20_quantidadeAgua`, `briefing_12_periodoAgua`, `briefing_60_coffeeObs`, `briefing_60_observacoes`) VALUES
-(1, 15, 0, '', 1, 1, 1, '10', '2', '', 0, 2, '', 0, 'coffeeee', 'briefingggg'),
-(2, 16, 0, '', 0, 0, 0, '', '', '', 0, 0, '', 0, '', ''),
-(3, 17, 1, '42', 2, 0, 0, '', '2', '', 0, 2, '', 0, 'obs coffee', 'obs briefing');
+INSERT INTO `sta_briefings` (`briefing_10_id`, `proposta_10_id`, `unidade_10_id`, `briefing_12_periodo`, `sala_10_id`, `briefing_12_formatoSala`, `briefing_20_quantidadeParticipantes`, `briefing_12_coffee`, `coffe_10_id`, `coffee_12_periodo`, `coffee_20_quantidade`, `briefing_12_cafe`, `briefing_20_quantidadeCafe`, `briefing_12_periodoCafe`, `briefing_12_agua`, `briefing_20_quantidadeAgua`, `briefing_12_periodoAgua`, `briefing_60_coffeeObs`, `briefing_60_observacoes`) VALUES
+(1, 15, 0, 0, 0, 0, '', 1, 1, 1, '10', '2', '', 0, 2, '', 0, 'coffeeee', 'briefingggg'),
+(2, 16, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, '', 0, '', ''),
+(3, 17, 1, 3, 3, 3, '42', 1, 1, 1, '42', '2', '', 0, 2, '', 0, 'obs coffee', 'obs briefing');
 
 -- --------------------------------------------------------
 
@@ -68,7 +71,7 @@ CREATE TABLE `sta_briefings_equipamento` (
   `briefing_equipamento_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `briefing_10_id` int(11) NOT NULL,
   PRIMARY KEY (`briefing_equipamento_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Extraindo dados da tabela `sta_briefings_equipamento`
@@ -78,8 +81,8 @@ INSERT INTO `sta_briefings_equipamento` (`briefing_equipamento_10_id`, `tipo_pro
 (1, 3, 1, '20', 1),
 (2, 3, 1, '30', 1),
 (3, 0, 0, '', 2),
-(4, 3, 1, '10', 3),
-(5, 3, 1, '30', 3);
+(8, 3, 1, '10', 3),
+(9, 3, 1, '30', 3);
 
 -- --------------------------------------------------------
 
@@ -195,8 +198,8 @@ INSERT INTO `sta_propostas` (`proposta_10_id`, `cliente_10_id`, `contato_10_id`,
 (13, 1, 1, 3, '2013-08-20'),
 (14, 0, 0, 0, '2013-08-21'),
 (15, 2, 3, 1, '2013-09-04'),
-(16, 0, 0, 1, '2013-09-04'),
-(17, 1, 5, 2, '2013-09-04');
+(16, 0, 0, 4, '2013-09-04'),
+(17, 1, 5, 1, '2013-11-25');
 
 -- --------------------------------------------------------
 
@@ -228,7 +231,7 @@ CREATE TABLE `sta_reservas` (
   `reserva_60_briefingObs` longtext COLLATE utf8_unicode_ci NOT NULL,
   `reserva_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`reserva_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
 
 --
 -- Extraindo dados da tabela `sta_reservas`
@@ -254,8 +257,8 @@ INSERT INTO `sta_reservas` (`reserva_10_id`, `proposta_10_id`, `unidade_10_id`, 
 (26, 15, 1, 1, 4, '2013-09-05', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '', '50', 4, 'coffeeee', 'briefingggg', 'data1'),
 (27, 15, 1, 1, 1, '2013-09-06', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '', '20', 1, 'coffeeee', 'briefingggg', 'data2'),
 (28, 16, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(29, 17, 1, 1, 2, '2013-09-10', 2, 0, 0, '', '2', '', 0, 2, '', 0, '40', '42', 3, 'obs coffee', 'obs briefing', 'data1'),
-(30, 17, 1, 1, 3, '2013-09-09', 2, 0, 0, '', '2', '', 0, 2, '', 0, '20', '42', 1, 'obs coffee', 'obs briefing', 'data2');
+(33, 17, 1, 1, 2, '2013-09-10', 2, 0, 0, '', '2', '', 0, 2, '', 0, '40', '42', 3, 'obs coffee', 'obs briefing', 'data1'),
+(34, 17, 1, 1, 3, '2013-09-09', 2, 0, 0, '', '2', '', 0, 2, '', 0, '20', '42', 1, 'obs coffee', 'obs briefing', 'data2');
 
 -- --------------------------------------------------------
 
@@ -270,7 +273,7 @@ CREATE TABLE `sta_reservas_equipamento` (
   `reserva_equipamento_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `reserva_10_id` int(11) NOT NULL,
   PRIMARY KEY (`reserva_equipamento_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 --
 -- Extraindo dados da tabela `sta_reservas_equipamento`
@@ -304,10 +307,10 @@ INSERT INTO `sta_reservas_equipamento` (`reserva_equipamento_10_id`, `tipo_produ
 (30, 3, 1, '20', 27),
 (31, 3, 1, '30', 27),
 (32, 0, 0, '', 28),
-(33, 3, 1, '10', 29),
-(34, 3, 1, '30', 29),
-(35, 3, 1, '10', 30),
-(36, 3, 1, '30', 30);
+(41, 3, 1, '10', 33),
+(42, 3, 1, '30', 33),
+(43, 3, 1, '10', 34),
+(44, 3, 1, '30', 34);
 
 -- --------------------------------------------------------
 
@@ -331,14 +334,16 @@ CREATE TABLE `sta_salas` (
   `sala_20_auditorio` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `unidade_10_id` int(11) NOT NULL,
   PRIMARY KEY (`sala_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Extraindo dados da tabela `sta_salas`
 --
 
 INSERT INTO `sta_salas` (`sala_10_id`, `sala_30_nome`, `sala_30_numero`, `sala_15_valorManha`, `sala_15_valorTarde`, `sala_15_valorNoite`, `sala_15_valorIntegral`, `sala_20_metros`, `sala_20_uMesa`, `sala_20_uSimples`, `sala_20_grupos`, `sala_20_escolar`, `sala_20_auditorio`, `unidade_10_id`) VALUES
-(1, 'Outra Sala3', '033', 100.00, 200.00, 300.00, 400.00, '10', '20', '30', '40', '50', '60', 1);
+(1, 'Outra Sala3', '033', 100.00, 200.00, 300.00, 400.00, '10', '20', '30', '40', '50', '60', 1),
+(2, 'Sala 2', '2', 30.00, 30.00, 30.00, 30.00, '10', '20', '30', '40', '50', '60', 1),
+(3, 'Sala 1', '1', 30.00, 30.00, 30.00, 30.00, '60', '50', '40', '30', '20', '10', 1);
 
 -- --------------------------------------------------------
 
