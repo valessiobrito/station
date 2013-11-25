@@ -8,6 +8,12 @@ class Briefing {
 
     protected $unidadeId;
 
+    protected $periodo;
+
+    protected $salaId;
+
+    protected $formatoSala;
+
     protected $quantidadeParticipantes;
 
 	protected $coffee;
@@ -62,6 +68,36 @@ class Briefing {
     public function setUnidadeId($unidadeId)
     {
         $this->unidadeId = $unidadeId;
+    }
+
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
+
+    public function setPeriodo($periodo)
+    {
+        $this->periodo = $periodo;
+    }
+
+    public function getSalaId()
+    {
+        return $this->salaId;
+    }
+
+    public function setSalaId($salaId)
+    {
+       $this->salaId = $salaId;
+    }
+
+    public function getFormatoSala()
+    {
+        return $this->formatoSala;
+    }
+
+    public function setFormatoSala($formatoSala)
+    {
+        $this->formatoSala = $formatoSala;
     }
 
     public function getQuantidadeParticipantes()
@@ -198,6 +234,9 @@ class Briefing {
             "briefing_10_id"       		            => $this->getId(),
             "proposta_10_id"     		            => $this->getPropostaId(),
             "unidade_10_id"                         => $this->getUnidadeId(),
+            "briefing_12_periodo"                   => $this->getPeriodo(),
+            "sala_10_id"                            => $this->getSalaId(),
+            "briefing_12_formatoSala"               => $this->getFormatoSala(),
             "briefing_20_quantidadeParticipantes"   => $this->getQuantidadeParticipantes(),
 			"briefing_12_coffee"    	            => $this->getCoffee(),
             "coffe_10_id"                           => $this->getCoffeeId(),
@@ -222,6 +261,9 @@ class Briefing {
         $this->setId($row['briefing_10_id']);
         $this->setPropostaId($row['proposta_10_id']);
         $this->setUnidadeId($row['unidade_10_id']);
+        $this->setPeriodo($row['briefing_12_periodo']);
+        $this->setSalaId($row['sala_10_id']);
+        $this->setFormatoSala($row['briefing_12_formatoSala']);
         $this->setQuantidadeParticipantes($row['briefing_20_quantidadeParticipantes']);
 		$this->setCoffee($row['briefing_12_coffee']);
         $this->setCoffeeId($row['coffe_10_id']);

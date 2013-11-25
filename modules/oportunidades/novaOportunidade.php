@@ -63,6 +63,9 @@
 					});
 
                     copiaBriefing(newLineId);
+
+                    trParentId = $(this).closest("tr").attr("id");
+                    minimizarReserva($("#"+trParentId+" .minReserva"));
 				});
 
 				$(".lineRemove").live("click",function(){
@@ -106,13 +109,7 @@
                 });
 
                 $(".minReserva").live("click",function(){
-                    slices = $(this).attr("id");
-                    slices = slices.split("_");
-                    $("#"+slices[1]+" td:eq(1)").hide("slow");
-                    if($("#"+slices[1]+" #data").val() != ''){
-                        $("#"+slices[1]+" .showData h5").html("+" + $("#"+slices[1]+" #data").val());
-                    }
-                    $("#"+slices[1]+" td:eq(0)").show();
+                    minimizarReserva(this);
                 });
 
                 $(".showData").live("click",function(){

@@ -77,6 +77,9 @@ switch ($op) {
 
             $briefingClass->setPropostaId($oportunidadeId);
             $briefingClass->setUnidadeId($unidadeBriefing);
+            $briefingClass->setPeriodo($periodoBriefing);
+            $briefingClass->setSalaId($salasBriefing);
+            $briefingClass->setFormatoSala($formatoSalaBriefing);
             $briefingClass->setQuantidadeParticipantes($qtdeParticipantesBriefing);
             $briefingClass->setCoffee($coffeeBriefing);
 			$briefingClass->setCoffeeId($tipoCoffeeBriefing);
@@ -248,6 +251,9 @@ switch ($op) {
             $briefingClass->setId($briefingId);
             $briefingClass->setPropostaId($oportunidadeId);
             $briefingClass->setUnidadeId($unidadeBriefing);
+            $briefingClass->setPeriodo($periodoBriefing);
+            $briefingClass->setSalaId($salasBriefing);
+            $briefingClass->setFormatoSala($formatoSalaBriefing);
             $briefingClass->setQuantidadeParticipantes($qtdeParticipantesBriefing);
             $briefingClass->setCoffee($coffeeBriefing);
 			$briefingClass->setCoffeeId($tipoCoffeeBriefing);

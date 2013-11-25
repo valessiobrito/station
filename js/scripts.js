@@ -716,7 +716,7 @@ function verificaPeriodo(el,idReserva){
 		$("#"+trParentId+" #rowSala").show();
 	}
 }
-function verificaPeriodoBriefing(){
+function verificaPeriodoBriefing(modo,objBrie){
 	unidade = $("#unidadeBriefing").val();
 
 	if(valor == ""){
@@ -735,14 +735,20 @@ function verificaPeriodoBriefing(){
 			$("#salasBriefing").empty();
 			$(".detalhesSalaBriefing").hide();
 			$("#formatoSalaBriefing").val(0);
-			$("#qtdeParticipantesBriefing").val("");
 
 			$.each(data, function(i, obj){
 
 				option[i] = document.createElement('option');
 				$( option[i] ).attr( {value : obj.idSelecao} );
 				$( option[i] ).append( obj.nomeSelecao );
-
+				if(modo == "edit"){
+					if(objBrie.sala_10_id != "0" && objBrie.sala_10_id == obj.idSelecao){
+						$( option[i] ).attr('selected','selected');
+					}
+					if(objBrie.briefing_12_formatoSala != "0"){
+						$("#formatoSalaBriefing").val(objBrie.briefing_12_formatoSala);
+					}
+				}
 				$("#salasBriefing").append( option[i] );
 			});
 		},'json');
@@ -760,8 +766,13 @@ function verificaSala(el){
 		$("#"+trParentId+" #qtdeParticipantes").val("");
 	}else{
 		$("#"+trParentId+" .detalhesSala").show();
-		$("#"+trParentId+" #formatoSala").val(0);
-		$("#"+trParentId+" #qtdeParticipantes").val("");
+		if($("#formatoSalaBriefing").val() != ""){
+			$("#"+trParentId+" #formatoSala").val($("#formatoSalaBriefing").val());
+			verificaFormatoSala($("#"+trParentId+" #formatoSala"));
+		}else{
+			$("#"+trParentId+" #formatoSala").val(0);
+			$("#"+trParentId+" #qtdeParticipantes").val("");
+		}
 	}
 }
 function verificaFormatoSala(el){
@@ -1136,6 +1147,11 @@ function carregaEdicaoOportunidade(idOportunidade){
 						}
 						if(objBrie.unidade_10_id != "0"){
 							$("#unidadeBriefing").val(objBrie.unidade_10_id);
+							verificaUnidadeBriefing($("#unidadeBriefing"));
+						}
+						if(objBrie.briefing_12_periodo != "0"){
+							$("#periodoBriefing").val(objBrie.briefing_12_periodo);
+							verificaPeriodoBriefing('edit',objBrie);
 						}
 						if(objBrie.briefing_12_coffee != "0"){
 							$("#coffeeBriefing").val(objBrie.briefing_12_coffee);
@@ -1317,4 +1333,14 @@ function deletaOportunidade(idOportunidade,el){
 	}else{
 		return false;
 	}
+}
+
+function minimizarReserva(el){
+	slices = $(el).attr("id");
+    slices = slices.split("_");
+    $("#"+slices[1]+" td:eq(1)").hide("slow");
+    if($("#"+slices[1]+" #data").val() != ''){
+        $("#"+slices[1]+" .showData h5").html("+" + $("#"+slices[1]+" #data").val());
+    }
+    $("#"+slices[1]+" td:eq(0)").show();
 }
