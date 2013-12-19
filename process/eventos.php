@@ -7,60 +7,73 @@
 
 		$inicio = date('Y-m-d', $from);
 		$fim = date('Y-m-d', $to);
-		echo $inicio." - ".$fim;
 
 		$json = array();
 
-		$resultado = array(
-			'idSelecao' => '',
-			'nomeSelecao' => 'Salas disponíveis:',
-			'classe' => ''
-		);
+		$sqlReservas = mysql_query("SELECT * FROM sta_reservas WHERE reserva_22_data BETWEEN '".$inicio."' AND '".$fim."'");
 
-		$classe = '';
+		while($dadosReserva = mysql_fetch_array($sqlReservas)){
+			$idReserva = $dadosReserva['reserva_10_id'];
+			$idProposta = $dadosReserva['proposta_10_id'];
+			$idPeriodo = $dadosReserva['reserva_12_periodo'];
+			$periodo = '';
+			if($idPeriodo == '1'){
+				$periodo = 'Manhã';
+			}else if($idPeriodo == '2'){
+				$periodo = 'Tarde';
+			}else if($idPeriodo == '3'){
+				$periodo = 'Noite';
+			}else if($idPeriodo == '4'){
+				$periodo = 'Integral';
+			}
 
-		array_push($json, $resultado);
+			$idUnidade = $dadosReserva['unidade_10_id'];
+			$idSala = $dadosReserva['sala_10_id'];
+			$data = strtotime($dadosReserva['reserva_22_data']) * 1000;
 
-		$sqlSalas = mysql_query("SELECT * FROM sta_salas WHERE unidade_10_id = '".$unidade."' ORDER BY sala_30_nome");
-		while($dadosSala = mysql_fetch_array($sqlSalas)){
-			$idSala = $dadosSala['sala_10_id'];
+			$sqlProposta = mysql_query("SELECT * FROM sta_propostas WHERE proposta_10_id = '".$idProposta."'");
+			$dadosProposta = mysql_fetch_array($sqlProposta);
+			$idStatus = $dadosProposta['proposta_12_status'];
+			$idCliente = $dadosProposta['cliente_10_id'];
+			if($idStatus == '1'){
+				$classe = 'event-info';
+			}else if($idStatus == '2'){
+				$classe = 'event-important';
+			}else if($idStatus == '3'){
+				$classe = 'event-success';
+			}else if($idStatus == '4'){
+				$classe = 'event-special';
+			}
+
+			$sqlCliente = mysql_query("SELECT * FROM sta_clientes WHERE cliente_10_id = '".$idCliente."'");
+			$dadosCliente = mysql_fetch_array($sqlCliente);
+			$nomeCliente = $dadosCliente['cliente_30_nome'];
+
+			$sqlUnidade = mysql_query("SELECT * FROM sta_unidades WHERE unidade_10_id = '".$idUnidade."'");
+			$dadosUnidade = mysql_fetch_array($sqlUnidade);
+			$nomeUnidade = $dadosUnidade['unidade_30_nome'];
+
+			$sqlSala = mysql_query("SELECT * FROM sta_salas WHERE sala_10_id = '".$idSala."'");
+			$dadosSala = mysql_fetch_array($sqlSala);
 			$nomeSala = $dadosSala['sala_30_nome'];
 
-			if($periodo == "4"){
-				$sql = mysql_query("SELECT * FROM sta_reservas WHERE sala_10_id = '".$idSala."' AND reserva_22_data = '".$data."' AND reserva_10_id != '".$idReserva."'");
-			}else{
-				$sql = mysql_query("SELECT * FROM sta_reservas WHERE sala_10_id = '".$idSala."' AND reserva_22_data = '".$data."' AND reserva_10_id != '".$idReserva."' AND (reserva_12_periodo = '".$periodo."' OR reserva_12_periodo = '4')");
-			}
-
-			if(mysql_num_rows($sql) == 0){
-				$classe = 'disponivel';
-			}else{
-				while($dadosReserva = mysql_fetch_array($sql)){
-					$idProposta = $dadosReserva['proposta_10_id'];
-					$sqlProposta = mysql_query("SELECT * FROM sta_propostas WHERE proposta_10_id = '".$idProposta."'");
-					$dadosProposta = mysql_fetch_array($sqlProposta);
-					$idStatus = $dadosProposta['proposta_12_status'];
-					if($idStatus == '1'){
-						$classe = 'oportunidade';
-					}else if($idStatus == '2'){
-						$classe = 'indisponivel';
-					}else if($idStatus == '3'){
-						$classe = 'disponivel';
-					}else if($idStatus == '4'){
-						$classe = 'vencida';
-					}
-				}
-			}
-
 			$resultado = array(
-				'idSelecao' => $idSala,
-				'nomeSelecao' => $nomeSala,
-				'classe' => $classe
+				'id' => $idReserva,
+				'title' => $nomeCliente." - ".$nomeUnidade." - ".$nomeSala." - ".$periodo,
+				'url' => '',
+				'class' => $classe,
+				'start' => $data,
+				'end' => $data
 			);
 			array_push($json, $resultado);
 		}
 
-		$jsonstring = json_encode($json);
+		$jsonresponse = array(
+			'success' => '1',
+			'result' => $json
+		);
 
-		echo $jsonstring;
+		$responsestring = json_encode($jsonresponse);
+
+		echo $responsestring;
 ?>

@@ -25,7 +25,7 @@
 							<button data-calendar-view="day" class="btn btn-warning">Dia</button>
 						</div>
 					</div>
-					<h3>Mes</h3>
+					<h3></h3>
                 </div>
                 <div class="row">
                 	<div class="span10">
@@ -36,7 +36,42 @@
         </div>
         <script type="text/javascript" src="<?php echo $urlGeral; ?>/bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript">
-		    var calendar = $('#calendar').calendar({language: 'pt-BR', events_source: 'process/eventos.php'});
+		    var calendar = $('#calendar').calendar({
+		    	language: 'pt-BR',
+		    	events_source: 'process/eventos.php',
+		    	onAfterEventsLoad: function(events) {
+					if(!events) {
+						return;
+					}
+					var list = $('#eventlist');
+					list.html('');
+
+					$.each(events, function(key, val) {
+						$(document.createElement('li'))
+							.html('<a href="' + val.url + '">' + val.title + '</a>')
+							.appendTo(list);
+					});
+				},
+				onAfterViewLoad: function(view) {
+					$('.page-header h3').text(this.getTitle());
+					$('.btn-group button').removeClass('active');
+					$('button[data-calendar-view="' + view + '"]').addClass('active');
+				}
+		    });
+
+		    $('.btn-group button[data-calendar-nav]').each(function() {
+				var $this = $(this);
+				$this.click(function() {
+					calendar.navigate($this.data('calendar-nav'));
+				});
+			});
+
+			$('.btn-group button[data-calendar-view]').each(function() {
+				var $this = $(this);
+				$this.click(function() {
+					calendar.view($this.data('calendar-view'));
+				});
+			});
 		</script>
 <?php include("inc/footer.php");?>
 <?php
