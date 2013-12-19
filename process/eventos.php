@@ -60,7 +60,7 @@
 			$resultado = array(
 				'id' => $idReserva,
 				'title' => $nomeCliente." - ".$nomeUnidade." - ".$nomeSala." - ".$periodo,
-				'url' => '',
+				'url' => '/agenda/modules/oportunidades/editarOportunidade.php?id='.$idProposta,
 				'class' => $classe,
 				'start' => $data,
 				'end' => $data
