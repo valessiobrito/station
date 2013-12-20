@@ -56,10 +56,11 @@
 			$sqlSala = mysql_query("SELECT * FROM sta_salas WHERE sala_10_id = '".$idSala."'");
 			$dadosSala = mysql_fetch_array($sqlSala);
 			$nomeSala = $dadosSala['sala_30_nome'];
+			$numeroSala = $dadosSala['sala_30_numero'];
 
 			$resultado = array(
 				'id' => $idReserva,
-				'title' => $nomeCliente." - ".$nomeUnidade." - ".$nomeSala." - ".$periodo,
+				'title' => $nomeCliente." - ".$nomeUnidade." - ".$nomeSala." ".$numeroSala." - ".$periodo,
 				'url' => '/agenda/modules/oportunidades/editarOportunidade.php?id='.$idProposta,
 				'class' => $classe,
 				'start' => $data,
