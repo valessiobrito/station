@@ -5,7 +5,13 @@
 		$qtdeAgua = $_POST['qtdeAgua'];
 		$periodoAgua = $_POST['periodoAgua'];
 
-		$qryValor = mysql_query("SELECT produto_15_valor FROM sta_produtos WHERE produto_10_id = '3'");
+		if($_SERVER['SERVER_ADDR'] == "127.0.0.1" || $_SERVER['SERVER_ADDR'] == "::1"){
+			$idAgua = "3";
+		}else{
+			$idAgua = "4";
+		}
+
+		$qryValor = mysql_query("SELECT produto_15_valor FROM sta_produtos WHERE produto_10_id = '".$idAgua."'");
 		$resultadoValor = mysql_fetch_array($qryValor);
 		$valor = $resultadoValor['produto_15_valor'];
 
