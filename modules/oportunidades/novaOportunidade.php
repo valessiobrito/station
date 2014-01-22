@@ -10,6 +10,8 @@
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<script>
 			$(document).ready(function(){
+                $(".valor").maskMoney({showSymbol:false, thousands:'', decimal:','});
+
 				var dataPicker = $('#primeiraReserva #data').datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
 					dataPicker.datepicker('hide');
 					dataPicker.blur();
@@ -55,6 +57,7 @@
                     $("#"+newLineId+" #show_clone").attr("id","show_"+newLineId);
                     $("#"+newLineId+" #min_clone").attr("id","min_"+newLineId);
                     $("#"+newLineId+" #nrClone").val(newLineId);
+                    newLine.find(".valor").maskMoney({showSymbol:false, thousands:'', decimal:','});
 
 					dataPicker = newLine.find(".data").datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
 						dataPicker.datepicker('hide');
@@ -454,11 +457,11 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee(this)">
                                                 <option value="">Qual Coffee?</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
-                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee(this)">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee(this)">
                                                 <option value="">Período Coffee?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -473,8 +476,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe(this)">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe(this)">
                                                 <option value="">Período Café?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -489,8 +492,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua(this)">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua(this)">
                                                 <option value="">Período Água?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -548,6 +551,43 @@
                                     <div class="row">
                                         <div class="span10">
                                             <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Data"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="span5">
+                                            <table class="table table-condensed table-bordered table-striped">
+                                                <tr>
+                                                    <th colspan="2">Valores</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sala</td>
+                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Coffee</td>
+                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Café</td>
+                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Água</td>
+                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Equipamentos</td>
+                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Desconto</td>
+                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" onchange="calculaDesconto(this)" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" value="0.00" /></td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -613,11 +653,11 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee(this)">
                                                 <option value="">Qual Coffee?</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
-                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee(this)">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee(this)">
                                                 <option value="">Período Coffee?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -632,8 +672,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe(this)">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe(this)">
                                                 <option value="">Período Café?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -648,8 +688,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua(this)">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua(this)">
                                                 <option value="">Período Água?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -708,6 +748,42 @@
                                             <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Data"></textarea>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="span5">
+                                            <table class="table table-condensed table-bordered table-striped">
+                                                <tr>
+                                                    <th colspan="2">Valores</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sala</td>
+                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Coffee</td>
+                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Café</td>
+                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Água</td>
+                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Equipamentos</td>
+                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Desconto</td>
+                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" onchange="calculaDesconto(this)" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" value="0.00" /></td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     <div class="row">
                                         <div class="span10">
                                             <div class="input-append">

@@ -714,6 +714,7 @@ function verificaPeriodo(el,idReserva){
 		},'json');
 
 		$("#"+trParentId+" #rowSala").show();
+		calculaValorSala(el);
 	}
 }
 function verificaPeriodoBriefing(modo,objBrie){
@@ -774,6 +775,7 @@ function verificaSala(el){
 			$("#"+trParentId+" #qtdeParticipantes").val("");
 		}
 	}
+	calculaValorSala(el);
 }
 function verificaFormatoSala(el){
 	valor = $(el).val();
@@ -813,6 +815,7 @@ function verificaCoffee(el){
 	}else{
 		$("#"+trParentId+" .detalhesCoffe").show();
 	}
+	calculaValorCoffee(el);
 }
 function verificaCafe(el){
 	valor = $(el).val();
@@ -822,6 +825,7 @@ function verificaCafe(el){
 	}else{
 		$("#"+trParentId+" .detalhesCafe").show();
 	}
+	calculaValorCafe(el);
 }
 function verificaAgua(el){
 	valor = $(el).val();
@@ -831,6 +835,7 @@ function verificaAgua(el){
 	}else{
 		$("#"+trParentId+" .detalhesAgua").show();
 	}
+	calculaValorAgua(el);
 }
 function verificaCoffeeBriefing(el){
 	valor = $(el).val();
@@ -994,6 +999,7 @@ function copiaBriefing(trParentId){
 		$("#"+trParentId+" #tipoCoffee").val($("#tipoCoffeeBriefing").val());
 		$("#"+trParentId+" #qtdeCoffee").val($("#qtdeCoffeeBriefing").val());
 		$("#"+trParentId+" #periodoCoffee").val($("#periodoCoffeeBriefing").val());
+		calculaValorCoffee($("#"+trParentId+" #qtdeCoffee"));
 	}
 
 	if(valorCafe == "" || valorCafe == "2"){
@@ -1003,6 +1009,7 @@ function copiaBriefing(trParentId){
 
 		$("#"+trParentId+" #qtdeCafe").val($("#qtdeCafeBriefing").val());
 		$("#"+trParentId+" #periodoCafe").val($("#periodoCafeBriefing").val());
+		calculaValorCafe($("#"+trParentId+" #qtdeCafe"));
 	}
 
 	if(valorAgua == "" || valorAgua == "2"){
@@ -1012,6 +1019,7 @@ function copiaBriefing(trParentId){
 
 		$("#"+trParentId+" #qtdeAgua").val($("#qtdeAguaBriefing").val());
 		$("#"+trParentId+" #periodoAgua").val($("#periodoAguaBriefing").val());
+		calculaValorAgua($("#"+trParentId+" #qtdeAgua"));
 	}
 
 	var tiposProdutoBriefing = document.getElementsByName('tipoProduto_cloneBriefing[]');
@@ -1343,4 +1351,102 @@ function minimizarReserva(el){
         $("#"+slices[1]+" .showData h5").html("+" + $("#"+slices[1]+" #data").val());
     }
     $("#"+slices[1]+" td:eq(0)").show();
+}
+
+function calculaValorSala(el){
+	trParentId = $(el).closest("tr").attr("id");
+	if ($("#"+trParentId+" #periodo").val() != '' && $("#"+trParentId+" #salas").val() != '') {
+		$.ajax({
+			type: "POST",
+			url: "/agenda/process/calculaValorSala.php",
+			data: "periodo="+$("#"+trParentId+" #periodo").val()+"&sala="+$("#"+trParentId+" #salas").val(),
+			success: function(resposta){
+				$("#"+trParentId+" #txtValorSala").html(resposta.replace(".",","));
+				$("#"+trParentId+" #valorSala").val(resposta);
+				calculaTotalReserva(trParentId);
+			}
+		});
+	}
+}
+
+function calculaValorCoffee(el){
+	trParentId = $(el).closest("tr").attr("id");
+	if($("#"+trParentId+" #coffee").val() == '1'){
+		if ($("#"+trParentId+" #tipoCoffee").val() != '' && $("#"+trParentId+" #qtdeCoffee").val() != '' && $("#"+trParentId+" #periodoCoffee").val() != '') {
+			$.ajax({
+				type: "POST",
+				url: "/agenda/process/calculaValorCoffee.php",
+				data: "idCoffee="+$("#"+trParentId+" #tipoCoffee").val()+"&qtdeCoffee="+$("#"+trParentId+" #qtdeCoffee").val()+"&periodoCoffee="+$("#"+trParentId+" #periodoCoffee").val(),
+				success: function(resposta){
+					$("#"+trParentId+" #txtValorCoffee").html(resposta.replace(".",","));
+					$("#"+trParentId+" #valorCoffee").val(resposta);
+					calculaTotalReserva(trParentId);
+				}
+			});
+		}
+	}else{
+		$("#"+trParentId+" #txtValorCoffee").html("0,00");
+		$("#"+trParentId+" #valorCoffee").val("0.00");
+	}
+}
+
+function calculaValorCafe(el){
+	trParentId = $(el).closest("tr").attr("id");
+	if($("#"+trParentId+" #cafe").val() == '1'){
+		if ($("#"+trParentId+" #qtdeCafe").val() != '' && $("#"+trParentId+" #periodoCafe").val() != '') {
+			$.ajax({
+				type: "POST",
+				url: "/agenda/process/calculaValorCafe.php",
+				data: "qtdeCafe="+$("#"+trParentId+" #qtdeCafe").val()+"&periodoCafe="+$("#"+trParentId+" #periodoCafe").val(),
+				success: function(resposta){
+					$("#"+trParentId+" #txtValorCafe").html(resposta.replace(".",","));
+					$("#"+trParentId+" #valorCafe").val(resposta);
+					calculaTotalReserva(trParentId);
+				}
+			});
+		}
+	}else{
+		$("#"+trParentId+" #txtValorCafe").html("0,00");
+		$("#"+trParentId+" #valorCafe").val("0.00");
+	}
+}
+
+function calculaValorAgua(el){
+	trParentId = $(el).closest("tr").attr("id");
+	if($("#"+trParentId+" #agua").val() == '1'){
+		if ($("#"+trParentId+" #qtdeAgua").val() != '' && $("#"+trParentId+" #periodoAgua").val() != '') {
+			$.ajax({
+				type: "POST",
+				url: "/agenda/process/calculaValorAgua.php",
+				data: "qtdeAgua="+$("#"+trParentId+" #qtdeAgua").val()+"&periodoAgua="+$("#"+trParentId+" #periodoAgua").val(),
+				success: function(resposta){
+					$("#"+trParentId+" #txtValorAgua").html(resposta.replace(".",","));
+					$("#"+trParentId+" #valorAgua").val(resposta);
+					calculaTotalReserva(trParentId);
+				}
+			});
+		}
+	}else{
+		$("#"+trParentId+" #txtValorAgua").html("0,00");
+		$("#"+trParentId+" #valorAgua").val("0.00");
+	}
+}
+
+function calculaTotalReserva(trParentId){
+	valorSala = parseFloat($("#"+trParentId+" #valorSala").val());
+	valorCoffee = parseFloat($("#"+trParentId+" #valorCoffee").val());
+	valorAgua = parseFloat($("#"+trParentId+" #valorAgua").val());
+	valorCafe = parseFloat($("#"+trParentId+" #valorCafe").val());
+	valorEquipamentos = parseFloat($("#"+trParentId+" #valorEquipamentos").val());
+	valorDesconto = parseFloat(($("#"+trParentId+" #valorDesconto").val()).replace(".",",")) || 0;
+
+	total = ((valorSala + valorCoffee + valorAgua + valorCafe + valorEquipamentos) - valorDesconto).toFixed(2);
+
+	$("#"+trParentId+" #txtValorTotal").html(total.replace(".",","));
+	$("#"+trParentId+" #valorTotal").val(total);
+}
+
+function calculaDesconto(el){
+	trParentId = $(el).closest("table").closest("tr").attr("id");
+	calculaTotalReserva(trParentId);
 }
