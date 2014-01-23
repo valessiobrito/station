@@ -999,7 +999,6 @@ function copiaBriefing(trParentId){
 		$("#"+trParentId+" #tipoCoffee").val($("#tipoCoffeeBriefing").val());
 		$("#"+trParentId+" #qtdeCoffee").val($("#qtdeCoffeeBriefing").val());
 		$("#"+trParentId+" #periodoCoffee").val($("#periodoCoffeeBriefing").val());
-		calculaValorCoffee($("#"+trParentId+" #qtdeCoffee"));
 	}
 
 	if(valorCafe == "" || valorCafe == "2"){
@@ -1009,7 +1008,6 @@ function copiaBriefing(trParentId){
 
 		$("#"+trParentId+" #qtdeCafe").val($("#qtdeCafeBriefing").val());
 		$("#"+trParentId+" #periodoCafe").val($("#periodoCafeBriefing").val());
-		calculaValorCafe($("#"+trParentId+" #qtdeCafe"));
 	}
 
 	if(valorAgua == "" || valorAgua == "2"){
@@ -1019,7 +1017,6 @@ function copiaBriefing(trParentId){
 
 		$("#"+trParentId+" #qtdeAgua").val($("#qtdeAguaBriefing").val());
 		$("#"+trParentId+" #periodoAgua").val($("#periodoAguaBriefing").val());
-		calculaValorAgua($("#"+trParentId+" #qtdeAgua"));
 	}
 
 	var tiposProdutoBriefing = document.getElementsByName('tipoProduto_cloneBriefing[]');
@@ -1072,6 +1069,9 @@ function copiaBriefing(trParentId){
 
 	$("#"+trParentId+" #obsCoffee").val($("#obsCoffeeBriefing").val());
 	$("#"+trParentId+" #obsBriefing").val($("#observacoesBriefing").val());
+	calculaValorCoffee($("#"+trParentId+" #qtdeCoffee"));
+	calculaValorCafe($("#"+trParentId+" #qtdeCafe"));
+	calculaValorAgua($("#"+trParentId+" #qtdeAgua"));
 }
 
 function preencheCloneProduto(idTipoProduto,idProduto,quantidade,lineId){
