@@ -457,11 +457,11 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee(this)">
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id),this)">
                                                 <option value="">Qual Coffee?</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee(this)">
-                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee(this)">
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Coffee?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -476,8 +476,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe(this)">
-                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe(this)">
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Café?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -492,8 +492,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua(this)">
-                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua(this)">
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Água?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -653,11 +653,11 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee(this)">
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Qual Coffee?</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee(this)">
-                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee(this)">
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Coffee?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -672,8 +672,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe(this)">
-                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe(this)">
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Café?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -688,8 +688,8 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua(this)">
-                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua(this)">
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Água?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>

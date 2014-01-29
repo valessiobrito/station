@@ -775,7 +775,7 @@ function verificaSala(el){
 			$("#"+trParentId+" #qtdeParticipantes").val("");
 		}
 	}
-	calculaValorSala(el);
+	calculaValorSala(trParentId, el);
 }
 function verificaFormatoSala(el){
 	valor = $(el).val();
@@ -815,7 +815,7 @@ function verificaCoffee(el){
 	}else{
 		$("#"+trParentId+" .detalhesCoffe").show();
 	}
-	calculaValorCoffee(el);
+	calculaValorCoffee(trParentId, el);
 }
 function verificaCafe(el){
 	valor = $(el).val();
@@ -825,7 +825,7 @@ function verificaCafe(el){
 	}else{
 		$("#"+trParentId+" .detalhesCafe").show();
 	}
-	calculaValorCafe(el);
+	calculaValorCafe(trParentId, el);
 }
 function verificaAgua(el){
 	valor = $(el).val();
@@ -835,7 +835,7 @@ function verificaAgua(el){
 	}else{
 		$("#"+trParentId+" .detalhesAgua").show();
 	}
-	calculaValorAgua(el);
+	calculaValorAgua(trParentId, el);
 }
 function verificaCoffeeBriefing(el){
 	valor = $(el).val();
@@ -1067,11 +1067,12 @@ function copiaBriefing(trParentId){
 		preencheCloneProduto(tiposProdutoBriefing[i].value,produtosBriefing[i].value,quantidadeProdutoBriefing[i].value,newLineId);
 	}
 
+	calculaValorCoffee(trParentId, $("#"+trParentId+" #qtdeCoffee"));
+	calculaValorCafe(trParentId, $("#"+trParentId+" #qtdeCafe"));
+	calculaValorAgua(trParentId, $("#"+trParentId+" #qtdeAgua"));
+
 	$("#"+trParentId+" #obsCoffee").val($("#obsCoffeeBriefing").val());
 	$("#"+trParentId+" #obsBriefing").val($("#observacoesBriefing").val());
-	calculaValorCoffee($("#"+trParentId+" #qtdeCoffee"));
-	calculaValorCafe($("#"+trParentId+" #qtdeCafe"));
-	calculaValorAgua($("#"+trParentId+" #qtdeAgua"));
 }
 
 function preencheCloneProduto(idTipoProduto,idProduto,quantidade,lineId){
@@ -1125,6 +1126,7 @@ function preencheCloneBriefingReserva(obj,lineId){
 			$("#"+lineId+" #periodoAgua").val(obj.reserva_12_periodoAgua);
 		}
 	}
+
 	$("#"+lineId+" #obsCoffee").val(obj.reserva_60_coffeeObs);
 	$("#"+lineId+" #obsBriefing").val(obj.reserva_60_briefingObs);
 	$("#"+lineId+" #observacoes").val(obj.reserva_60_observacoes);
@@ -1348,13 +1350,14 @@ function minimizarReserva(el){
     slices = slices.split("_");
     $("#"+slices[1]+" td:eq(1)").hide("slow");
     if($("#"+slices[1]+" #data").val() != ''){
-        $("#"+slices[1]+" .showData h5").html("+" + $("#"+slices[1]+" #data").val());
+        $("#"+slices[1]+" .showData h5").html("+ " + $("#"+slices[1]+" #data").val() + " - R$" + $("#"+slices[1]+" #valorTotal").val().replace(".",","));
+    }else{
+    	$("#"+slices[1]+" .showData h5").html("+ Data" + " - R$" + $("#"+slices[1]+" #valorTotal").val().replace(".",","));
     }
     $("#"+slices[1]+" td:eq(0)").show();
 }
 
-function calculaValorSala(el){
-	trParentId = $(el).closest("tr").attr("id");
+function calculaValorSala(trParentId, el){
 	if ($("#"+trParentId+" #periodo").val() != '' && $("#"+trParentId+" #salas").val() != '') {
 		$.ajax({
 			type: "POST",
@@ -1369,8 +1372,7 @@ function calculaValorSala(el){
 	}
 }
 
-function calculaValorCoffee(el){
-	trParentId = $(el).closest("tr").attr("id");
+function calculaValorCoffee(trParentId, el){
 	if($("#"+trParentId+" #coffee").val() == '1'){
 		if ($("#"+trParentId+" #tipoCoffee").val() != '' && $("#"+trParentId+" #qtdeCoffee").val() != '' && $("#"+trParentId+" #periodoCoffee").val() != '') {
 			$.ajax({
@@ -1390,8 +1392,7 @@ function calculaValorCoffee(el){
 	}
 }
 
-function calculaValorCafe(el){
-	trParentId = $(el).closest("tr").attr("id");
+function calculaValorCafe(trParentId, el){
 	if($("#"+trParentId+" #cafe").val() == '1'){
 		if ($("#"+trParentId+" #qtdeCafe").val() != '' && $("#"+trParentId+" #periodoCafe").val() != '') {
 			$.ajax({
@@ -1411,8 +1412,7 @@ function calculaValorCafe(el){
 	}
 }
 
-function calculaValorAgua(el){
-	trParentId = $(el).closest("tr").attr("id");
+function calculaValorAgua(trParentId, el){
 	if($("#"+trParentId+" #agua").val() == '1'){
 		if ($("#"+trParentId+" #qtdeAgua").val() != '' && $("#"+trParentId+" #periodoAgua").val() != '') {
 			$.ajax({
