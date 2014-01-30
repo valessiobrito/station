@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 25/11/2013 às 21:16:09
+-- Tempo de Geração: 30/01/2014 às 20:52:05
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.4.4
 
@@ -160,14 +160,18 @@ CREATE TABLE `sta_produtos` (
   `produto_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
   `tipo_produto_10_id` int(11) NOT NULL,
   PRIMARY KEY (`produto_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `sta_produtos`
 --
 
 INSERT INTO `sta_produtos` (`produto_10_id`, `produto_30_nome`, `produto_15_valor`, `produto_20_quantidade`, `produto_60_observacoes`, `tipo_produto_10_id`) VALUES
-(1, 'Coffee Teste', 20.00, '30', 'Coffee', 3);
+(1, 'Coffee Teste', 20.00, '30', 'Coffee', 3),
+(2, 'CafÃ©', 10.00, '00', 'A jarra', 4),
+(3, 'Ãgua', 1.00, '00', 'O copo', 4),
+(4, 'Produto Teste 1', 10.00, '20', '', 1),
+(5, 'Produto Teste 2', 20.00, '30', '', 1);
 
 -- --------------------------------------------------------
 
@@ -230,6 +234,13 @@ CREATE TABLE `sta_reservas` (
   `reserva_60_coffeeObs` longtext COLLATE utf8_unicode_ci NOT NULL,
   `reserva_60_briefingObs` longtext COLLATE utf8_unicode_ci NOT NULL,
   `reserva_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `reserva_15_valorSala` decimal(10,2) NOT NULL,
+  `reserva_15_valorCoffee` decimal(10,2) NOT NULL,
+  `reserva_15_valorCafe` decimal(10,2) NOT NULL,
+  `reserva_15_valorAgua` decimal(10,2) NOT NULL,
+  `reserva_15_valorEquipamentos` decimal(10,2) NOT NULL,
+  `reserva_15_valorDesconto` decimal(10,2) NOT NULL,
+  `reserva_15_valorTotal` decimal(10,2) NOT NULL,
   PRIMARY KEY (`reserva_10_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
 
@@ -237,28 +248,28 @@ CREATE TABLE `sta_reservas` (
 -- Extraindo dados da tabela `sta_reservas`
 --
 
-INSERT INTO `sta_reservas` (`reserva_10_id`, `proposta_10_id`, `unidade_10_id`, `sala_10_id`, `reserva_12_periodo`, `reserva_22_data`, `reserva_12_coffee`, `coffe_10_id`, `coffee_12_periodo`, `coffee_20_quantidade`, `reserva_12_cafe`, `reserva_20_quantidadeCafe`, `reserva_12_periodoCafe`, `reserva_12_agua`, `reserva_20_quantidadeAgua`, `reserva_12_periodoAgua`, `reserva_20_capacidadeSala`, `reserva_20_quantidadeParticipantes`, `reserva_12_formatoSala`, `reserva_60_coffeeObs`, `reserva_60_briefingObs`, `reserva_60_observacoes`) VALUES
-(10, 7, 1, 1, 1, '2013-08-21', 1, 1, 1, '30', '1', '40', 2, 1, '50', 3, '', '20', 1, 'obs coffee 1', '', 'obs res 1'),
-(11, 7, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(12, 7, 1, 1, 4, '2013-08-22', 1, 1, 3, '40', '1', '50', 2, 1, '60', 1, '', '30', 2, 'obs coffee 2', '', 'obs coffee 2'),
-(13, 8, 1, 1, 4, '2013-08-21', 2, 1, 2, '20', '2', '13', 1, 2, '', 0, '', '20', 1, 'cof obs', '', 'res obs'),
-(14, 8, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(15, 9, 1, 1, 2, '2013-08-02', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '20', 1, 'obs', '', 'obsss'),
-(16, 9, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(17, 10, 1, 1, 3, '2013-08-29', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '20', 1, 'obs cof', '', 'obs res'),
-(18, 10, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(19, 11, 1, 1, 1, '2013-08-24', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '50', 4, 'obs cof', '', 'obs res'),
-(20, 11, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(21, 12, 1, 1, 2, '2013-08-30', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '50', 4, 'cof obs', '', 'res obs'),
-(22, 12, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(23, 13, 1, 1, 1, '2013-08-16', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '40', 3, 'cof obs 1', '', 'res obs 1'),
-(24, 13, 1, 1, 4, '2013-08-28', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '60', 5, 'cof obs 2', '', 'res obs 2'),
-(25, 14, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(26, 15, 1, 1, 4, '2013-09-05', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '', '50', 4, 'coffeeee', 'briefingggg', 'data1'),
-(27, 15, 1, 1, 1, '2013-09-06', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '', '20', 1, 'coffeeee', 'briefingggg', 'data2'),
-(28, 16, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', ''),
-(33, 17, 1, 1, 2, '2013-09-10', 2, 0, 0, '', '2', '', 0, 2, '', 0, '40', '42', 3, 'obs coffee', 'obs briefing', 'data1'),
-(34, 17, 1, 1, 3, '2013-09-09', 2, 0, 0, '', '2', '', 0, 2, '', 0, '20', '42', 1, 'obs coffee', 'obs briefing', 'data2');
+INSERT INTO `sta_reservas` (`reserva_10_id`, `proposta_10_id`, `unidade_10_id`, `sala_10_id`, `reserva_12_periodo`, `reserva_22_data`, `reserva_12_coffee`, `coffe_10_id`, `coffee_12_periodo`, `coffee_20_quantidade`, `reserva_12_cafe`, `reserva_20_quantidadeCafe`, `reserva_12_periodoCafe`, `reserva_12_agua`, `reserva_20_quantidadeAgua`, `reserva_12_periodoAgua`, `reserva_20_capacidadeSala`, `reserva_20_quantidadeParticipantes`, `reserva_12_formatoSala`, `reserva_60_coffeeObs`, `reserva_60_briefingObs`, `reserva_60_observacoes`, `reserva_15_valorSala`, `reserva_15_valorCoffee`, `reserva_15_valorCafe`, `reserva_15_valorAgua`, `reserva_15_valorEquipamentos`, `reserva_15_valorDesconto`, `reserva_15_valorTotal`) VALUES
+(10, 7, 1, 1, 1, '2013-08-21', 1, 1, 1, '30', '1', '40', 2, 1, '50', 3, '', '20', 1, 'obs coffee 1', '', 'obs res 1', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(11, 7, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(12, 7, 1, 1, 4, '2013-08-22', 1, 1, 3, '40', '1', '50', 2, 1, '60', 1, '', '30', 2, 'obs coffee 2', '', 'obs coffee 2', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(13, 8, 1, 1, 4, '2013-08-21', 2, 1, 2, '20', '2', '13', 1, 2, '', 0, '', '20', 1, 'cof obs', '', 'res obs', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(14, 8, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(15, 9, 1, 1, 2, '2013-08-02', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '20', 1, 'obs', '', 'obsss', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(16, 9, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(17, 10, 1, 1, 3, '2013-08-29', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '20', 1, 'obs cof', '', 'obs res', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(18, 10, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(19, 11, 1, 1, 1, '2013-08-24', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '50', 4, 'obs cof', '', 'obs res', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(20, 11, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(21, 12, 1, 1, 2, '2013-08-30', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '50', 4, 'cof obs', '', 'res obs', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(22, 12, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(23, 13, 1, 1, 1, '2013-08-16', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '40', 3, 'cof obs 1', '', 'res obs 1', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(24, 13, 1, 1, 4, '2013-08-28', 2, 0, 0, '', '2', '', 0, 2, '', 0, '', '60', 5, 'cof obs 2', '', 'res obs 2', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(25, 14, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(26, 15, 1, 1, 4, '2013-09-05', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '', '50', 4, 'coffeeee', 'briefingggg', 'data1', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(27, 15, 1, 1, 1, '2013-09-06', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '', '20', 1, 'coffeeee', 'briefingggg', 'data2', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(28, 16, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(33, 17, 1, 1, 2, '2013-09-10', 2, 0, 0, '', '2', '', 0, 2, '', 0, '40', '42', 3, 'obs coffee', 'obs briefing', 'data1', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(34, 17, 1, 1, 3, '2013-09-09', 2, 0, 0, '', '2', '', 0, 2, '', 0, '20', '42', 1, 'obs coffee', 'obs briefing', 'data2', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00);
 
 -- --------------------------------------------------------
 
@@ -341,7 +352,7 @@ CREATE TABLE `sta_salas` (
 --
 
 INSERT INTO `sta_salas` (`sala_10_id`, `sala_30_nome`, `sala_30_numero`, `sala_15_valorManha`, `sala_15_valorTarde`, `sala_15_valorNoite`, `sala_15_valorIntegral`, `sala_20_metros`, `sala_20_uMesa`, `sala_20_uSimples`, `sala_20_grupos`, `sala_20_escolar`, `sala_20_auditorio`, `unidade_10_id`) VALUES
-(1, 'Outra Sala3', '033', 100.00, 200.00, 300.00, 400.00, '10', '20', '30', '40', '50', '60', 1),
+(1, 'Sala 1', '1', 1300.00, 1200.00, 1100.00, 3000.00, '60', '50', '40', '30', '20', '10', 1),
 (2, 'Sala 2', '2', 30.00, 30.00, 30.00, 30.00, '10', '20', '30', '40', '50', '60', 1),
 (3, 'Sala 1', '1', 30.00, 30.00, 30.00, 30.00, '60', '50', '40', '30', '20', '10', 1);
 
@@ -355,7 +366,7 @@ CREATE TABLE `sta_tipos_produto` (
   `tipo_produto_10_id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_produto_30_nome` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`tipo_produto_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Extraindo dados da tabela `sta_tipos_produto`
@@ -364,7 +375,8 @@ CREATE TABLE `sta_tipos_produto` (
 INSERT INTO `sta_tipos_produto` (`tipo_produto_10_id`, `tipo_produto_30_nome`) VALUES
 (1, 'Tipo Teste'),
 (2, 'Outro TIpo'),
-(3, 'Coffee Break');
+(3, 'Coffee Break'),
+(4, 'Infinitos');
 
 -- --------------------------------------------------------
 

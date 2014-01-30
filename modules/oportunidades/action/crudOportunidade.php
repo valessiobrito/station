@@ -138,6 +138,14 @@ switch ($op) {
 					$reservaClass->setCoffeObs($obsCoffee[$kReserva]);
 					$reservaClass->setBriefingObs($obsBriefing[$kReserva]);
 					$reservaClass->setObservacoes($observacoes[$kReserva]);
+					$reservaClass->setValorSala($valorSala[$kReserva]);
+					$reservaClass->setValorCoffee($valorCoffee[$kReserva]);
+					$reservaClass->setValorCafe($valorCafe[$kReserva]);
+					$reservaClass->setValorAgua($valorAgua[$kReserva]);
+					$reservaClass->setValorEquipamentos($valorEquipamentos[$kReserva]);
+					$reservaClass->setValorDesconto($valorDesconto[$kReserva]);
+					$reservaClass->setValorTotal($valorTotal[$kReserva]);
+
 					$reservaId = $reservaController->insertAction($reservaClass);
 
 					foreach(${'tipoProduto_'.$cloneId} as $kProduto => $vProduto){
@@ -324,6 +332,13 @@ switch ($op) {
 					$reservaClass->setCoffeObs($obsCoffee[$kReserva]);
 					$reservaClass->setBriefingObs($obsBriefing[$kReserva]);
 					$reservaClass->setObservacoes($observacoes[$kReserva]);
+					$reservaClass->setValorSala($valorSala[$kReserva]);
+					$reservaClass->setValorCoffee($valorCoffee[$kReserva]);
+					$reservaClass->setValorCafe($valorCafe[$kReserva]);
+					$reservaClass->setValorAgua($valorAgua[$kReserva]);
+					$reservaClass->setValorEquipamentos($valorEquipamentos[$kReserva]);
+					$reservaClass->setValorDesconto($valorDesconto[$kReserva]);
+					$reservaClass->setValorTotal($valorTotal[$kReserva]);
 					$reservaId = $reservaController->insertAction($reservaClass);
 
 					foreach(${'tipoProduto_'.$cloneId} as $kProduto => $vProduto){

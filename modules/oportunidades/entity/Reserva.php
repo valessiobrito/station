@@ -46,6 +46,20 @@ class Reserva {
 
 	protected $observacoes;
 
+    protected $valorSala;
+
+    protected $valorCoffee;
+
+    protected $valorCafe;
+
+    protected $valorAgua;
+
+    protected $valorEquipamentos;
+
+    protected $valorDesconto;
+
+    protected $valorTotal;
+
     public function getId()
     {
         return $this->id;
@@ -264,6 +278,76 @@ class Reserva {
         $this->observacoes = $observacoes;
     }
 
+    public function getValorSala()
+    {
+        return $this->valorSala;
+    }
+
+    public function setValorSala($valorSala)
+    {
+        $this->valorSala = $valorSala;
+    }
+
+    public function getValorCoffee()
+    {
+        return $this->valorCoffee;
+    }
+
+    public function setValorCoffee($valorCoffee)
+    {
+        $this->valorCoffee = $valorCoffee;
+    }
+
+    public function getValorCafe()
+    {
+        return $this->valorCafe;
+    }
+
+    public function setValorCafe($valorCafe)
+    {
+        $this->valorCafe = $valorCafe;
+    }
+
+    public function getValorAgua()
+    {
+        return $this->valorAgua;
+    }
+
+    public function setValorAgua($valorAgua)
+    {
+        $this->valorAgua = $valorAgua;
+    }
+
+    public function getValorEquipamentos()
+    {
+        return $this->valorEquipamentos;
+    }
+
+    public function setValorEquipamentos($valorEquipamentos)
+    {
+        $this->valorEquipamentos = $valorEquipamentos;
+    }
+
+    public function getValorDesconto()
+    {
+        return $this->valorDesconto;
+    }
+
+    public function setValorDesconto($valorDesconto)
+    {
+        $this->valorDesconto = $valorDesconto;
+    }
+
+    public function getValorTotal()
+    {
+        return $this->valorTotal;
+    }
+
+    public function setValorTotal($valorTotal)
+    {
+        $this->valorTotal = $valorTotal;
+    }
+
     public function assocEntity(){
 
         $fields = array(
@@ -288,7 +372,14 @@ class Reserva {
             "reserva_12_formatoSala"                => $this->getFormatoSala(),
             "reserva_60_coffeeObs"                  => $this->getCoffeObs(),
             "reserva_60_briefingObs"                => $this->getBriefingObs(),
-			"reserva_60_observacoes"   				=> $this->getObservacoes()
+			"reserva_60_observacoes"   				=> $this->getObservacoes(),
+            "reserva_15_valorSala"                  => $this->getValorSala(),
+            "reserva_15_valorCoffee"                => $this->getValorCoffee(),
+            "reserva_15_valorCafe"                  => $this->getValorCafe(),
+            "reserva_15_valorAgua"                  => $this->getValorAgua(),
+            "reserva_15_valorEquipamentos"          => $this->getValorEquipamentos(),
+            "reserva_15_valorDesconto"              => $this->getValorDesconto(),
+            "reserva_15_valorTotal"                 => $this->getValorTotal()
         );
 
         return $fields;
@@ -319,6 +410,13 @@ class Reserva {
         $this->setCoffeObs($row['reserva_60_coffeeObs']);
         $this->setBriefingObs($row['reserva_60_briefingObs']);
 		$this->setObservacoes($row['reserva_60_observacoes']);
+        $this->setValorSala($row['reserva_15_valorSala']);
+        $this->setValorCoffee($row['reserva_15_valorCoffee']);
+        $this->setValorCafe($row['reserva_15_valorCafe']);
+        $this->setValorAgua($row['reserva_15_valorAgua']);
+        $this->setValorEquipamentos($row['reserva_15_valorEquipamentos']);
+        $this->setValorEquipamentos($row['reserva_15_valorDesconto']);
+        $this->setValorTotal($row['reserva_15_valorTotal']);
 
         return $this;
     }

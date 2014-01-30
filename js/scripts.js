@@ -1035,6 +1035,9 @@ function copiaBriefing(trParentId){
 		idTbody = "tr_produtos_"+idClone;
 	}
 
+	produtos = new Array();
+	quantidades = new Array();
+
 	for (var i=0; i <= tiposProdutoBriefing.length - 1; i++) {
 		if(i == 0){
 			if(trParentId == "primeiraReserva"){
@@ -1064,19 +1067,36 @@ function copiaBriefing(trParentId){
 			$("#"+newLineId+" .lineRemoveProduto").attr("id","rm_"+newLineId+"_tr_produtos_"+idClone);
 		}
 
-		preencheCloneProduto(tiposProdutoBriefing[i].value,produtosBriefing[i].value,quantidadeProdutoBriefing[i].value,newLineId);
+		preencheCloneProduto(tiposProdutoBriefing[i].value,produtosBriefing[i].value,quantidadeProdutoBriefing[i].value,newLineId,trParentId);
+
+		if(produtosBriefing[i].value != "" && quantidadeProdutoBriefing[i].value != ""){
+			produtos.push(produtosBriefing[i].value);
+			quantidades.push(quantidadeProdutoBriefing[i].value);
+		}
+	}
+
+	if(produtos.length > 0){
+		$.ajax({
+			type: "POST",
+			url: "/agenda/process/calculaValorEquipamentos.php",
+			data: "produtos="+produtos+"&quantidades="+quantidades,
+			success: function(resposta){
+				$("#"+trParentId+" #txtValorEquipamentos").html(resposta.replace(".",","));
+				$("#"+trParentId+" #valorEquipamentos").val(resposta);
+				calculaTotalReserva(trParentId);
+			}
+		});
 	}
 
 	calculaValorCoffee(trParentId, $("#"+trParentId+" #qtdeCoffee"));
 	calculaValorCafe(trParentId, $("#"+trParentId+" #qtdeCafe"));
 	calculaValorAgua(trParentId, $("#"+trParentId+" #qtdeAgua"));
-	calculaValorEquipamentos(trParentId);
 
 	$("#"+trParentId+" #obsCoffee").val($("#obsCoffeeBriefing").val());
 	$("#"+trParentId+" #obsBriefing").val($("#observacoesBriefing").val());
 }
 
-function preencheCloneProduto(idTipoProduto,idProduto,quantidade,lineId){
+function preencheCloneProduto(idTipoProduto,idProduto,quantidade,lineId,trParentId){
 	$("#"+lineId+" .tipoProduto").val(idTipoProduto);
 	verificaTipoProdutoCallback(lineId,idProduto);
 	$("#"+lineId+" .quantidadeProduto").val(quantidade);

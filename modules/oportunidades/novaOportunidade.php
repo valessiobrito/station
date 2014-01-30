@@ -563,31 +563,31 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Sala</td>
-                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" value="0.00" /></td>
+                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" name="valorSala[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Coffee</td>
-                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" value="0.00" /></td>
+                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" name="valorCoffee[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Café</td>
-                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" value="0.00" /></td>
+                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" name="valorCafe[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Água</td>
-                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" value="0.00" /></td>
+                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" name="valorAgua[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Equipamentos</td>
-                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" value="0.00" /></td>
+                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" name="valorEquipamentos[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Desconto</td>
-                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" onchange="calculaDesconto(this)" /></td>
+                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" name="valorDesconto[]" onchange="calculaDesconto(this)" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Total</td>
-                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" value="0.00" /></td>
+                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" name="valorTotal[]" value="0.00" /></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -758,31 +758,31 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Sala</td>
-                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" value="0.00" /></td>
+                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" name="valorSala[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Coffee</td>
-                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" value="0.00" /></td>
+                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" name="valorCoffee[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Café</td>
-                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" value="0.00" /></td>
+                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" name="valorCafe[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Água</td>
-                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" value="0.00" /></td>
+                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" name="valorAgua[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Equipamentos</td>
-                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" value="0.00" /></td>
+                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" name="valorEquipamentos[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Desconto</td>
-                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" onchange="calculaDesconto(this)" /></td>
+                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" name="valorDesconto[]" onchange="calculaDesconto(this)" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Total</td>
-                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" value="0.00" /></td>
+                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" name="valorTotal[]" value="0.00" /></td>
                                                 </tr>
                                             </table>
                                         </div>
