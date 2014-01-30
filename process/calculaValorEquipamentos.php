@@ -2,21 +2,18 @@
         header("Content-Type: text/html; charset=utf-8");
 		include ($_SERVER['DOCUMENT_ROOT']."/agenda/conf/connection.php");
 
-		$periodo = $_POST['periodo'];
-		if($periodo == '1'){
-			$campo = 'sala_15_valorManha';
-		}else if($periodo == '2'){
-			$campo = 'sala_15_valorTarde';
-		}else if($periodo == '3'){
-			$campo = 'sala_15_valorNoite';
-		}else if($periodo == '4'){
-			$campo = 'sala_15_valorIntegral';
+		$produtos = explode(",", $_POST['produtos']);
+		$quantidades = explode(",", $_POST['quantidades']);
+		$valorTotal = 0;
+
+		for ($i=0; $i <= (count($produtos)-1); $i++) {
+			$qryValor = mysql_query("SELECT produto_15_valor FROM sta_produtos WHERE produto_10_id = ".$produtos[$i]);
+			$resultadoValor = mysql_fetch_array($qryValor);
+			$valor = $resultadoValor["produto_15_valor"] * $quantidades[$i];
+			$valorTotal += $valor;
 		}
-		$sala = $_POST['sala'];
 
-		$qryValor = mysql_query("SELECT ".$campo." FROM sta_salas WHERE sala_10_id = ".$sala);
-		$resultadoValor = mysql_fetch_array($qryValor);
-		$valor = $resultadoValor[$campo];
-
-		echo $valor;
+		$valorTotal = number_format($valorTotal,2,'.',',');
+		$valorTotal = str_replace(',','',$valorTotal);
+		echo $valorTotal;
 ?>

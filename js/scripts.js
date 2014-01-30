@@ -1070,6 +1070,7 @@ function copiaBriefing(trParentId){
 	calculaValorCoffee(trParentId, $("#"+trParentId+" #qtdeCoffee"));
 	calculaValorCafe(trParentId, $("#"+trParentId+" #qtdeCafe"));
 	calculaValorAgua(trParentId, $("#"+trParentId+" #qtdeAgua"));
+	calculaValorEquipamentos(trParentId);
 
 	$("#"+trParentId+" #obsCoffee").val($("#obsCoffeeBriefing").val());
 	$("#"+trParentId+" #obsBriefing").val($("#observacoesBriefing").val());
@@ -1430,6 +1431,42 @@ function calculaValorAgua(trParentId, el){
 		$("#"+trParentId+" #txtValorAgua").html("0,00");
 		$("#"+trParentId+" #valorAgua").val("0.00");
 	}
+}
+
+function calculaValorEquipamentos(trParentId){
+	regex = /inv\b/;
+	produtos = new Array();
+	quantidades = new Array();
+
+	idTable = $('#'+trParentId).find('table').attr("id");
+
+ 	slices = idTable.split("_");
+ 	lastSliceNr = slices.length -1;
+ 	nrLinhas = $('#'+idTable+' tr:last').index() + 1;
+
+	$("#"+idTable+" tr").each(function(){
+		idRow = $(this).attr("id")
+		if(!regex.test(idRow)){
+			if($("#"+idRow+" select[id='produtos_"+slices[lastSliceNr]+"']").val() != "" && $("#"+idRow+" input[id='quantidadeProduto_"+slices[lastSliceNr]+"']").val() != ""){
+				produtos.push($("#"+idRow+" select[id='produtos_"+slices[lastSliceNr]+"']").val());
+				quantidades.push($("#"+idRow+" input[id='quantidadeProduto_"+slices[lastSliceNr]+"']").val());
+			}
+		}
+	});
+
+	if(produtos.length > 0){
+		$.ajax({
+			type: "POST",
+			url: "/agenda/process/calculaValorEquipamentos.php",
+			data: "produtos="+produtos+"&quantidades="+quantidades,
+			success: function(resposta){
+				$("#"+trParentId+" #txtValorEquipamentos").html(resposta.replace(".",","));
+				$("#"+trParentId+" #valorEquipamentos").val(resposta);
+				calculaTotalReserva(trParentId);
+			}
+		});
+	}
+
 }
 
 function calculaTotalReserva(trParentId){

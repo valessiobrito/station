@@ -105,8 +105,10 @@
                     slices = $(this).attr("id");
                     slices = slices.split("_");
                     nrLinhas = $('#tbody_'+slices[2]+'_'+slices[3]+'_'+slices[4]+' tr').length;
+                    idParent = $(this).closest('table').closest('tr').attr('id');
                     if(nrLinhas > 2){
                         $("#"+slices[1]).remove();
+                        calculaValorEquipamentos(idParent);
                     }
 
                 });
@@ -509,11 +511,11 @@
                                                         <select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" id="rm_produtoClone1_tr_produtos_clone1" />
                                                         </div>
@@ -524,12 +526,12 @@
                                                     	<select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
 
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
@@ -705,11 +707,11 @@
                                                         <select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]">
+                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" id="rm_produtoClone_tr_produtos_clone" />
                                                         </div>
@@ -720,11 +722,11 @@
                                                     	<select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]">
+                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
