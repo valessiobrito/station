@@ -67,6 +67,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                     $("#"+newLineId+" #show_clone").attr("id","show_"+newLineId);
                     $("#"+newLineId+" #min_clone").attr("id","min_"+newLineId);
                     $("#"+newLineId+" #nrClone").val(newLineId);
+                    newLine.find(".valor").maskMoney({showSymbol:false, thousands:'', decimal:','});
 
 					dataPicker = newLine.find(".data").datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
 						dataPicker.datepicker('hide');
@@ -116,6 +117,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                     nrLinhas = $('#tbody_'+slices[2]+'_'+slices[3]+'_'+slices[4]+' tr').length;
                     if(nrLinhas > 2){
                         $("#"+slices[1]).remove();
+                        calculaValorEquipamentos(idParent);
                     }
 
                 });
@@ -467,11 +469,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Qual Coffee?</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
-                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Coffee?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -486,8 +488,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Café?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -502,8 +504,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Água?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -519,11 +521,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                         <select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" id="rm_produtoClone1_tr_produtos_clone1" />
                                                         </div>
@@ -534,12 +536,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                     	<select class="span3 tipoProduto" id="tipoProduto_clone1" name="tipoProduto_clone1[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]">
+                                                        <select class="span3 produtos" id="produtos_clone1" name="produtos_clone1[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
 
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone1" name="quantidadeProduto_clone1[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone1" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
@@ -561,6 +563,43 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                     <div class="row">
                                         <div class="span10">
                                             <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Data"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="span5">
+                                            <table class="table table-condensed table-bordered table-striped">
+                                                <tr>
+                                                    <th colspan="2">Valores</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sala</td>
+                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" name="valorSala[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Coffee</td>
+                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" name="valorCoffee[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Café</td>
+                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" name="valorCafe[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Água</td>
+                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" name="valorAgua[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Extras</td>
+                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" name="valorEquipamentos[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Desconto</td>
+                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" name="valorDesconto[]" onchange="calculaDesconto(this)" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" name="valorTotal[]" value="0.00" /></td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -626,11 +665,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]">
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Qual Coffee?</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas">
-                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]">
+                                            <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCoffe" style="display:none;" id="periodoCoffee" name="periodoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Coffee?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -645,8 +684,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]">
+                                            <input type="text" class="span2 detalhesCafe" style="display:none;" id="qtdeCafe" name="qtdeCafe[]" placeholder="Quantidade" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesCafe" style="display:none;" id="periodoCafe" name="periodoCafe[]" onchange="calculaValorCafe($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Café?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -661,8 +700,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade">
-                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]">
+                                            <input type="text" class="span2 detalhesAgua" style="display:none;" id="qtdeAgua" name="qtdeAgua[]" placeholder="Quantidade" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
+                                            <select class="span3 detalhesAgua" style="display:none;" id="periodoAgua" name="periodoAgua[]" onchange="calculaValorAgua($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Período Água?</option>
                                                 <option value="1">Apenas Manhã</option>
                                                 <option value="2">Apenas Tarde</option>
@@ -678,11 +717,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                         <select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]">
+                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" id="rm_produtoClone_tr_produtos_clone" />
                                                         </div>
@@ -693,11 +732,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                                     	<select class="span3 tipoProduto" id="tipoProduto_clone" name="tipoProduto_clone[]" onchange="verificaTipoProduto(this);">
                                                             <option value="">Tipos de Produto</option>
                                                         </select>
-                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]">
+                                                        <select class="span3 produtos" id="produtos_clone" name="produtos_clone[]" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))">
                                                             <option value="">Produtos</option>
                                                         </select>
                                                         <div class="input-append">
-                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" />
+                                                            <input type="text" class="span2 quantidadeProduto" id="quantidadeProduto_clone" name="quantidadeProduto_clone[]" placeholder="Quantidade" onchange="calculaValorEquipamentos($(this).closest('table').closest('tr').attr('id'))" />
                                                             <input type="button" id="tr_produtos_clone" class="btn btn-success lineCloneProduto" value="Adicionar Mais" />
                                                             <input type="button" class="btn btn-danger lineRemoveProduto" value="Remover Produto" />
                                                         </div>
@@ -719,6 +758,43 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                                     <div class="row">
                                         <div class="span10">
                                             <textarea class="span6" id="observacoes" name="observacoes[]" placeholder="Observações da Data"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="span5">
+                                            <table class="table table-condensed table-bordered table-striped">
+                                                <tr>
+                                                    <th colspan="2">Valores</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sala</td>
+                                                    <td><span id="txtValorSala">0,00</span><input type="hidden" id="valorSala" name="valorSala[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Coffee</td>
+                                                    <td><span id="txtValorCoffee">0,00</span><input type="hidden" id="valorCoffee" name="valorCoffee[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Café</td>
+                                                    <td><span id="txtValorCafe">0,00</span><input type="hidden" id="valorCafe" name="valorCafe[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Água</td>
+                                                    <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" name="valorAgua[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Extras</td>
+                                                    <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" name="valorEquipamentos[]" value="0.00" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Desconto</td>
+                                                    <td id="txtValorDesconto"><input type="text" class="span2 valor" id="valorDesconto" name="valorDesconto[]" onchange="calculaDesconto(this)" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td><span id="txtValorTotal">0,00</span><input type="hidden" id="valorTotal" name="valorTotal[]" value="0.00" /></td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                     <div class="row">

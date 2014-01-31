@@ -128,6 +128,18 @@ class ReservaController {
 
     }
 
+    public function formataValor($valor, $action){
+
+        if($action == 'gravar'){
+            $valorFormatado = number_format($valor,2,'.',',');
+            $valorFormatado = str_replace(',','',$valorFormatado);
+        }else{
+            $valorFormatado = number_format($valor,2,',','.');
+            $valorFormatado = str_replace('.','',$valorFormatado);
+        }
+        return $valorFormatado;
+    }
+
 }
 
 ?>

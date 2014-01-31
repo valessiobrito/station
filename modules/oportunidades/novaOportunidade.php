@@ -459,7 +459,7 @@
                                                 <option value="1">Sim</option>
                                                 <option value="2">Não</option>
                                             </select>
-                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id),this)">
+                                            <select class="span3 tipoCoffee detalhesCoffe" style="display:none;" id="tipoCoffee" name="tipoCoffee[]" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
                                                 <option value="">Qual Coffee?</option>
                                             </select>
                                             <input type="text" class="span2 detalhesCoffe" style="display:none;" id="qtdeCoffee" name="qtdeCoffee[]" placeholder="Qtde. Pessoas" onchange="calculaValorCoffee($(this).closest('tr').attr('id'),this)">
@@ -578,7 +578,7 @@
                                                     <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" name="valorAgua[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Equipamentos</td>
+                                                    <td>Extras</td>
                                                     <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" name="valorEquipamentos[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
@@ -773,7 +773,7 @@
                                                     <td><span id="txtValorAgua">0,00</span><input type="hidden" id="valorAgua" name="valorAgua[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Equipamentos</td>
+                                                    <td>Extras</td>
                                                     <td><span id="txtValorEquipamentos">0,00</span><input type="hidden" id="valorEquipamentos" name="valorEquipamentos[]" value="0.00" /></td>
                                                 </tr>
                                                 <tr>
@@ -786,6 +786,7 @@
                                                 </tr>
                                             </table>
                                         </div>
+                                    </div>
                                     <div class="row">
                                         <div class="span10">
                                             <div class="input-append">

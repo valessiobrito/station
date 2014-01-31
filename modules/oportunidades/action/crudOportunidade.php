@@ -143,7 +143,7 @@ switch ($op) {
 					$reservaClass->setValorCafe($valorCafe[$kReserva]);
 					$reservaClass->setValorAgua($valorAgua[$kReserva]);
 					$reservaClass->setValorEquipamentos($valorEquipamentos[$kReserva]);
-					$reservaClass->setValorDesconto($valorDesconto[$kReserva]);
+					$reservaClass->setValorDesconto($reservaController->formataValor($valorDesconto[$kReserva],'gravar'));
 					$reservaClass->setValorTotal($valorTotal[$kReserva]);
 
 					$reservaId = $reservaController->insertAction($reservaClass);
@@ -337,7 +337,7 @@ switch ($op) {
 					$reservaClass->setValorCafe($valorCafe[$kReserva]);
 					$reservaClass->setValorAgua($valorAgua[$kReserva]);
 					$reservaClass->setValorEquipamentos($valorEquipamentos[$kReserva]);
-					$reservaClass->setValorDesconto($valorDesconto[$kReserva]);
+					$reservaClass->setValorDesconto($reservaController->formataValor($valorDesconto[$kReserva],'gravar'));
 					$reservaClass->setValorTotal($valorTotal[$kReserva]);
 					$reservaId = $reservaController->insertAction($reservaClass);
 

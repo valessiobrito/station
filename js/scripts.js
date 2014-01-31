@@ -1111,6 +1111,33 @@ function preencheCloneReserva(obj,lineId){
 		$("#"+lineId+" #data").val(obj.reserva_22_data);
 		verificaData($("#"+lineId+" #data"));
 	}
+	if(obj.reserva_15_valorSala != "0.00"){
+		$("#"+lineId+" #txtValorSala").html(obj.reserva_15_valorSala.replace(".",","));
+		$("#"+lineId+" #valorSala").val(obj.reserva_15_valorSala);
+	}
+	if(obj.reserva_15_valorCoffee != "0.00"){
+		$("#"+lineId+" #txtValorCoffee").html(obj.reserva_15_valorCoffee.replace(".",","));
+		$("#"+lineId+" #valorCoffee").val(obj.reserva_15_valorCoffee);
+	}
+	if(obj.reserva_15_valorCafe != "0.00"){
+		$("#"+lineId+" #txtValorCafe").html(obj.reserva_15_valorCafe.replace(".",","));
+		$("#"+lineId+" #valorCafe").val(obj.reserva_15_valorCafe);
+	}
+	if(obj.reserva_15_valorAgua != "0.00"){
+		$("#"+lineId+" #txtValorAgua").html(obj.reserva_15_valorAgua.replace(".",","));
+		$("#"+lineId+" #valorAgua").val(obj.reserva_15_valorAgua);
+	}
+	if(obj.reserva_15_valorEquipamentos != "0.00"){
+		$("#"+lineId+" #txtValorEquipamentos").html(obj.reserva_15_valorEquipamentos.replace(".",","));
+		$("#"+lineId+" #valorEquipamentos").val(obj.reserva_15_valorEquipamentos);
+	}
+	if(obj.reserva_15_valorDesconto != "0.00" && obj.reserva_15_valorDesconto != ""){
+		$("#"+lineId+" #valorDesconto").val(obj.reserva_15_valorDesconto.replace(".",","));
+	}
+	if(obj.reserva_15_valorTotal != "0.00"){
+		$("#"+lineId+" #txtValorTotal").html(obj.reserva_15_valorTotal.replace(".",","));
+		$("#"+lineId+" #valorTotal").val(obj.reserva_15_valorTotal);
+	}
 	if(obj.reserva_12_periodo != "0"){
 		$("#"+lineId+" #periodo").val(obj.reserva_12_periodo);
 		$("#"+lineId+" #periodo").attr("onchange","verificaPeriodo(this,'"+obj.reserva_10_id+"')")
@@ -1273,6 +1300,7 @@ function carregaEdicaoOportunidade(idOportunidade){
 		                    $("#"+newLineResId+" #show_clone").attr("id","show_"+newLineResId);
                     		$("#"+newLineResId+" #min_clone").attr("id","min_"+newLineResId);
 		                    $("#"+newLineResId+" #nrClone").val(newLineResId);
+		                    newLine.find(".valor").maskMoney({showSymbol:false, thousands:'', decimal:','});
 
 							dataPicker = newLine.find(".data").datepicker({format:'dd/mm/yyyy'}).on('changeDate', function(ev){
 								dataPicker.datepicker('hide');
