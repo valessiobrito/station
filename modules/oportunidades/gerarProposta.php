@@ -117,7 +117,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
 				<br>
 				<br>
 				<br>
-				<span class="destaque" style="font-size:14px;">SALAS</span>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">SALAS</span>
 				<br>
 				<br>
 				<span>Nosso objetivo é proporcionar as melhores condições para o seu evento. Por isso equipamos nossas cinco salas com mesas e cadeiras flexíveis, notebook, sistema de iluminação setorizada, controle de ar condicionado individual, acesso à internet via wi-fi (cortesia), flip chart, projetor multimídia com suporte fixo no teto, mouse sem fio e caixas de som acopladas.
@@ -139,7 +139,7 @@ Abaixo tabela com medidas e capacidades das salas:</span>
 				<br>
 				<br>
 				<br>
-				<span class="destaque" style="font-size:14px;">OBSERVAÇÃO</span>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">OBSERVAÇÃO</span>
 				<br>
 				<br>
 				<span>Para reservas aos finais de semana, considerar acréscimo de 20% no valor da sala.</span>
@@ -147,7 +147,7 @@ Abaixo tabela com medidas e capacidades das salas:</span>
 				<br>
 				<br>
 				<br>
-				<span class="destaque" style="font-size:14px;">EQUIPAMENTOS</span>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">EQUIPAMENTOS</span>
 				<br>
 				<br>
 				<span>No centro de treinamento Station Vila Olímpia, você não precisa se preocupar com a instalação dos equipamentos para projeção. Todos os equipamentos já estão prontos para receber seu notebook. É só plugar e pronto. Caso seja necessário, fazemos a locação de notebooks, mouse, televisores, serviços de cópia e impressão (PB e color).</span>
@@ -161,13 +161,95 @@ Abaixo tabela com medidas e capacidades das salas:</span>
 				<br>
 				<br>
 				<br>
-				<span class="destaque" style="font-size:14px;">ALIMENTOS E BEBIDAS</span>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">ALIMENTOS E BEBIDAS</span>
 				<br>
 				<br>
 				<span>Parte essencial de qualquer evento, disponibilizamos também serviços de coffee break e brunch através de uma parceria com a Bread and Company. Veja o cardápio anexo no e-mail.</span>
 				<br>
 				<br>
 				<span>•	Não será permitido o acesso de nenhuma empresa terceira para fornecimento de coffee break e almoço.</span>
+			</div>
+		</div>
+<!-- ------------ Pagina 4 ------------------------------------------------------- -->
+		<div class="paginaProposta">
+			<div class="topoPagina">
+				<img src="<?php echo $urlGeral; ?>/images/logo-proposta.jpg" style="float:left;">
+			</div>
+			<div class="conteudoPagina">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">INVESTIMENTO</span>
+				<br>
+				<br>
+				<span>Para a realização do seu evento no centro de treinamento <span class="destaque">{nomeUnidade}</span>, o investimento será de:</span>
+				<br>
+				<br>
+				<span>Vem tabela editavel Data - Periodo - Sala - Valor</span>
+				<br>
+				<br>
+			</div>
+		</div>
+<!-- ------------ Pagina 5 ------------------------------------------------------- -->
+		<div class="paginaProposta">
+			<div class="topoPagina">
+				<img src="<?php echo $urlGeral; ?>/images/logo-proposta.jpg" style="float:left;">
+			</div>
+			<div class="conteudoPagina">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">ESTÁ INCLUSO NESTA PROPOSTA:</span>
+				<br>
+				<br>
+				<!-- Parte Editavel com cada linha sendo um item pré-selecionado -->
+				<span>•	Locação da sala para os dias descritos;</span>
+				<br>
+				<span>•	Projetor multimídia;</span>
+				<br>
+				<span>•	Notebook;</span>
+				<br>
+				<span>•	Sistema de sonorização;</span>
+				<br>
+				<span>•	Mouse sem fio;</span>
+				<br>
+				<span>•	Flip chart.</span>
+				<br>
+				<br>
+				<br>
+				<br>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">FORMA DE PAGAMENTO:</span>
+				<br>
+				<br>
+				<span>Os eventos serão faturados no dia seguinte a sua realização, considerando o valor total contratado para o dia, e enviados ao responsável pela contratação do evento com vencimento para <span class="destaque">{numeroDias}</span> após a emissão da nota.</span>
+				<br>
+				<span>Quando houver serviços extras, os mesmos serão relacionados e encaminhados ao responsável pela contratação do evento para serem aprovados e serão faturados após aprovação, com vencimento para 10 dias após a data da aprovação.</span>
+				<br>
+				<br>
+				<br>
+				<br>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">CANCELAMENTO:</span>
+				<br>
+				<br>
+				<span>Em caso de cancelamento do evento será cobrado o no show da seguinte forma:</span>
+				<br>
+				<span>•	15 dias da data marcada, será cobrado no show equivalente a 50% do valor do dia do evento.</span>
+				<br>
+				<span>•	10 dias da data marcada, será cobrado no show equivalente a 100% do valor do dia do evento.</span>
+				<br>
+				<br>
+				<br>
+				<br>
+				<span class="destaque" style="font-size:14px; font-weight:bold;">VALIDADE:</span>
+				<br>
+				<br>
+				<span>Esta proposta tem prazo de validade até <span class="destaque">{validadeProposta}</span>.</span>
 			</div>
 		</div>
 	</div>
