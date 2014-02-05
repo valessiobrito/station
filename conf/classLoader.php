@@ -13,6 +13,7 @@ $oportunidadesClass = $geralClass."/oportunidades";
 /* Unidades Module */
 include_once $unidadesClass.'/entity/Sala.php';
 include_once $unidadesClass.'/controller/SalaController.php';
+include_once $unidadesClass.'/controller/UnidadeController.php';
 /* /Unidades Module */
 
 /* Unidades Module */

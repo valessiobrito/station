@@ -816,6 +816,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                     <input type="hidden" id="id" name="id" value="<?php echo $oportunidadeClass->getId(); ?>" />
                     <input type="button" onclick="validaOportunidade('aplicar')" class="btn btn-info btn-large" value="Aplicar" />
                     <input type="button" onclick="validaOportunidade('novo')" class="btn btn-success btn-large" value="Salvar e Fechar" />
+                    <a href="/agenda/modules/oportunidades/gerarProposta.php?id=<?php echo $oportunidadeClass->getId(); ?>" class="btn btn-info btn-large" target="_blank">Gerar Proposta</a>
                 </form>
             </div>
         </div>
