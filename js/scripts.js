@@ -1199,6 +1199,9 @@ function carregaEdicaoOportunidade(idOportunidade){
 							carregaComboDependente("contatos",obj.contato_10_id,$("#clientes"));
 						}
 					}
+					$("#itensProposta").val(obj.proposta_60_itens);
+					$("#vencimentoFatura").val(obj.proposta_12_vencimentoFatura);
+
 					$.each(obj.dadosBriefing, function(j, objBrie){
 						if(objBrie.briefing_20_quantidadeParticipantes != ""){
 							$("#qtdeParticipantesBriefing").val(objBrie.briefing_20_quantidadeParticipantes);

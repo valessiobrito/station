@@ -68,6 +68,8 @@ switch ($op) {
             $oportunidadeClass->setClienteId($clienteId);
             $oportunidadeClass->setContatoId($contatoId);
             $oportunidadeClass->setStatus($status);
+            $oportunidadeClass->setItens("Locação da sala para os dias descritos;Projetor multimídia;Notebook;Sistema de sonorização;Mouse sem fio;Flip chart");
+            $oportunidadeClass->setVencimentoFatura(10);
             $oportunidadeClass->setData(date("Y-m-d"));
             $oportunidadeId = $oportunidadeController->insertAction($oportunidadeClass);
 
@@ -244,6 +246,8 @@ switch ($op) {
             $oportunidadeClass->setClienteId($clienteId);
             $oportunidadeClass->setContatoId($contatoId);
             $oportunidadeClass->setStatus($status);
+            $oportunidadeClass->setItens($itensProposta);
+            $oportunidadeClass->setVencimentoFatura($vencimentoFatura);
             $oportunidadeClass->setData(date("Y-m-d"));
             $oportunidadeId = $id;
             $oportunidadeController->editAction($oportunidadeClass);

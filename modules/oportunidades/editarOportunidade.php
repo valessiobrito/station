@@ -267,6 +267,20 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
                         </div>
                     </div>
 
+<!-- Campos Proposta -->
+                    <br>
+                    <h4>Detalhes Proposta</h4>
+                    <div class="row">
+                        <div class="span10">
+                            <textarea class="span6" id="itensProposta" name="itensProposta" placeholder="Itens da Proposta (separados por ;)"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span10">
+                            <input type="text" class="span6" id="vencimentoFatura" name="vencimentoFatura" placeholder="Dias Vencimento Fatura">
+                        </div>
+                    </div>
+
 <!-- Inicio Briefing -->
                     <br>
                     <h4>Briefing</h4>

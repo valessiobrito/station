@@ -38,6 +38,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
 		$oportunidadeController = new OportunidadeController();
 		$oportunidade = $oportunidadeController->listAction($_GET['id']);
 
+		$txtItensProposta = "";
+		$arrItensProposta = explode(";", $oportunidade[1]["proposta_60_itens"]);
+		foreach ($arrItensProposta as $itemProposta) {
+			$txtItensProposta .= "<span>• ".trim($itemProposta)."</span><br>";
+		}
+
+		$diasVencimentoFatura = $oportunidade[1]["proposta_12_vencimentoFatura"];
+
 		$clienteController = new ClienteController();
 		$dadosCliente = $clienteController->listAction($oportunidade[1]["cliente_10_id"]);
 
@@ -335,18 +343,7 @@ Abaixo tabela com medidas e capacidades das salas:</span>
 				<span class="destaque" style="font-size:14px; font-weight:bold;">ESTÁ INCLUSO NESTA PROPOSTA:</span>
 				<br>
 				<br>
-				<!-- Parte Editavel com cada linha sendo um item pré-selecionado -->
-				<span>•	Locação da sala para os dias descritos</span>
-				<br>
-				<span>•	Projetor multimídia</span>
-				<br>
-				<span>•	Notebook</span>
-				<br>
-				<span>•	Sistema de sonorização</span>
-				<br>
-				<span>•	Mouse sem fio</span>
-				<br>
-				<span>•	Flip chart</span>
+				<?php echo $txtItensProposta ?>
 				<br>
 				<br>
 				<br>
@@ -354,7 +351,7 @@ Abaixo tabela com medidas e capacidades das salas:</span>
 				<span class="destaque" style="font-size:14px; font-weight:bold;">FORMA DE PAGAMENTO:</span>
 				<br>
 				<br>
-				<span>Os eventos serão faturados no dia seguinte a sua realização, considerando o valor total contratado para o dia, e enviados ao responsável pela contratação do evento com vencimento para <span class="destaque">{numeroDias}</span> após a emissão da nota.</span>
+				<span>Os eventos serão faturados no dia seguinte a sua realização, considerando o valor total contratado para o dia, e enviados ao responsável pela contratação do evento com vencimento para <span class="destaque"><?php echo $diasVencimentoFatura ?> dias</span> após a emissão da nota.</span>
 				<br>
 				<span>Quando houver serviços extras, os mesmos serão relacionados e encaminhados ao responsável pela contratação do evento para serem aprovados e serão faturados após aprovação, com vencimento para 10 dias após a data da aprovação.</span>
 				<br>
