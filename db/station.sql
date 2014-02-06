@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 30/01/2014 às 20:52:05
+-- Tempo de Geração: 06/02/2014 às 19:49:37
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.4.4
 
@@ -47,7 +47,7 @@ CREATE TABLE `sta_briefings` (
   `briefing_60_coffeeObs` longtext COLLATE utf8_unicode_ci NOT NULL,
   `briefing_60_observacoes` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`briefing_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `sta_briefings`
@@ -56,7 +56,9 @@ CREATE TABLE `sta_briefings` (
 INSERT INTO `sta_briefings` (`briefing_10_id`, `proposta_10_id`, `unidade_10_id`, `briefing_12_periodo`, `sala_10_id`, `briefing_12_formatoSala`, `briefing_20_quantidadeParticipantes`, `briefing_12_coffee`, `coffe_10_id`, `coffee_12_periodo`, `coffee_20_quantidade`, `briefing_12_cafe`, `briefing_20_quantidadeCafe`, `briefing_12_periodoCafe`, `briefing_12_agua`, `briefing_20_quantidadeAgua`, `briefing_12_periodoAgua`, `briefing_60_coffeeObs`, `briefing_60_observacoes`) VALUES
 (1, 15, 0, 0, 0, 0, '', 1, 1, 1, '10', '2', '', 0, 2, '', 0, 'coffeeee', 'briefingggg'),
 (2, 16, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, '', 0, '', ''),
-(3, 17, 1, 3, 3, 3, '42', 1, 1, 1, '42', '2', '', 0, 2, '', 0, 'obs coffee', 'obs briefing');
+(3, 17, 1, 3, 3, 3, '42', 1, 1, 1, '42', '2', '', 0, 2, '', 0, 'obs coffee', 'obs briefing'),
+(4, 18, 1, 2, 1, 1, '10', 1, 1, 1, '10', '1', '2', 3, 1, '10', 3, 'coffee teste', 'briefing teste'),
+(5, 19, 1, 3, 1, 1, '10', 1, 1, 1, '10', '1', '2', 3, 1, '10', 3, 'obs coffee', 'obs briefing');
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,7 @@ CREATE TABLE `sta_briefings_equipamento` (
   `briefing_equipamento_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `briefing_10_id` int(11) NOT NULL,
   PRIMARY KEY (`briefing_equipamento_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
 --
 -- Extraindo dados da tabela `sta_briefings_equipamento`
@@ -82,7 +84,11 @@ INSERT INTO `sta_briefings_equipamento` (`briefing_equipamento_10_id`, `tipo_pro
 (2, 3, 1, '30', 1),
 (3, 0, 0, '', 2),
 (8, 3, 1, '10', 3),
-(9, 3, 1, '30', 3);
+(9, 3, 1, '30', 3),
+(12, 1, 4, '3', 4),
+(13, 1, 5, '2', 4),
+(16, 1, 4, '2', 5),
+(17, 1, 5, '1', 5);
 
 -- --------------------------------------------------------
 
@@ -116,7 +122,7 @@ CREATE TABLE `sta_clientes` (
 --
 
 INSERT INTO `sta_clientes` (`cliente_10_id`, `cliente_30_nome`, `cliente_30_cnpj`, `cliente_30_razaoSocial`, `cliente_30_inscMunicipal`, `cliente_30_inscEstadual`, `cliente_30_endereco`, `cliente_30_complemento`, `cliente_30_cidade`, `cliente_30_estado`, `cliente_30_cep`, `cliente_30_nomeResponsavel`, `cliente_30_sobrenomeResponsavel`, `cliente_30_emailResponsavel`, `cliente_30_telefoneResponsavel`, `cliente_30_celularResponsavel`, `cliente_10_idPai`) VALUES
-(1, 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'TO', 'teste', 'tetsd', 'tets', 'gs', 'gsrs', 'gsxg', 0),
+(1, 'Cliente Teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'TO', 'teste', 'tetsd', 'tets', 'gs', 'gsrs', 'gsxg', 0),
 (2, 'empresa teste 2 ed', 'edteste', 'tesdete', 'testede', 'testede', 'gsde', 'fadfde', 'fdsfde', 'SP', 'fdfsdde', 'fsdfgde', 'gsdged', 'fgsdged', 'fgdsgde', 'gsdgsde', 1);
 
 -- --------------------------------------------------------
@@ -141,7 +147,7 @@ CREATE TABLE `sta_contatos_cliente` (
 --
 
 INSERT INTO `sta_contatos_cliente` (`contato_cliente_10_id`, `contato_cliente_30_nome`, `contato_cliente_30_sobrenome`, `contato_cliente_30_email`, `contato_cliente_30_telefone`, `contato_cliente_30_celular`, `cliente_10_id`) VALUES
-(1, 'teste contato', 'teste', 'teste', 'teste', 'teste', 1),
+(1, 'Contato Teste', 'teste', 'teste', 'teste', 'teste', 1),
 (3, 'contato 2 ed', 'gdsgsqfdh ed', 'gsfd ed', 'hfdb ed', 'nuu ed', 2),
 (4, 'contato 3', 'mfmmfi', 'mi', 'mf', 'mif', 2),
 (5, 'teste contato 2', 'gdsgm', 'gmso', 'mfgdso', 'mfgdso', 1);
@@ -184,26 +190,30 @@ CREATE TABLE `sta_propostas` (
   `cliente_10_id` int(11) NOT NULL,
   `contato_10_id` int(11) NOT NULL,
   `proposta_12_status` int(3) NOT NULL,
+  `proposta_60_itens` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `proposta_12_vencimentoFatura` int(3) NOT NULL,
   `proposta_22_data` date NOT NULL,
   PRIMARY KEY (`proposta_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 --
 -- Extraindo dados da tabela `sta_propostas`
 --
 
-INSERT INTO `sta_propostas` (`proposta_10_id`, `cliente_10_id`, `contato_10_id`, `proposta_12_status`, `proposta_22_data`) VALUES
-(7, 1, 1, 3, '2013-08-20'),
-(8, 1, 1, 2, '2013-08-20'),
-(9, 1, 1, 1, '2013-08-20'),
-(10, 1, 1, 1, '2013-08-20'),
-(11, 1, 1, 2, '2013-08-20'),
-(12, 1, 1, 3, '2013-08-20'),
-(13, 1, 1, 3, '2013-08-20'),
-(14, 0, 0, 0, '2013-08-21'),
-(15, 2, 3, 1, '2013-09-04'),
-(16, 0, 0, 4, '2013-09-04'),
-(17, 1, 5, 1, '2013-11-25');
+INSERT INTO `sta_propostas` (`proposta_10_id`, `cliente_10_id`, `contato_10_id`, `proposta_12_status`, `proposta_60_itens`, `proposta_12_vencimentoFatura`, `proposta_22_data`) VALUES
+(7, 1, 1, 3, '', 0, '2013-08-20'),
+(8, 1, 1, 2, '', 0, '2013-08-20'),
+(9, 1, 1, 1, '', 0, '2013-08-20'),
+(10, 1, 1, 1, '', 0, '2013-08-20'),
+(11, 1, 1, 2, '', 0, '2013-08-20'),
+(12, 1, 1, 3, '', 0, '2013-08-20'),
+(13, 1, 1, 3, '', 0, '2013-08-20'),
+(14, 0, 0, 0, '', 0, '2013-08-21'),
+(15, 2, 3, 1, '', 0, '2013-09-04'),
+(16, 0, 0, 4, '', 0, '2013-09-04'),
+(17, 1, 5, 1, '', 0, '2013-11-25'),
+(18, 1, 1, 1, '', 0, '2014-01-31'),
+(19, 1, 1, 1, 'LocaÃ§Ã£o da sala para os dias descritos;Projetor multimÃ­dia;Notebook;Sistema de sonorizaÃ§Ã£o;Mouse sem fio;Flip chart;Item Teste;Item Teste 2;Item Teste 3', 15, '2014-02-06');
 
 -- --------------------------------------------------------
 
@@ -242,7 +252,7 @@ CREATE TABLE `sta_reservas` (
   `reserva_15_valorDesconto` decimal(10,2) NOT NULL,
   `reserva_15_valorTotal` decimal(10,2) NOT NULL,
   PRIMARY KEY (`reserva_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=46 ;
 
 --
 -- Extraindo dados da tabela `sta_reservas`
@@ -269,7 +279,13 @@ INSERT INTO `sta_reservas` (`reserva_10_id`, `proposta_10_id`, `unidade_10_id`, 
 (27, 15, 1, 1, 1, '2013-09-06', 1, 1, 1, '10', '2', '', 0, 2, '', 0, '', '20', 1, 'coffeeee', 'briefingggg', 'data2', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
 (28, 16, 0, 0, 0, '0000-00-00', 0, 0, 0, '', '', '', 0, 0, '', 0, '', '', 0, '', '', '', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
 (33, 17, 1, 1, 2, '2013-09-10', 2, 0, 0, '', '2', '', 0, 2, '', 0, '40', '42', 3, 'obs coffee', 'obs briefing', 'data1', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
-(34, 17, 1, 1, 3, '2013-09-09', 2, 0, 0, '', '2', '', 0, 2, '', 0, '20', '42', 1, 'obs coffee', 'obs briefing', 'data2', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00);
+(34, 17, 1, 1, 3, '2013-09-09', 2, 0, 0, '', '2', '', 0, 2, '', 0, '20', '42', 1, 'obs coffee', 'obs briefing', 'data2', 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00),
+(37, 18, 1, 1, 1, '2014-01-31', 1, 1, 3, '10', '1', '2', 3, 1, '10', 3, '50', '10', 1, 'coffee teste', 'briefing teste', 'data teste 1', 1300.00, 400.00, 40.00, 20.00, 70.00, 230.00, 1600.00),
+(38, 18, 1, 1, 4, '2014-02-01', 1, 1, 1, '10', '1', '2', 3, 1, '10', 3, '50', '10', 1, 'coffee teste', 'briefing teste', 'data teste 2', 3000.00, 200.00, 40.00, 20.00, 70.00, 330.00, 3000.00),
+(39, 18, 1, 1, 3, '2014-01-31', 1, 1, 1, '10', '1', '2', 3, 1, '10', 3, '50', '10', 1, 'coffee teste', 'briefing teste', '', 1100.00, 200.00, 40.00, 20.00, 70.00, 430.00, 1430.00),
+(43, 19, 1, 1, 4, '2014-02-07', 1, 1, 1, '10', '1', '2', 3, 1, '10', 3, '50', '10', 1, 'obs coffee', 'obs briefing', 'obs data 1', 3000.00, 200.00, 40.00, 20.00, 40.00, 300.00, 3000.00),
+(44, 19, 1, 1, 1, '2014-02-10', 1, 1, 1, '10', '1', '2', 3, 1, '10', 3, '50', '10', 1, 'obs coffee', 'obs briefing', 'obs data 2', 1300.00, 200.00, 40.00, 20.00, 40.00, 100.00, 1500.00),
+(45, 19, 1, 1, 2, '2014-02-11', 1, 1, 1, '10', '1', '2', 3, 1, '10', 3, '50', '10', 1, 'obs coffee', 'obs briefing', 'obs data 3', 1200.00, 200.00, 40.00, 20.00, 70.00, 30.00, 1500.00);
 
 -- --------------------------------------------------------
 
@@ -284,7 +300,7 @@ CREATE TABLE `sta_reservas_equipamento` (
   `reserva_equipamento_20_quantidade` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `reserva_10_id` int(11) NOT NULL,
   PRIMARY KEY (`reserva_equipamento_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=67 ;
 
 --
 -- Extraindo dados da tabela `sta_reservas_equipamento`
@@ -321,7 +337,19 @@ INSERT INTO `sta_reservas_equipamento` (`reserva_equipamento_10_id`, `tipo_produ
 (41, 3, 1, '10', 33),
 (42, 3, 1, '30', 33),
 (43, 3, 1, '10', 34),
-(44, 3, 1, '30', 34);
+(44, 3, 1, '30', 34),
+(49, 1, 4, '3', 37),
+(50, 1, 5, '2', 37),
+(51, 1, 4, '3', 38),
+(52, 1, 5, '2', 38),
+(53, 1, 4, '3', 39),
+(54, 1, 5, '2', 39),
+(61, 1, 4, '2', 43),
+(62, 1, 5, '1', 43),
+(63, 1, 4, '2', 44),
+(64, 1, 5, '1', 44),
+(65, 1, 4, '3', 45),
+(66, 1, 5, '2', 45);
 
 -- --------------------------------------------------------
 
@@ -405,7 +433,7 @@ CREATE TABLE `sta_unidades` (
 --
 
 INSERT INTO `sta_unidades` (`unidade_10_id`, `unidade_30_nome`, `unidade_30_logradouro`, `unidade_30_numero`, `unidade_30_bairro`, `unidade_30_complemento`, `unidade_30_cidade`, `unidade_30_estado`, `unidade_30_cep`, `unidade_30_ddd`, `unidade_30_telefone`, `unidade_30_nomeContato`) VALUES
-(1, 'nome', 'end', 'nr', 'ba', 'comp', 'cid', 'SP', 'cp', '11', '11111111', 'cont');
+(1, 'Unidade Teste', 'end', 'nr', 'ba', 'comp', 'cid', 'SP', 'cp', '11', '11111111', 'cont');
 
 -- --------------------------------------------------------
 
