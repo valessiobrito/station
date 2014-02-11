@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 06/02/2014 às 19:49:37
+-- Tempo de Geração: 11/02/2014 às 21:05:59
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.4.4
 
@@ -446,18 +446,20 @@ CREATE TABLE `sta_usuarios` (
   `usuario_20_login` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `usuario_20_senha` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `usuario_30_nome` text COLLATE utf8_unicode_ci NOT NULL,
+  `usuario_30_email` text COLLATE utf8_unicode_ci NOT NULL,
   `usuario_20_fotoUrl` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `usuario_12_tipo` int(1) NOT NULL,
   `usuario_12_ativo` int(1) NOT NULL,
   PRIMARY KEY (`usuario_10_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Extraindo dados da tabela `sta_usuarios`
 --
 
-INSERT INTO `sta_usuarios` (`usuario_10_id`, `usuario_20_login`, `usuario_20_senha`, `usuario_30_nome`, `usuario_20_fotoUrl`, `usuario_12_tipo`, `usuario_12_ativo`) VALUES
-(1, 'admin', 'MjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzM=', 'Administrador', 'admin.jpg', 1, 1);
+INSERT INTO `sta_usuarios` (`usuario_10_id`, `usuario_20_login`, `usuario_20_senha`, `usuario_30_nome`, `usuario_30_email`, `usuario_20_fotoUrl`, `usuario_12_tipo`, `usuario_12_ativo`) VALUES
+(1, 'admin', 'MjEyMzJmMjk3YTU3YTVhNzQzODk0YTBlNGE4MDFmYzM=', 'Administrador', '', 'admin.jpg', 1, 1),
+(2, 'teste', 'Njk4ZGMxOWQ0ODljNGU0ZGI3M2UyOGE3MTNlYWIwN2I=', 'UsuÃ¡rio Teste', 'emailteste@stationct.com.br', '139214874552fa8109b1a16.jpg', 2, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
