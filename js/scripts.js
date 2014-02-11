@@ -332,6 +332,42 @@ function validaTipoProduto(){
 	});
 }
 
+function validaUsuario(metodo){
+	if(document.getElementById("nome").value == "")
+	{
+		alert("Preencha o nome");
+		document.getElementById("nome").focus();
+		return false;
+	}
+	if(document.getElementById("login").value == "")
+	{
+		alert("Preencha o login");
+		document.getElementById("login").focus();
+		return false;
+	}
+	if(metodo == 'salvar'){
+		if(document.getElementById("senha").value == "")
+		{
+			alert("Preencha a senha");
+			document.getElementById("senha").focus();
+			return false;
+		}
+	}
+	if(document.getElementById("tipo").value == "")
+	{
+		alert("Selecione o tipo de permissão");
+		document.getElementById("tipo").focus();
+		return false;
+	}
+	if(document.getElementById("ativo").value == "")
+	{
+		alert("Selecione o status do usuário");
+		document.getElementById("ativo").focus();
+		return false;
+	}
+	document.gravarUsuario.submit();
+}
+
 function pesquisarSalas(idUnidade)
 {
 	if(idUnidade == "")
@@ -454,6 +490,54 @@ function deletaCliente(idCliente){
 				if(resposta == 'ok'){
 					alert("Cliente deletado!");
 					pesquisarClientes(idCliente);
+				}else{
+					alert("Ocorreu um erro");
+				}
+			}
+		});
+	}else{
+		return false;
+	}
+}
+
+function pesquisarUsuarios(idUsuario)
+{
+	if(idUsuario == "")
+	{
+		alert("Selecione o usuário");
+		document.getElementById("usuarios").focus();
+		return false;
+	}
+
+	$("#tabelaBusca").empty();
+	$.post(
+		'/agenda/process/buscarUsuarios.php',
+		{usuario:idUsuario},
+
+		function(data){
+
+			$("#tabelaBusca").append("<tr><th>Nome</th><th>Login</th><th>Ações</th></tr>");
+			$.each(data, function(i,data){
+				if(data.idUsuario == "1"){
+					$("#tabelaBusca").append("<tr><td>"+data.nomeUsuario+"</td><td>"+data.loginUsuario+"</td><td><a href='editarUsuario.php?id="+data.idUsuario+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a></td></tr>");
+				}else{
+					$("#tabelaBusca").append("<tr><td>"+data.nomeUsuario+"</td><td>"+data.loginUsuario+"</td><td><a href='editarUsuario.php?id="+data.idUsuario+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaUsuario('"+data.idUsuario+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+				}
+			});
+		},'json');
+
+	$("#resultadoBusca").show();
+}
+function deletaUsuario(idUsuario){
+	if(confirm("Deseja realmente deletar esse usuário?")){
+		$.ajax({
+			type: "POST",
+			url: "/agenda/process/deletarUsuario.php",
+			data: "iu="+idUsuario,
+			success: function(resposta){
+				if(resposta == 'ok'){
+					alert("Usuário deletado!");
+					pesquisarUsuarios(idUsuario);
 				}else{
 					alert("Ocorreu um erro");
 				}

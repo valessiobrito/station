@@ -38,6 +38,10 @@
 			$colId = 'produto_10_id';
 			$colNome = 'produto_30_nome';
 			$colPai = 'tipo_produto_10_id';
+		}else if($elemento == 'usuarios'){
+			$table = 'sta_usuarios';
+			$colId = 'usuario_10_id';
+			$colNome = 'usuario_30_nome';
 		}
 
 

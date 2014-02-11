@@ -10,6 +10,12 @@ $contatosClass = $geralClass."/contatos";
 $usuariosClass = $geralClass."/usuarios";
 $oportunidadesClass = $geralClass."/oportunidades";
 
+/* Usuarios Module */
+include_once $usuariosClass.'/entity/Usuario.php';
+include_once $usuariosClass.'/controller/UsuarioController.php';
+include_once $usuariosClass.'/util/SimpleImage.php';
+/* Usuarios Module */
+
 /* Unidades Module */
 include_once $unidadesClass.'/entity/Sala.php';
 include_once $unidadesClass.'/controller/SalaController.php';
