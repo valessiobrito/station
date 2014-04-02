@@ -15,7 +15,7 @@ switch ($op) {
                $$k = $v;
             }
 
-            if ($nome != "" && $cnpj != "" && $razaoSocial != "" && $inscEstadual != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "" && $nomeResponsavel != "" && $sobrenomeResponsavel != "" && $emailResponsavel != "" && $telefoneResponsavel != "" && $celularResponsavel != "") {
+            if ($nome != "" && $cnpj != "" && $razaoSocial != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "") {
 
                 $clienteClass = new Cliente();
                 $clienteController = new ClienteController();
@@ -77,7 +77,7 @@ switch ($op) {
                 $$k = $v;
             }
 
-            if ($id != "" && $nome != "" && $cnpj != "" && $razaoSocial != "" && $inscEstadual != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "" && $nomeResponsavel != "" && $sobrenomeResponsavel != "" && $emailResponsavel != "" && $telefoneResponsavel != "" && $celularResponsavel != "") {
+            if ($id != "" && $nome != "" && $cnpj != "" && $razaoSocial != "" && $endereco != "" && $cidade != "" && $estado != "" && $cep != "") {
 
                 $clienteClass = new Cliente();
                 $clienteController = new ClienteController();

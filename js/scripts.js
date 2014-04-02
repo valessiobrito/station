@@ -167,12 +167,6 @@ function validaCliente(){
 		document.getElementById("razaoSocial").focus();
 		return false;
 	}
-	if(document.getElementById("inscEstadual").value == "")
-	{
-		alert("Preencha a inscrição estadual");
-		document.getElementById("inscEstadual").focus();
-		return false;
-	}
 	if(document.getElementById("endereco").value == "")
 	{
 		alert("Preencha o endereço");
@@ -195,36 +189,6 @@ function validaCliente(){
 	{
 		alert("Preencha o CEP");
 		document.getElementById("cep").focus();
-		return false;
-	}
-	if(document.getElementById("nomeResponsavel").value == "")
-	{
-		alert("Preencha o nome do responsável financeiro");
-		document.getElementById("nomeResponsavel").focus();
-		return false;
-	}
-	if(document.getElementById("sobrenomeResponsavel").value == "")
-	{
-		alert("Preencha o sobrenome do responsável financeiro");
-		document.getElementById("sobrenomeResponsavel").focus();
-		return false;
-	}
-	if(document.getElementById("emailResponsavel").value == "")
-	{
-		alert("Preencha o e-mail do responsável financeiro");
-		document.getElementById("emailResponsavel").focus();
-		return false;
-	}
-	if(document.getElementById("telefoneResponsavel").value == "")
-	{
-		alert("Preencha o telefone do responsável financeiro");
-		document.getElementById("telefoneResponsavel").focus();
-		return false;
-	}
-	if(document.getElementById("celularResponsavel").value == "")
-	{
-		alert("Preencha o celular do responsável financeiro");
-		document.getElementById("celularResponsavel").focus();
 		return false;
 	}
 	document.gravarCliente.submit();
