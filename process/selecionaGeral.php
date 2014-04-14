@@ -22,6 +22,7 @@
 			$colId = 'contato_cliente_10_id';
 			$colNome = 'contato_cliente_30_nome';
 			$colPai = 'cliente_10_id';
+			$colSobrenome = 'contato_cliente_30_sobrenome';
 		}else if($elemento == 'tipoCoffee' || $elemento == 'tipoCoffeeBriefing'){
 			$valorPai = '3';
 			$table = 'sta_produtos';
@@ -42,6 +43,11 @@
 			$table = 'sta_usuarios';
 			$colId = 'usuario_10_id';
 			$colNome = 'usuario_30_nome';
+		}else if($elemento == 'contato'){
+			$table = 'sta_contatos_cliente';
+			$colId = 'contato_cliente_10_id';
+			$colNome = 'contato_cliente_30_nome';
+			$colSobrenome = 'contato_cliente_30_sobrenome';
 		}
 
 
@@ -74,10 +80,17 @@
 
 		while($row = mysql_fetch_array($sql))
 		{
-			$resultado = array(
-				'idSelecao' => $row[$colId],
-				'nomeSelecao' => $row[$colNome]
-			);
+			if(isset($colSobrenome)){
+				$resultado = array(
+					'idSelecao' => $row[$colId],
+					'nomeSelecao' => $row[$colNome]." ".$row[$colSobrenome]
+				);
+			}else{
+				$resultado = array(
+					'idSelecao' => $row[$colId],
+					'nomeSelecao' => $row[$colNome]
+				);
+			}
 			array_push($json, $resultado);
 		}
 

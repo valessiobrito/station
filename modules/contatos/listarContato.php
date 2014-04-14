@@ -10,7 +10,7 @@
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<script>
 			$(document).ready(function(){
-				carregaCombo('clientes','');
+				carregaCombo('contato','');
 			});
 		</script>
 
@@ -34,10 +34,10 @@
                 <div class="row">
                     <div class="span10">
                         <div class="input-append">
-                            <select class="span6" id="clientes" name="clientes">
-                                <option value="">Escolha o cliente:</option>
+                            <select class="span6" id="contato" name="contato">
+                                <option value="">Escolha o contato:</option>
                             </select>
-                            <a role="button" class="btn" onclick="pesquisarContatos(document.getElementById('clientes').value)">Mostrar</a>
+                            <a role="button" class="btn" onclick="pesquisarContatos(document.getElementById('contato').value)">Mostrar</a>
                         </div>
                     </div>
                 </div>
