@@ -76,7 +76,7 @@
 		{
 			$resultado = array(
 				'idSelecao' => $row[$colId],
-				'nomeSelecao' => utf8_encode($row[$colNome])
+				'nomeSelecao' => $row[$colNome]
 			);
 			array_push($json, $resultado);
 		}

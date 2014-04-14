@@ -11,8 +11,8 @@
 		while($row = mysql_fetch_array($sql))
 		{
 			$resultado = array(
-				'nomeContato' => utf8_encode($row['contato_cliente_30_nome']),
-				'sobrenomeContato' => utf8_encode($row['contato_cliente_30_sobrenome']),
+				'nomeContato' => $row['contato_cliente_30_nome'],
+				'sobrenomeContato' => $row['contato_cliente_30_sobrenome'],
 				'idContato' => $row['contato_cliente_10_id']
 			);
 			array_push($json, $resultado);

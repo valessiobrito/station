@@ -11,7 +11,7 @@
 		while($row = mysql_fetch_array($sql))
 		{
 			$resultado = array(
-				'nomeCliente' => utf8_encode($row['cliente_30_nome']),
+				'nomeCliente' => $row['cliente_30_nome'],
 				'cnpj' => $row['cliente_30_cnpj'],
 				'idCliente' => $row['cliente_10_id']
 			);
