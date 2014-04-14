@@ -71,7 +71,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
                 </form>
 			</div>
 		</div>
-<?php include("inc/footer.php");?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
 	}
 ?>

@@ -8,7 +8,7 @@
 		include($_SERVER['DOCUMENT_ROOT'].'/agenda/conf/connection.php');
 		$title = "Painel";
 ?>
-<?php include("inc/header.php");?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/header.php");?>
 		<div class="content">
             <div class="span10">
             	<div class="page-header">
@@ -73,7 +73,7 @@
 				});
 			});
 		</script>
-<?php include("inc/footer.php");?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
 	}
 ?>

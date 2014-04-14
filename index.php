@@ -29,10 +29,10 @@
                 }
                 ?>
                 <legend>Faça o login <?=$msgErro?></legend>
-                
+
                 <label for="login">Usuário</label>
                 <input type="text" name="login" id="login" />
-                
+
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" id="senha" />
                 <br>
@@ -40,8 +40,8 @@
             </form>
          </div>
     </div>
-<?php include("inc/footer.php");?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
 	session_destroy();
-	}	
+	}
 ?>
