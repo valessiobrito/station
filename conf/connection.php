@@ -1,10 +1,10 @@
 <?php
-if($_SERVER['SERVER_ADDR'] == "127.0.0.1" || $_SERVER['SERVER_ADDR'] == "::1"){ 
+if($_SERVER['SERVER_ADDR'] == "127.0.0.1" || $_SERVER['SERVER_ADDR'] == "::1"){
     $dataBase = "station";
     $host = "localhost";
     $user = "station";
     $pass = "stationdb";
-	
+
 }else{
     $dataBase = "stationct";
     $host = "mysql01.stationct.hospedagemdesites.ws";
@@ -23,5 +23,10 @@ $db_selected = mysql_select_db($dataBase, $conn);
 if (!$db_selected){
     die ("Erro ao selecionar banco de dados!");
 }
+
+mysql_query("SET NAMES 'utf8'");
+mysql_query('SET character_set_connection=utf8');
+mysql_query('SET character_set_client=utf8');
+mysql_query('SET character_set_results=utf8');
 
 ?>
