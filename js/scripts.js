@@ -512,31 +512,32 @@ function deletaUsuario(idUsuario){
 	}
 }
 
-function pesquisarContatos(idCliente)
+function pesquisarContatos(idContato)
 {
-	if(idCliente == "")
+	if(idContato == "")
 	{
-		alert("Selecione o cliente");
-		document.getElementById("clientes").focus();
+		alert("Selecione o contato");
+		document.getElementById("contato").focus();
 		return false;
 	}
 
 	$("#tabelaBusca").empty();
 	$.post(
 		'/agenda/process/buscarContatos.php',
-		{cliente:idCliente},
+		{contato:idContato},
 
 		function(data){
 
-			$("#tabelaBusca").append("<tr><th>Nome</th><th>Sobrenome</th><th>Ações</th></tr>");
+			$("#tabelaBusca").append("<tr><th>Nome</th><th>Sobrenome</th><th>Empresa</th><th>Ações</th></tr>");
 			$.each(data, function(i,data){
-				$("#tabelaBusca").append("<tr><td>"+data.nomeContato+"</td><td>"+data.sobrenomeContato+"</td><td><a href='editarContato.php?id="+data.idContato+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaContato('"+data.idContato+"','"+idCliente+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+				$("#tabelaBusca").append("<tr><td>"+data.nomeContato+"</td><td>"+data.sobrenomeContato+"</td><td>"+data.nomeEmpresa+"</td><td><a href='editarContato.php?id="+data.idContato+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaContato('"+data.idContato+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
 			});
 		},'json');
 
 	$("#resultadoBusca").show();
 }
-function deletaContato(idContato,idCliente){
+
+function deletaContato(idContato){
 	if(confirm("Deseja realmente deletar esse contato?")){
 		$.ajax({
 			type: "POST",
@@ -545,7 +546,7 @@ function deletaContato(idContato,idCliente){
 			success: function(resposta){
 				if(resposta == 'ok'){
 					alert("Contato deletado!");
-					pesquisarContatos(idCliente);
+					pesquisarContatos(idContato);
 				}else{
 					alert("Ocorreu um erro");
 				}
@@ -605,6 +606,9 @@ function carregaCombo(elemento,valorSelecionado)
 				$( option[i] ).append( obj.nomeSelecao );
 				if(obj.idSelecao == valorSelecionado){
 					$( option[i] ).attr('selected','selected');
+				}
+				if(elemento == 'clientes'){
+					$( option[i] ).attr('class',obj.classe);
 				}
 
 				$("select[name='"+elemento+"']").append( option[i] );

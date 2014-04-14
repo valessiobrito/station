@@ -86,10 +86,23 @@
 					'nomeSelecao' => $row[$colNome]." ".$row[$colSobrenome]
 				);
 			}else{
-				$resultado = array(
-					'idSelecao' => $row[$colId],
-					'nomeSelecao' => $row[$colNome]
-				);
+				if($elemento == "clientes"){
+					if($row['cliente_10_idPai'] == '0'){
+						$classe = 'oportunidade';
+					}else{
+						$classe = '';
+					}
+					$resultado = array(
+						'idSelecao' => $row[$colId],
+						'nomeSelecao' => $row[$colNome],
+						'classe' => $classe
+					);
+				}else{
+					$resultado = array(
+						'idSelecao' => $row[$colId],
+						'nomeSelecao' => $row[$colNome]
+					);
+				}
 			}
 			array_push($json, $resultado);
 		}
