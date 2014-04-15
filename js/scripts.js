@@ -524,13 +524,31 @@ function pesquisarContatos(idContato)
 	$("#tabelaBusca").empty();
 	$.post(
 		'/agenda/process/buscarContatos.php',
-		{contato:idContato},
+		{metodo:"contato",contato:idContato},
 
 		function(data){
 
 			$("#tabelaBusca").append("<tr><th>Nome</th><th>Sobrenome</th><th>Empresa</th><th>Ações</th></tr>");
 			$.each(data, function(i,data){
 				$("#tabelaBusca").append("<tr><td>"+data.nomeContato+"</td><td>"+data.sobrenomeContato+"</td><td>"+data.nomeEmpresa+"</td><td><a href='editarContato.php?id="+data.idContato+"' class='btn btn-info' style='float:left; margin-right:10px;'>Editar</a><a onclick=\"deletaContato('"+data.idContato+"')\" class='btn btn-danger' style='float:left;'>Deletar</a></td></tr>");
+			});
+		},'json');
+
+	$("#resultadoBusca").show();
+}
+
+function pesquisarContatosByCliente(idCliente)
+{
+	$("#tabelaBusca").empty();
+	$.post(
+		'/agenda/process/buscarContatos.php',
+		{metodo:"cliente",cliente:idCliente},
+
+		function(data){
+
+			$("#tabelaBusca").append("<tr><th>Nome</th><th>Sobrenome</th></tr>");
+			$.each(data, function(i,data){
+				$("#tabelaBusca").append("<tr><td>"+data.nomeContato+"</td><td>"+data.sobrenomeContato+"</td></tr>");
 			});
 		},'json');
 

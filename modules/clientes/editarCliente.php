@@ -24,6 +24,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 <script>
 	$(document).ready(function(){
 		carregaCombo('clientes','<?php echo $clienteClass->getIdPai(); ?>');
+        pesquisarContatosByCliente('<?php echo $clienteClass->getId(); ?>')
 	});
 </script>
 
@@ -110,6 +111,13 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
                     <input type="hidden" name="id" value="<?php echo $clienteClass->getId();?>">
                     <input type="button" onclick="validaCliente()" class="btn btn-info btn-large" value="Salvar" />
                 </form>
+                <br>
+                <div id="resultadoBusca" style="display:none;">
+                    <h4>Contatos desse cliente:</h4>
+                    <div class="row">
+                        <table id="tabelaBusca" class="table table-bordered table-striped"></table>
+                    </div>
+                </div>
 			</div>
 		</div>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
