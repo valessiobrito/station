@@ -1,7 +1,7 @@
 <?php
 	ob_start();
 	session_start();
-	
+
 	if ($_SESSION['LogadoSTATION'] != "1"){
 		header("Location: index.php");
 	}else{
@@ -15,9 +15,9 @@
 				$("#valorTarde").maskMoney({showSymbol:false, thousands:'', decimal:','});
 				$("#valorNoite").maskMoney({showSymbol:false, thousands:'', decimal:','});
 				$("#valorIntegral").maskMoney({showSymbol:false, thousands:'', decimal:','});
-			});	
-		</script> 
-    
+			});
+		</script>
+
         <div class="content">
         	<ul class="breadcrumb">
                 <li><a href="/agenda/painel.php">Home</a> <span class="divider">/</span></li>
@@ -36,9 +36,10 @@
                             	<select class="span6" id="unidade" name="unidade">
                                 	<option value="">Escolha a unidade:</option>
                                 </select>
-                                <a href="#modalNovaUnidade" role="button" class="btn" data-toggle="modal">+</a>
+                                <a href="#" onclick="editarUnidade()" role="button" class="btn btn-info">Editar</a>
+                                <a href="#" onclick="novaUnidade()" role="button" class="btn">+</a>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <br>
                     <h4>Informações da Sala</h4>
@@ -168,6 +169,7 @@
                     <br>
                     <div class="row">
                     	<input type="button" onclick="validaUnidade()" class="btn btn-info" value="Salvar" style="float:right; margin-right:55px;" />
+                        <input type="hidden" id="idUnidadeEd" name="idUnidadeEd" value="0">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -177,5 +179,5 @@
         </div>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
-	}	
+	}
 ?>

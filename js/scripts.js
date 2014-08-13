@@ -259,7 +259,7 @@ function validaUnidade(){
 	$.ajax({
 		type: "POST",
 		url: "/agenda/process/gravarUnidade.php",
-		data: "nome="+document.getElementById("nomeUnidade").value+"&logradouro="+document.getElementById("logradouro").value+"&numero="+document.getElementById("numeroUnidade").value+"&bairro="+document.getElementById("bairro").value+"&cep="+document.getElementById("cep").value+"&complemento="+document.getElementById("complemento").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&ddd="+document.getElementById("ddd").value+"&telefone="+document.getElementById("telefone").value+"&nomeContato="+document.getElementById("nomeContato").value,
+		data: "idUnidade="+document.getElementById("idUnidadeEd").value+"&nome="+document.getElementById("nomeUnidade").value+"&logradouro="+document.getElementById("logradouro").value+"&numero="+document.getElementById("numeroUnidade").value+"&bairro="+document.getElementById("bairro").value+"&cep="+document.getElementById("cep").value+"&complemento="+document.getElementById("complemento").value+"&cidade="+document.getElementById("cidade").value+"&estado="+document.getElementById("estado").value+"&ddd="+document.getElementById("ddd").value+"&telefone="+document.getElementById("telefone").value+"&nomeContato="+document.getElementById("nomeContato").value,
 		success: function(resposta){
 			if(resposta != '0'){
 				$('#modalNovaUnidade').modal('hide');
@@ -270,6 +270,52 @@ function validaUnidade(){
 			}
 		}
 	});
+}
+
+function novaUnidade(){
+	$("#idUnidadeEd").val("0")
+	$("#nomeUnidade").val("");
+	$("#logradouro").val("");
+	$("#numeroUnidade").val("");
+	$("#bairro").val("");
+	$("#complemento").val("");
+	$("#cidade").val("");
+	$("#estado").val("");
+	$("#cep").val("");
+	$("#ddd").val("");
+	$("#telefone").val("");
+	$("#nomeContato").val("");
+	$('#modalNovaUnidade').modal('show');
+}
+
+function editarUnidade(){
+	if($("#unidade").val() == ""){
+		alert("Selecione a unidade");
+		document.getElementById("unidade").focus();
+		return false;
+	}else{
+		$("#idUnidadeEd").val($("#unidade").val())
+		$.post(
+			'/agenda/process/buscarUnidade.php',
+			{unidade:$("#unidade").val()},
+
+			function(data){
+				$.each(data, function(i,data){
+					$("#nomeUnidade").val(data.nomeUnidade);
+					$("#logradouro").val(data.logradouro);
+					$("#numeroUnidade").val(data.numero);
+					$("#bairro").val(data.bairro);
+					$("#complemento").val(data.complemento);
+					$("#cidade").val(data.cidade);
+					$("#estado").val(data.estado);
+					$("#cep").val(data.cep);
+					$("#ddd").val(data.ddd);
+					$("#telefone").val(data.telefone);
+					$("#nomeContato").val(data.nomeContato);
+				});
+			$('#modalNovaUnidade').modal('show');
+		},'json');
+	}
 }
 
 function validaTipoProduto(){

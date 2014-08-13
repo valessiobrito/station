@@ -6,14 +6,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/agenda/conf/classLoader.php';
 if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)){
 	header("Location: index.php");
 }else{
-    
+
     $salaController = new SalaController();
     $sala = $salaController->listAction($_GET['id'] , 1);
-    
+
     if (count($sala) == 0){
         header("Location: ".$urlUnidades."/listarUnidade.php");
     }
-	
+
     $salaClass = new Sala();
     $salaClass->fetchEntity($sala[1]);
 	$title = "Editar Unidade/Sala";
@@ -28,7 +28,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 		$("#valorTarde").maskMoney({showSymbol:false, thousands:'', decimal:','});
 		$("#valorNoite").maskMoney({showSymbol:false, thousands:'', decimal:','});
 		$("#valorIntegral").maskMoney({showSymbol:false, thousands:'', decimal:','});
-	});	
+	});
 </script>
 
 <div class="content">
@@ -49,9 +49,10 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 								<select class="span6" id="unidade" name="unidade">
 									<option value="">Escolha a unidade:</option>
 								</select>
-								<a href="#modalNovaUnidade" role="button" class="btn" data-toggle="modal">+</a>
+								<a href="#" onclick="editarUnidade()" role="button" class="btn btn-info">Editar</a>
+								<a href="#" onclick="novaUnidade()" role="button" class="btn">+</a>
 							</div>
-						</div>                        
+						</div>
 					</div>
 					<br>
 					<h4>Informações da Sala</h4>
@@ -182,6 +183,7 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 					<br>
 					<div class="row">
 						<input type="button" onclick="validaUnidade()" class="btn btn-info" value="Salvar" style="float:right; margin-right:55px;">
+						<input type="hidden" id="idUnidadeEd" name="idUnidadeEd" value="0">
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -191,5 +193,5 @@ if ($_SESSION['LogadoSTATION'] != "1" && (isset($_GET['id']) && $_GET['id'] > 0)
 		</div>
 <?php include($_SERVER['DOCUMENT_ROOT']."/agenda/inc/footer.php");?>
 <?php
-	}	
-?>                                                      
+	}
+?>
